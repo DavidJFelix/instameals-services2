@@ -8,9 +8,9 @@ from .review import Review
 
 class SellerReview(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True)
-    review = models.OneToOneField(Review, on_delete=models.CASCADE)
+    review = models.OneToOneField(Review, on_delete=models.CASCADE, related_name='seller_review')
     seller = models.ForeignKey(APIUser, on_delete=models.CASCADE, related_name='seller_reviews_of')
-    reviewer = models.ForeignKey(APIUser, on_delete=models.CASCADE)
+    reviewer = models.ForeignKey(APIUser, on_delete=models.CASCADE, related_name='seller_reviews')
 
     class Meta:
         app_label = 'instameals'

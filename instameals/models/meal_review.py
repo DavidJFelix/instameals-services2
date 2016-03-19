@@ -9,9 +9,9 @@ from .review import Review
 
 class MealReview(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True)
-    review = models.OneToOneField(Review, on_delete=models.CASCADE)
-    meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
-    reviewer = models.ForeignKey(APIUser, on_delete=models.CASCADE)
+    review = models.OneToOneField(Review, on_delete=models.CASCADE, related_name='meal_review')
+    meal = models.ForeignKey(Meal, on_delete=models.CASCADE, related_name='meal_review_of')
+    reviewer = models.ForeignKey(APIUser, on_delete=models.CASCADE, related_name='meal_reviews')
 
     class Meta:
         app_label = 'instameals'
