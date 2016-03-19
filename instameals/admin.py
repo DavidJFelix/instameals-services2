@@ -10,8 +10,11 @@ from instameals.models import (
     Ingredient,
     Location,
     Meal,
+    MealReview,
     Order,
+    OrderReview,
     Review,
+    SellerReview,
 )
 
 admin.site.register(Address)
@@ -22,5 +25,8 @@ admin.site.register(Image)
 admin.site.register(Ingredient)
 admin.site.register(Location)
 admin.site.register(Meal)
+admin.site.register(MealReview)
 admin.site.register(Order)
+admin.site.register(OrderReview)
 admin.site.register(Review)
+admin.site.register(SellerReview)
