@@ -5,6 +5,7 @@ from django.db import models
 from .allergen import Allergen
 from .api_user import APIUser
 from .dietary_filter import DietaryFilter
+from .image import Image
 from .ingredient import Ingredient
 from .location import Location
 
@@ -29,6 +30,9 @@ class Meal(models.Model):
 
     is_active = models.BooleanField(default=True)
     seller = models.ForeignKey(APIUser, on_delete=models.CASCADE, related_name='meals')
+
+    preview_image = models.ForeignKey(Image, related_name='preview_meals')
+    images = models.ManyToManyField(Image, related_name='meals')
 
     class Meta:
         app_label = 'instameals'

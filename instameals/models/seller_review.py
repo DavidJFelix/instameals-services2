@@ -16,9 +16,9 @@ class SellerReview(models.Model):
         app_label = 'instameals'
 
     def __str__(self):
-        return "{}: {}'s review of {}; {}".format(
-                str(self.id),
-                str(self.reviewer),
-                str(self.seller),
-                str(self.review),
+        return "[{id}]: {reviewer}'s review of {seller}; {review}".format(
+                id=str(self.id),
+                reviewer=str(self.reviewer),
+                seller=str(self.seller),
+                review=str(self.review),
         )
