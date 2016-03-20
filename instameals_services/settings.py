@@ -104,6 +104,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/

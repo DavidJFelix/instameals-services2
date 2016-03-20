@@ -26,8 +26,11 @@ from instameals.views import (
     IngredientViewSet,
     LocationViewSet,
     MealViewSet,
+    MealReviewViewSet,
     OrderViewSet,
+    OrderReviewViewSet,
     ReviewViewSet,
+    SellerReviewViewSet,
 )
 
 router = DefaultRouter()
@@ -38,8 +41,11 @@ router.register(r'images', ImageViewSet)
 router.register(r'ingredients', IngredientViewSet)
 router.register(r'location', LocationViewSet)
 router.register(r'meals', MealViewSet)
+router.register(r'meal_reviews', MealReviewViewSet)
 router.register(r'orders', OrderViewSet)
+router.register(r'order_reviews', OrderReviewViewSet)
 router.register(r'reviews', ReviewViewSet)
+router.register(r'seller_reviews', SellerReviewViewSet)
 router.register(r'users', APIUserViewSet)
 
 urlpatterns = [

@@ -10,8 +10,11 @@ from .models import (
     Ingredient,
     Location,
     Meal,
+    MealReview,
     Order,
+    OrderReview,
     Review,
+    SellerReview,
 )
 from .serializers import (
     AddressSerializer,
@@ -22,8 +25,11 @@ from .serializers import (
     IngredientSerializer,
     LocationSerializer,
     MealSerializer,
+    MealReviewSerializer,
     OrderSerializer,
+    OrderReviewSerializer,
     ReviewSerializer,
+    SellerReviewSerializer,
 )
 
 
@@ -40,7 +46,7 @@ class AddressViewSet(NoDeleteModelViewSet):
     serializer_class = AddressSerializer
 
 
-class AllergenViewSet(NoDeleteModelViewSet):
+class AllergenViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Allergen.objects.all()
     serializer_class = AllergenSerializer
 
@@ -75,11 +81,26 @@ class MealViewSet(NoDeleteModelViewSet):
     serializer_class = MealSerializer
 
 
+class MealReviewViewSet(NoDeleteModelViewSet):
+    queryset = MealReview.objects.all()
+    serializer_class = MealReviewSerializer
+
+
 class OrderViewSet(NoDeleteModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
 
+class OrderReviewViewSet(NoDeleteModelViewSet):
+    queryset = OrderReview.objects.all()
+    serializer_class = OrderReviewSerializer
+
+
 class ReviewViewSet(NoDeleteModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+
+
+class SellerReviewViewSet(NoDeleteModelViewSet):
+    queryset = SellerReview.objects.all()
+    serializer_class = SellerReviewSerializer

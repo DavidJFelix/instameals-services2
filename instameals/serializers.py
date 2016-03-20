@@ -9,8 +9,11 @@ from .models import (
     APIUser,
     Location,
     Meal,
+    MealReview,
     Order,
+    OrderReview,
     Review,
+    SellerReview,
 )
 
 
@@ -29,8 +32,7 @@ class AllergenSerializer(serializers.HyperlinkedModelSerializer):
 class APIUserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = APIUser
-        fields = ('id',)
-        extra_kwargs = {'password': {'write_only': True}}
+        fields = ('id', 'username',)
 
 
 class DietaryFilterSerializer(serializers.HyperlinkedModelSerializer):
@@ -58,6 +60,9 @@ class LocationSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class MealSerializer(serializers.HyperlinkedModelSerializer):
+    seller = APIUserSerializer()
+
+
     class Meta:
         model = Meal
         fields = (
@@ -79,9 +84,21 @@ class MealSerializer(serializers.HyperlinkedModelSerializer):
         depth = 1
 
 
+class MealReviewSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = MealReview
+        fields = ('id',)
+
+
 class OrderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Order
+        fields = ('id',)
+
+
+class OrderReviewSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = OrderReview
         fields = ('id',)
 
 
@@ -89,3 +106,9 @@ class ReviewSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Review
         fields = ('id', 'text', 'rating')
+
+
+class SellerReviewSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = SellerReview
+        fields = ('id',)
