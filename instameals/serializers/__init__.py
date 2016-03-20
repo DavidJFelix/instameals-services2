@@ -2,6 +2,7 @@ from .address import AddressSerializer
 from .allergen import AllergenSerializer
 from .api_user import APIUserSerializer
 from .dietary_filter import DietaryFilterSerializer
+from .favorite_seller import FavoriteSellerSerializer
 from .image import ImageSerializer
 from .ingredient import IngredientSerializer
 from .location import LocationSerializer
@@ -17,6 +18,7 @@ __all__ = [
     'AllergenSerializer',
     'APIUserSerializer',
     'DietaryFilterSerializer',
+    'FavoriteSellerSerializer',
     'ImageSerializer',
     'IngredientSerializer',
     'LocationSerializer',

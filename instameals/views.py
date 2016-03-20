@@ -6,6 +6,7 @@ from .models import (
     Allergen,
     APIUser,
     DietaryFilter,
+    FavoriteSeller,
     Image,
     Ingredient,
     Location,
@@ -21,6 +22,7 @@ from .serializers import (
     AllergenSerializer,
     APIUserSerializer,
     DietaryFilterSerializer,
+    FavoriteSellerSerializer,
     ImageSerializer,
     IngredientSerializer,
     LocationSerializer,
@@ -59,6 +61,11 @@ class APIUserViewSet(NoDeleteModelViewSet):
 class DietaryFilterViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = DietaryFilter.objects.all()
     serializer_class = DietaryFilterSerializer
+
+
+class FavoriteSellerViewSet(NoDeleteModelViewSet):
+    queryset = FavoriteSeller.objects.all()
+    serializer_class = FavoriteSellerSerializer
 
 
 class IngredientViewSet(viewsets.ReadOnlyModelViewSet):
