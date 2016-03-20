@@ -30,6 +30,7 @@ class APIUserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = APIUser
         fields = ('id',)
+        extra_kwargs = {'password': {'write_only': True}}
 
 
 class DietaryFilterSerializer(serializers.HyperlinkedModelSerializer):
@@ -59,7 +60,23 @@ class LocationSerializer(serializers.HyperlinkedModelSerializer):
 class MealSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Meal
-        fields = ('id',)
+        fields = (
+            'id',
+            'name',
+            'description',
+            'allergens',
+            'dietary_filters',
+            'ingredients',
+            'portions',
+            'portions_available',
+            'location',
+            'available_from',
+            'available_to',
+            'seller',
+            'preview_image',
+            'images'
+        )
+        depth = 1
 
 
 class OrderSerializer(serializers.HyperlinkedModelSerializer):

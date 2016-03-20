@@ -18,8 +18,8 @@ class OrderReview(models.Model):
 
     def __str__(self):
         return "[{id}]: {reviewer}'s review of {order}; {review}".format(
-            id=str(self.id),
-            reviewer=str(self.reviewer),
-            order=str(self.order),
-            review=str(self.review),
+                id=str(self.id),
+                reviewer=str(self.reviewer),
+                order=str(self.order),
+                review=str(self.review),
         )

@@ -11,4 +11,7 @@ class DietaryFilter(models.Model):
         app_label = 'instameals'
 
     def __str__(self):
-        return str(self.name)
+        return "[{id}]: {name}".format(
+                id=str(self.id),
+                name=str(self.name),
+        )

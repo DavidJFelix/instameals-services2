@@ -8,6 +8,7 @@ from .models import (
     DietaryFilter,
     Image,
     Ingredient,
+    Location,
     Meal,
     Order,
     Review,
@@ -19,6 +20,7 @@ from .serializers import (
     DietaryFilterSerializer,
     ImageSerializer,
     IngredientSerializer,
+    LocationSerializer,
     MealSerializer,
     OrderSerializer,
     ReviewSerializer,
@@ -61,6 +63,11 @@ class IngredientViewSet(viewsets.ReadOnlyModelViewSet):
 class ImageViewSet(NoDeleteModelViewSet):
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
+
+
+class LocationViewSet(NoDeleteModelViewSet):
+    queryset = Location.objects.all()
+    serializer_class = LocationSerializer
 
 
 class MealViewSet(NoDeleteModelViewSet):

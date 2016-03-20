@@ -6,7 +6,7 @@ from django.db import models
 class Address(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True)
     line1 = models.TextField()
-    line2 = models.TextField()
+    line2 = models.TextField(blank=True, default="")
     city = models.TextField()
     state = models.TextField()
     postal_code = models.TextField()

@@ -21,8 +21,10 @@ from instameals.views import (
     APIUserViewSet,
     AddressViewSet,
     AllergenViewSet,
+    DietaryFilterViewSet,
     ImageViewSet,
     IngredientViewSet,
+    LocationViewSet,
     MealViewSet,
     OrderViewSet,
     ReviewViewSet,
@@ -31,8 +33,10 @@ from instameals.views import (
 router = DefaultRouter()
 router.register(r'addresses', AddressViewSet)
 router.register(r'allergens', AllergenViewSet)
+router.register(r'dietary_filters', DietaryFilterViewSet)
 router.register(r'images', ImageViewSet)
 router.register(r'ingredients', IngredientViewSet)
+router.register(r'location', LocationViewSet)
 router.register(r'meals', MealViewSet)
 router.register(r'orders', OrderViewSet)
 router.register(r'reviews', ReviewViewSet)

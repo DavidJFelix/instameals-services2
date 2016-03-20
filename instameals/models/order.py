@@ -17,5 +17,8 @@ class Order(models.Model):
 
     def __str__(self):
         return "[{id}]: {buyer}'s purchase of {meal} at {purchased_at}".format(
-
+                id=str(self.id),
+                buyer=str(self.buyer),
+                meal=str(self.meal),
+                purchased_at=str(self.purchased_at),
         )

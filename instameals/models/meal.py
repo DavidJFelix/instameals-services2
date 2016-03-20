@@ -36,3 +36,10 @@ class Meal(models.Model):
 
     class Meta:
         app_label = 'instameals'
+
+    def __str__(self):
+        return "[{id}]: {seller}'s {name}".format(
+                id=str(self.id),
+                seller=str(self.seller),
+                name=str(self.name),
+        )

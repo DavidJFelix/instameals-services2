@@ -15,3 +15,11 @@ class MealReview(models.Model):
 
     class Meta:
         app_label = 'instameals'
+
+    def __str__(self):
+        return "[{id}]: {reviewer}'s review of {meal}; {review}".format(
+                id=str(self.id),
+                reviewer=str(self.reviewer),
+                meal=str(self.meal),
+                review=str(self.review),
+        )
