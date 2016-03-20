@@ -6,6 +6,7 @@ from instameals.models import (
     Allergen,
     APIUser,
     DietaryFilter,
+    FavoriteSeller,
     Image,
     Ingredient,
     Location,
@@ -21,6 +22,7 @@ admin.site.register(Address)
 admin.site.register(Allergen)
 admin.site.register(APIUser)
 admin.site.register(DietaryFilter)
+admin.site.register(FavoriteSeller)
 admin.site.register(Image)
 admin.site.register(Ingredient)
 admin.site.register(Location)
