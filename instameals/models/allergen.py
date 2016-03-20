@@ -5,7 +5,8 @@ from django.db import models
 
 class Allergen(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True)
-    name = models.TextField(max_length=50)
+    name = models.TextField(max_length=50, blank=False)
+    description = models.TextField(max_length=250, blank=True)
 
     class Meta:
         app_label = 'instameals'
@@ -14,4 +15,5 @@ class Allergen(models.Model):
         return "[{id}]: {name}".format(
                 id=str(self.id),
                 name=str(self.name),
+                description=str(self.description)
         )
