@@ -2,6 +2,7 @@ from .address import Address
 from .allergen import Allergen
 from .api_user import APIUser
 from .dietary_filter import DietaryFilter
+from .favorite_seller import FavoriteSeller
 from .image import Image
 from .ingredient import Ingredient
 from .location import Location
