@@ -89,6 +89,9 @@ DATABASES = {
 }
 
 AUTHENTICATION_BACKENDS = (
+    'social.backends.facebook.FacebookAppOAuth2',
+    'social.backends.facebook.FacebookOAuth2',
+    'social.backends.google.GoogleOAuth2',
     'rest_framework_social_oauth2.backends.DjangoOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
@@ -121,6 +124,11 @@ REST_FRAMEWORK = {
         'rest_framework_social_oauth2.authentication.SocialAuthentication',
     ),
 }
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '531566137905-fhljh7kirg7v9kg4019qd6aaob57gd4s.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '-L6ZkKxbS--XFXTZIrrkb-M9'
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
