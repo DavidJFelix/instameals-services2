@@ -1,4 +1,5 @@
 from django.db import models
+from model_utils.models import TimeStampedModel
 
 from .allergen import Allergen
 from .api_user import APIUser
@@ -9,7 +10,7 @@ from .location import Location
 from .uuid import UUIDModelMixin
 
 
-class Meal(UUIDModelMixin, models.Model):
+class Meal(UUIDModelMixin, TimeStampedModel):
     name = models.TextField(max_length=50)
     description = models.TextField(max_length=10000)
     allergens = models.ManyToManyField(Allergen, blank=True, related_name='meals')

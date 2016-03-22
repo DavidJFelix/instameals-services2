@@ -1,9 +1,10 @@
 from django.db import models
+from model_utils.models import TimeStampedModel
 
 from .uuid import UUIDModelMixin
 
 
-class Review(UUIDModelMixin, models.Model):
+class Review(UUIDModelMixin, TimeStampedModel):
     RATING_CHOICES = (
         (1, 1),
         (2, 2),
@@ -13,7 +14,6 @@ class Review(UUIDModelMixin, models.Model):
     )
     text = models.TextField(max_length=10000)
     rating = models.IntegerField(choices=RATING_CHOICES)
-    posted_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         app_label = 'instameals'

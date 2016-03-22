@@ -1,9 +1,10 @@
 from django.db import models
+from model_utils.models import TimeStampedModel
 
 from .uuid import UUIDModelMixin
 
 
-class Address(UUIDModelMixin, models.Model):
+class Address(UUIDModelMixin, TimeStampedModel):
     line1 = models.TextField()
     line2 = models.TextField(blank=True, default="")
     city = models.TextField()
