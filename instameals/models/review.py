@@ -1,9 +1,9 @@
-import uuid
-
 from django.db import models
 
+from .uuid import UUIDModelMixin
 
-class Review(models.Model):
+
+class Review(UUIDModelMixin, models.Model):
     RATING_CHOICES = (
         (1, 1),
         (2, 2),
@@ -11,7 +11,6 @@ class Review(models.Model):
         (4, 4),
         (5, 5),
     )
-    id = models.UUIDField(default=uuid.uuid4, primary_key=True)
     text = models.TextField(max_length=10000)
     rating = models.IntegerField(choices=RATING_CHOICES)
     posted_at = models.DateTimeField(auto_now_add=True)

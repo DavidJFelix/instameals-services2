@@ -1,10 +1,9 @@
-import uuid
-
 from django.db import models
 
+from .uuid import UUIDModelMixin
 
-class Image(models.Model):
-    id = models.UUIDField(default=uuid.uuid4, primary_key=True)
+
+class Image(UUIDModelMixin, models.Model):
     url = models.URLField()
 
     class Meta:

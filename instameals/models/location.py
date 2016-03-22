@@ -1,10 +1,9 @@
-import uuid
-
 from django.db import models
 
+from .uuid import UUIDModelMixin
 
-class Location(models.Model):
-    id = models.UUIDField(default=uuid.uuid4, primary_key=True)
+
+class Location(UUIDModelMixin, models.Model):
     # FIXME: validate lat, lng
     lat = models.FloatField()
     lng = models.FloatField()

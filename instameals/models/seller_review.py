@@ -1,13 +1,11 @@
-import uuid
-
 from django.db import models
 
 from .api_user import APIUser
 from .review import Review
+from .uuid import UUIDModelMixin
 
 
-class SellerReview(models.Model):
-    id = models.UUIDField(default=uuid.uuid4, primary_key=True)
+class SellerReview(UUIDModelMixin, models.Model):
     review = models.OneToOneField(Review, on_delete=models.CASCADE, related_name='seller_review')
     seller = models.ForeignKey(APIUser, on_delete=models.CASCADE, related_name='seller_reviews_of')
     reviewer = models.ForeignKey(APIUser, on_delete=models.CASCADE, related_name='seller_reviews')

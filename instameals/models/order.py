@@ -1,13 +1,11 @@
-import uuid
-
 from django.db import models
 
 from .api_user import APIUser
 from .meal import Meal
+from .uuid import UUIDModelMixin
 
 
-class Order(models.Model):
-    id = models.UUIDField(default=uuid.uuid4, primary_key=True)
+class Order(UUIDModelMixin, models.Model):
     buyer = models.ForeignKey(APIUser)
     purchased_at = models.DateTimeField(auto_now_add=True)
     meal = models.ForeignKey(Meal)

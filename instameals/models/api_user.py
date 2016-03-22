@@ -1,11 +1,8 @@
-import uuid
-
 from django.contrib.auth.models import AbstractUser
-from django.db import models
+
+from .uuid import UUIDModelMixin
 
 
-class APIUser(AbstractUser):
-    id = models.UUIDField(default=uuid.uuid4, primary_key=True)
-
+class APIUser(UUIDModelMixin, AbstractUser):
     class Meta:
         app_label = 'instameals'

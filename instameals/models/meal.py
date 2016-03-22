@@ -1,5 +1,3 @@
-import uuid
-
 from django.db import models
 
 from .allergen import Allergen
@@ -8,19 +6,17 @@ from .dietary_filter import DietaryFilter
 from .image import Image
 from .ingredient import Ingredient
 from .location import Location
+from .uuid import UUIDModelMixin
 
 
-class Meal(models.Model):
-    id = models.UUIDField(default=uuid.uuid4, primary_key=True)
+class Meal(UUIDModelMixin, models.Model):
     name = models.TextField(max_length=50)
     description = models.TextField(max_length=10000)
     allergens = models.ManyToManyField(Allergen, blank=True, related_name='meals')
     dietary_filters = models.ManyToManyField(DietaryFilter, blank=True, related_name='meals')
     ingredients = models.ManyToManyField(Ingredient, blank=True, related_name='meals')
-
-    # FIXME: validate positive
-    portions = models.IntegerField()
-    portions_available = models.IntegerField()
+    portions = models.PositiveSmallIntegerField()
+    portions_available = models.PositiveSmallIntegerField()
 
     location = models.OneToOneField(Location, on_delete=models.CASCADE, related_name='meal')
 

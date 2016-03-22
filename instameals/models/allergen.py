@@ -1,10 +1,9 @@
-import uuid
-
 from django.db import models
 
+from .uuid import UUIDModelMixin
 
-class Allergen(models.Model):
-    id = models.UUIDField(default=uuid.uuid4, primary_key=True)
+
+class Allergen(UUIDModelMixin, models.Model):
     name = models.TextField(max_length=50, blank=False)
     description = models.TextField(max_length=250, blank=True)
 

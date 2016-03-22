@@ -1,11 +1,10 @@
-import uuid
-
 from django.db import models
 
+from .uuid import UUIDModelMixin
 
-class Ingredient(models.Model):
-    id = models.UUIDField(default=uuid.uuid4, primary_key=True)
-    name = models.TextField(max_length=50)
+
+class Ingredient(UUIDModelMixin, models.Model):
+    name = models.TextField(max_length=50, unique=True)
 
     class Meta:
         app_label = 'instameals'
