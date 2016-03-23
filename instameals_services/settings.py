@@ -66,14 +66,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
-]
-
-TEMPLATE_CONTEXT_PROCESSORS = [
-    'social.apps.django_app.context_processors.backends',
-    'social.apps.django_app.context_processors.login_redirect',
 ]
 
 WSGI_APPLICATION = 'instameals_services.wsgi.application'
@@ -131,7 +128,6 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '-L6ZkKxbS--XFXTZIrrkb-M9'
 SOCIAL_AUTH_FACEBOOK_KEY = '1649669365297361'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'c1f5d2737cb5d01b1062ac91596d84d6'
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
