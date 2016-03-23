@@ -40,11 +40,6 @@
     "fields": {"name": "shellfish"}
   },
   {
-    "model": "instameals.allergen",
-    "pk": "9f49c524-1163-44ca-a4b2-decfe4735ae9",
-    "fields": {"name": "shellfish"}
-  },
-  {
     "model": "instameals.allergen", "pk": "b2f58804-8728-4dbd-9c7e-829a6300555a", "fields": {"name": "milk"}},
   {
     "model": "instameals.allergen", "pk": "dbb0054a-c95e-4272-bb77-ae6e7e33e836", "fields": {"name": "wheat"}},
