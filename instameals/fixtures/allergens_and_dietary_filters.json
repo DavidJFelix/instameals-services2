@@ -40,16 +40,43 @@
     "fields": {"name": "shellfish"}
   },
   {
-    "model": "instameals.allergen", "pk": "b2f58804-8728-4dbd-9c7e-829a6300555a", "fields": {"name": "milk"}},
+    "model": "instameals.allergen",
+    "pk": "b2f58804-8728-4dbd-9c7e-829a6300555a",
+    "fields": {"name": "milk"}
+  },
   {
-    "model": "instameals.allergen", "pk": "dbb0054a-c95e-4272-bb77-ae6e7e33e836", "fields": {"name": "wheat"}},
+    "model": "instameals.allergen",
+    "pk": "dbb0054a-c95e-4272-bb77-ae6e7e33e836",
+    "fields": {"name": "wheat"}
+  },
   {
-    "model": "instameals.allergen", "pk": "eb33cf55-4c90-4f15-b7eb-5c05cf231ba3", "fields": {"name": "tree nuts"}},
+    "model": "instameals.allergen",
+    "pk": "eb33cf55-4c90-4f15-b7eb-5c05cf231ba3",
+    "fields": {"name": "tree nuts"}
+  },
   {
-    "model": "instameals.allergen", "pk": "ebfd4703-2f1d-4b38-8154-f90feaf925f5", "fields": {"name": "fish"}},
+    "model": "instameals.allergen",
+    "pk": "ebfd4703-2f1d-4b38-8154-f90feaf925f5",
+    "fields": {"name": "fish"}
+  },
   {
-    "model": "instameals.dietaryfilter", "pk": "176f9e75-a5cd-4433-942f-10f275cf72a9", "fields": {"name": "lactose free"}},
-  {"model": "instameals.dietaryfilter", "pk": "8e23f536-219a-4e0d-b8d1-9c391e962511", "fields": {"name": "vegetarian"}},
-  {"model": "instameals.dietaryfilter", "pk": "c5b38138-9c7a-41d4-bd39-d2999ea25b74", "fields": {"name": "vegan"}},
-  {"model": "instameals.dietaryfilter", "pk": "f2650573-77ae-4301-8c56-326561e0bf35", "fields": {"name": "gluten free"}}
+    "model": "instameals.dietaryfilter",
+    "pk": "176f9e75-a5cd-4433-942f-10f275cf72a9",
+    "fields": {"name": "lactose free"}
+  },
+  {
+    "model": "instameals.dietaryfilter",
+    "pk": "8e23f536-219a-4e0d-b8d1-9c391e962511",
+    "fields": {"name": "vegetarian"}
+  },
+  {
+    "model": "instameals.dietaryfilter",
+    "pk": "c5b38138-9c7a-41d4-bd39-d2999ea25b74",
+    "fields": {"name": "vegan"}
+  },
+  {
+    "model": "instameals.dietaryfilter",
+    "pk": "f2650573-77ae-4301-8c56-326561e0bf35",
+    "fields": {"name": "gluten free"}
+  }
 ]
