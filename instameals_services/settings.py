@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_social_oauth2',
     'instameals.apps.InstamealsConfig',
+    'django_extensions',
 ]
 
 MIDDLEWARE_CLASSES = [
