@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework_social_oauth2',
     'instameals.apps.InstamealsConfig',
     'django_extensions',
+    'guardian',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -93,6 +94,7 @@ AUTHENTICATION_BACKENDS = (
     'social.backends.google.GoogleOAuth2',
     'rest_framework_social_oauth2.backends.DjangoOAuth2',
     'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend',
 )
 
 PROPRIETARY_BACKEND_NAME = 'instameals'
