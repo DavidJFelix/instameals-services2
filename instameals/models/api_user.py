@@ -7,3 +7,6 @@ from .uuid import UUIDModelMixin
 class APIUser(UUIDModelMixin, TimeStampedModel, AbstractUser):
     class Meta:
         app_label = 'instameals'
+        permissions = (
+            ('APIUser', 'APIUser'),
+        )

@@ -9,6 +9,9 @@ class Allergen(UUIDModelMixin, models.Model):
 
     class Meta:
         app_label = 'instameals'
+        permissions = (
+            ('Allergen', 'Allergen'),
+        )
 
     def __str__(self):
         return "[{id}]: {name}, {description}".format(
