@@ -18,6 +18,7 @@ __all__ = [
     'Allergen',
     'APIUser',
     'DietaryFilter',
+    'FavoriteSeller',
     'Image',
     'Ingredient',
     'Location',
