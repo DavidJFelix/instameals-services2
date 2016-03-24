@@ -32,7 +32,7 @@
   {
     "model": "instameals.allergen",
     "pk": "476156e3-6c63-4394-97b7-88965e37cb3c",
-    "fields": {"name": "seseame"}
+    "fields": {"name": "sesame"}
   },
   {
     "model": "instameals.allergen",
