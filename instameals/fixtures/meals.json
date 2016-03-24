@@ -1,0 +1,297 @@
+[
+  {
+    "model": "instameals.apiuser",
+    "pk": "49055cf2-a843-4fc6-87af-7292e3cd8580",
+    "fields": {
+      "password": "!bfExVDvSKsBJ3bWOmtPyO8ZwTQmXzou0NQlpWnkI",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "AnonymousUser",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2016-03-24T00:42:49.465Z",
+      "created": "2016-03-24T00:42:49.465Z",
+      "modified": "2016-03-24T00:42:49.466Z",
+      "groups": [
+        
+      ],
+      "user_permissions": [
+        
+      ]
+    }
+  },
+  {
+    "model": "instameals.image",
+    "pk": "04805c1d-975f-464b-8eb9-1ecbb7250c6a",
+    "fields": {
+      "created": "2016-03-24T01:26:06.797Z",
+      "modified": "2016-03-24T01:26:06.797Z",
+      "url": "http:\/\/imgsv.imaging.nikon.com\/lineup\/lens\/zoom\/normalzoom\/af-s_dx_18-140mmf_35-56g_ed_vr\/img\/sample\/sample1_l.jpg"
+    }
+  },
+  {
+    "model": "instameals.image",
+    "pk": "1a1b1507-6842-4476-b543-48459f87e710",
+    "fields": {
+      "created": "2016-03-24T04:27:50.047Z",
+      "modified": "2016-03-24T04:27:50.048Z",
+      "url": "http:\/\/www.seriouseats.com\/images\/2014\/02\/20140227-chipotles-sofritas-tacos.jpg"
+    }
+  },
+  {
+    "model": "instameals.image",
+    "pk": "24eb41db-58f6-4f8c-b12c-aef7112d65e3",
+    "fields": {
+      "created": "2016-03-24T04:27:51.831Z",
+      "modified": "2016-03-24T04:27:51.831Z",
+      "url": "http:\/\/www.seriouseats.com\/images\/2014\/02\/20140227-chipotles-sofritas-tacos.jpg"
+    }
+  },
+  {
+    "model": "instameals.image",
+    "pk": "269c781a-2063-4e34-8bc8-5662188fc7d9",
+    "fields": {
+      "created": "2016-03-24T04:27:51.827Z",
+      "modified": "2016-03-24T04:27:51.827Z",
+      "url": "http:\/\/imgsv.imaging.nikon.com\/lineup\/lens\/zoom\/normalzoom\/af-s_dx_18-140mmf_35-56g_ed_vr\/img\/sample\/sample1_l.jpg"
+    }
+  },
+  {
+    "model": "instameals.image",
+    "pk": "38892dd0-0e84-493a-bd08-27be83247746",
+    "fields": {
+      "created": "2016-03-24T04:29:25.341Z",
+      "modified": "2016-03-24T04:29:25.342Z",
+      "url": "http:\/\/imgsv.imaging.nikon.com\/lineup\/lens\/zoom\/normalzoom\/af-s_dx_18-140mmf_35-56g_ed_vr\/img\/sample\/sample1_l.jpg"
+    }
+  },
+  {
+    "model": "instameals.image",
+    "pk": "3d3a5677-d763-4448-a678-f5438a35cfd2",
+    "fields": {
+      "created": "2016-03-24T04:26:05.145Z",
+      "modified": "2016-03-24T04:26:05.146Z",
+      "url": "http:\/\/imgsv.imaging.nikon.com\/lineup\/lens\/zoom\/normalzoom\/af-s_dx_18-140mmf_35-56g_ed_vr\/img\/sample\/sample1_l.jpg"
+    }
+  },
+  {
+    "model": "instameals.image",
+    "pk": "a554fb18-8922-4633-abc4-30707268ae92",
+    "fields": {
+      "created": "2016-03-24T01:20:41.433Z",
+      "modified": "2016-03-24T01:20:41.433Z",
+      "url": "http:\/\/www.example.com"
+    }
+  },
+  {
+    "model": "instameals.image",
+    "pk": "af86d7e0-fecd-4cc9-b78f-cde61c8e39d1",
+    "fields": {
+      "created": "2016-03-24T04:27:50.040Z",
+      "modified": "2016-03-24T04:27:50.041Z",
+      "url": "http:\/\/imgsv.imaging.nikon.com\/lineup\/lens\/zoom\/normalzoom\/af-s_dx_18-140mmf_35-56g_ed_vr\/img\/sample\/sample1_l.jpg"
+    }
+  },
+  {
+    "model": "instameals.image",
+    "pk": "e1a5dd74-657e-46f8-8620-bddbc69306be",
+    "fields": {
+      "created": "2016-03-24T01:26:06.802Z",
+      "modified": "2016-03-24T01:26:06.802Z",
+      "url": "http:\/\/www.seriouseats.com\/images\/2014\/02\/20140227-chipotles-sofritas-tacos.jpg"
+    }
+  },
+  {
+    "model": "instameals.image",
+    "pk": "e883b0a1-9d13-4566-b0c4-f494a18f715f",
+    "fields": {
+      "created": "2016-03-24T04:26:05.149Z",
+      "modified": "2016-03-24T04:26:05.149Z",
+      "url": "http:\/\/www.seriouseats.com\/images\/2014\/02\/20140227-chipotles-sofritas-tacos.jpg"
+    }
+  },
+  {
+    "model": "instameals.image",
+    "pk": "fe94c20e-e2bb-41d6-8ab5-32e57fbc9a86",
+    "fields": {
+      "created": "2016-03-24T04:29:25.346Z",
+      "modified": "2016-03-24T04:29:25.347Z",
+      "url": "http:\/\/www.seriouseats.com\/images\/2014\/02\/20140227-chipotles-sofritas-tacos.jpg"
+    }
+  },
+  {
+    "model": "instameals.location",
+    "pk": "31e18258-0750-4194-b60b-8cba1ecaccf9",
+    "fields": {
+      "lat": 39.1086858,
+      "lng": -84.5150832
+    }
+  },
+  {
+    "model": "instameals.location",
+    "pk": "3c98904a-a3eb-4a51-95e2-92476c83dc05",
+    "fields": {
+      "lat": 12.34,
+      "lng": 23.45
+    }
+  },
+  {
+    "model": "instameals.location",
+    "pk": "7ace340e-0538-4678-acf7-ee412ae21097",
+    "fields": {
+      "lat": 12.34,
+      "lng": 23.45
+    }
+  },
+  {
+    "model": "instameals.location",
+    "pk": "abf1cbab-2418-4fe6-8b9b-15240e41ce24",
+    "fields": {
+      "lat": 39.1086858,
+      "lng": -84.5150832
+    }
+  },
+  {
+    "model": "instameals.location",
+    "pk": "d273e50b-c1a9-483a-87d8-c4fb8c70387d",
+    "fields": {
+      "lat": 39.1086858,
+      "lng": -84.5150832
+    }
+  },
+  {
+    "model": "instameals.location",
+    "pk": "e67bbe26-39c9-407e-818e-8eeafd7cc714",
+    "fields": {
+      "lat": 12.34,
+      "lng": 23.45
+    }
+  },
+  {
+    "model": "instameals.meal",
+    "pk": "348ddbdd-e842-45f1-8df6-5d388120e364",
+    "fields": {
+      "created": "2016-03-24T01:31:04.684Z",
+      "modified": "2016-03-24T01:31:04.684Z",
+      "name": "tacos baby",
+      "description": "",
+      "portions": 3,
+      "portions_available": 3,
+      "location": "3c98904a-a3eb-4a51-95e2-92476c83dc05",
+      "available_from": "2016-03-24T01:31:04.682Z",
+      "available_to": "2016-07-02T01:31:04.682Z",
+      "is_active": true,
+      "seller": "49055cf2-a843-4fc6-87af-7292e3cd8580",
+      "preview_image": "04805c1d-975f-464b-8eb9-1ecbb7250c6a",
+      "allergens": [
+        
+      ],
+      "dietary_filters": [
+        
+      ],
+      "ingredients": [
+        
+      ],
+      "images": [
+        "04805c1d-975f-464b-8eb9-1ecbb7250c6a",
+        "e1a5dd74-657e-46f8-8620-bddbc69306be"
+      ]
+    }
+  },
+  {
+    "model": "instameals.meal",
+    "pk": "48cebc3d-bab2-4cc2-aaa1-07fe56fb02da",
+    "fields": {
+      "created": "2016-03-24T04:26:05.159Z",
+      "modified": "2016-03-24T04:26:05.159Z",
+      "name": "moar tacos",
+      "description": "",
+      "portions": 10,
+      "portions_available": 5,
+      "location": "d273e50b-c1a9-483a-87d8-c4fb8c70387d",
+      "available_from": "2016-03-24T04:26:05.158Z",
+      "available_to": "2017-01-18T04:26:05.159Z",
+      "is_active": true,
+      "seller": "49055cf2-a843-4fc6-87af-7292e3cd8580",
+      "preview_image": "3d3a5677-d763-4448-a678-f5438a35cfd2",
+      "allergens": [
+        
+      ],
+      "dietary_filters": [
+        "c5b38138-9c7a-41d4-bd39-d2999ea25b74",
+        "f2650573-77ae-4301-8c56-326561e0bf35"
+      ],
+      "ingredients": [
+        
+      ],
+      "images": [
+        "3d3a5677-d763-4448-a678-f5438a35cfd2",
+        "af86d7e0-fecd-4cc9-b78f-cde61c8e39d1"
+      ]
+    }
+  },
+  {
+    "model": "instameals.meal",
+    "pk": "9b8fd018-c244-4fbd-8d71-83c1f434bd68",
+    "fields": {
+      "created": "2016-03-24T04:27:51.839Z",
+      "modified": "2016-03-24T04:27:51.840Z",
+      "name": "meal with dietary filter",
+      "description": "",
+      "portions": 2,
+      "portions_available": 2,
+      "location": "abf1cbab-2418-4fe6-8b9b-15240e41ce24",
+      "available_from": "2016-03-24T04:27:51.839Z",
+      "available_to": "2017-01-18T04:27:51.839Z",
+      "is_active": true,
+      "seller": "49055cf2-a843-4fc6-87af-7292e3cd8580",
+      "preview_image": "269c781a-2063-4e34-8bc8-5662188fc7d9",
+      "allergens": [
+        
+      ],
+      "dietary_filters": [
+        "c5b38138-9c7a-41d4-bd39-d2999ea25b74",
+        "f2650573-77ae-4301-8c56-326561e0bf35"
+      ],
+      "ingredients": [
+        
+      ],
+      "images": [
+        "269c781a-2063-4e34-8bc8-5662188fc7d9"
+      ]
+    }
+  },
+  {
+    "model": "instameals.meal",
+    "pk": "decb5497-364f-4012-bb15-424bc00d9fe4",
+    "fields": {
+      "created": "2016-03-24T04:29:25.354Z",
+      "modified": "2016-03-24T04:29:25.354Z",
+      "name": "meal with allergen",
+      "description": "",
+      "portions": 2,
+      "portions_available": 2,
+      "location": "31e18258-0750-4194-b60b-8cba1ecaccf9",
+      "available_from": "2016-03-24T04:29:25.354Z",
+      "available_to": "2017-01-18T04:29:25.354Z",
+      "is_active": true,
+      "seller": "49055cf2-a843-4fc6-87af-7292e3cd8580",
+      "preview_image": "38892dd0-0e84-493a-bd08-27be83247746",
+      "allergens": [
+        "051d373d-26ff-4339-b021-edd23dcb9cd4"
+      ],
+      "dietary_filters": [
+        
+      ],
+      "ingredients": [
+        
+      ],
+      "images": [
+        "38892dd0-0e84-493a-bd08-27be83247746"
+      ]
+    }
+  }
+]
