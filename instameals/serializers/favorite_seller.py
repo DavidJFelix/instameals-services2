@@ -1,11 +1,11 @@
 from rest_framework import serializers
 
-from ..models import favorite_seller
+from ..models import FavoriteSeller
 
 
 class FavoriteSellerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = favorite_seller
+        model = FavoriteSeller
         fields = (
             'id',
             'seller',
