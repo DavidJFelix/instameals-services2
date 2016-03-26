@@ -1,10 +1,11 @@
 from django.db import models
+from model_utils.models import TimeStampedModel
 
 from .api_user import APIUser
 from .uuid import UUIDModelMixin
 
 
-class FavoriteSeller(UUIDModelMixin, models.Model):
+class FavoriteSeller(UUIDModelMixin, TimeStampedModel):
     seller = models.ForeignKey(APIUser, on_delete=models.CASCADE,
                                related_name="favorite_sellers_of")
     favoriter = models.ForeignKey(APIUser, on_delete=models.CASCADE,

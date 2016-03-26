@@ -16,9 +16,14 @@ class MealViewSet(NoDeleteModelViewSet):
         longitude = self.request.query_params.get('lng', None)
         latitude = self.request.query_params.get('lat', None)
         max_range = self.request.query_params.get('range', None)
+        units = self.request.query_params.get('units', 'mi')
         limit = self.request.query_params.get('limit', None)
         page = self.request.query_params.get('page', None)
 
-        meals = queryset.filter(is_active=True)
+        # FIXME: perform haversine here
+
+        meals = queryset.filter(
+                is_active=True,
+        )
         serializer = MealSerializer(meals, many=True, context={'request': request})
         return Response(serializer.data)

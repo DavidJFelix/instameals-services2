@@ -18,17 +18,22 @@ from instameals.models import (
     SellerReview,
 )
 
+
+class TimeStampedModelAdmin(admin.ModelAdmin):
+    readonly_fields = ('created', 'modified')
+
+
 admin.site.register(Address)
 admin.site.register(Allergen)
-admin.site.register(APIUser)
+admin.site.register(APIUser, TimeStampedModelAdmin)
 admin.site.register(DietaryFilter)
-admin.site.register(FavoriteSeller)
-admin.site.register(Image)
+admin.site.register(FavoriteSeller, TimeStampedModelAdmin)
+admin.site.register(Image, TimeStampedModelAdmin)
 admin.site.register(Ingredient)
 admin.site.register(Location)
-admin.site.register(Meal)
+admin.site.register(Meal, TimeStampedModelAdmin)
 admin.site.register(MealReview)
-admin.site.register(Order)
+admin.site.register(Order, TimeStampedModelAdmin)
 admin.site.register(OrderReview)
-admin.site.register(Review)
+admin.site.register(Review, TimeStampedModelAdmin)
 admin.site.register(SellerReview)
