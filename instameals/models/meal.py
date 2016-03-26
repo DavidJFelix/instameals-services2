@@ -34,7 +34,7 @@ class Meal(UUIDModelMixin, TimeStampedModel):
     class Meta:
         app_label = 'instameals'
         permissions = (
-            ('Meal', 'Meal'),
+            ('view_meal', 'View Meal'),
         )
 
     def __str__(self):
