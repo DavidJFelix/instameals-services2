@@ -1,6 +1,7 @@
 from django.db import models
 from model_utils.models import TimeStampedModel
 
+from .address import Address
 from .allergen import Allergen
 from .api_user import APIUser
 from .dietary_filter import DietaryFilter
@@ -19,6 +20,7 @@ class Meal(UUIDModelMixin, TimeStampedModel):
     portions = models.PositiveSmallIntegerField()
     portions_available = models.PositiveSmallIntegerField()
 
+    pickup_address = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='meals')
     location = models.OneToOneField(Location, on_delete=models.CASCADE, related_name='meal')
 
     # FIXME: validate dates

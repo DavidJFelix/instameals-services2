@@ -12,7 +12,6 @@ from .order import OrderSerializer
 from .order_review import OrderReviewSerializer
 from .review import ReviewSerializer
 from .seller_review import SellerReviewSerializer
-from .user_address_mapping import UserAddressMappingSerializer
 
 __all__ = [
     'AddressSerializer',
@@ -29,5 +28,4 @@ __all__ = [
     'OrderReviewSerializer',
     'ReviewSerializer',
     'SellerReviewSerializer',
-    'UserAddressMappingSerializer',
 ]
