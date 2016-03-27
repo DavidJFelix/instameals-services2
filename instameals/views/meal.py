@@ -1,3 +1,5 @@
+import math
+
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 
@@ -11,8 +13,31 @@ class MealViewSet(NoDeleteModelViewSet):
     serializer_class = MealSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
+    @staticmethod
+    def get_coord_square(longitude, latitude, max_range=10000.0):
+        # latitude varies about 0.7miles from north pole to equator -- ignore this
+        #  and use equatorial longitude
+        # 69.172 mi/deg-lat * 1609.34 m/mi = 111,321.266 m/deg-lat
+        lat_offset = max_range / 111321.266
+        lng_offset = max_range / (math.cos(math.radians(latitude)) * 111321.266)
+
+        # Latitude has a limit of -90 to 90; hard limit at the poles
+        max_lat = latitude + lat_offset
+        max_lat = 90.0 if max_lat > 90.0 else max_lat
+
+        min_lat = latitude - lat_offset
+        min_lat = -90.0 if min_lat < -90.0 else min_lat
+
+        # FIXME: handle longitude overflow weirdness
+        # Longitude has a limit of -180 to 180; wraps around at the ends
+        max_lng = longitude + lng_offset
+        min_lng = longitude - lng_offset
+
+        return min_lng, min_lat, max_lng, max_lat
+
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
+
         longitude = self.request.query_params.get('lng', None)
         latitude = self.request.query_params.get('lat', None)
         max_range = self.request.query_params.get('range', None)
@@ -20,10 +45,38 @@ class MealViewSet(NoDeleteModelViewSet):
         limit = self.request.query_params.get('limit', None)
         page = self.request.query_params.get('page', None)
 
-        # FIXME: perform haversine here
+        # FIXME: fail on bad input
+        # Only obey latitude and longitude if we have both
+        if all((latitude, longitude)):
+            try:
+                latitude = float(latitude)
+                longitude = float(longitude)
+            except ValueError:  # they weren't floats
+                longitude, latitude = (-84.51, 39.10)
+        else:
+            longitude, latitude = (-84.51, 39.10)
 
+        # FIXME: handle units and range
+        # Convert max range to meters
+        max_range = 15.0 * 1609.34
+
+        (min_lng, min_lat, max_lng, max_lat) = MealViewSet.get_coord_square(
+                longitude,
+                latitude,
+                max_range=max_range
+        )
+
+        print(min_lng, min_lat, max_lng, max_lat)
+
+        # FIXME: handle 180, -180 filter edge case
         meals = queryset.filter(
                 is_active=True,
+                location__lng__lte=max_lng,
+                location__lng__gte=min_lng,
+                location__lat__lte=max_lat,
+                location__lat__gte=min_lat,
         )
         serializer = MealSerializer(meals, many=True, context={'request': request})
+        # TODO: sort items by distance and remove items outside of radius
+        # FIXME: paginate here
         return Response(serializer.data)
