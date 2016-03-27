@@ -5,8 +5,8 @@ from .uuid import UUIDModelMixin
 
 class Location(UUIDModelMixin, models.Model):
     # FIXME: validate lat, lng
-    lat = models.FloatField()
-    lng = models.FloatField()
+    lat = models.DecimalField(max_digits=9, decimal_places=6)
+    lng = models.DecimalField(max_digits=9, decimal_places=6)
 
     class Meta:
         app_label = 'instameals'
