@@ -21,17 +21,21 @@ class MealViewSet(NoDeleteModelViewSet):
         lat_offset = max_range / 111321.266
         lng_offset = max_range / (math.cos(math.radians(latitude)) * 111321.266)
 
-        # Latitude has a limit of -90 to 90; hard limit at the poles
+        # Latitude has an upper limit of 90 at the north pole. Cap it at 90.
         max_lat = latitude + lat_offset
         max_lat = 90.0 if max_lat > 90.0 else max_lat
 
+        # Latitude has a lower limit of -90 at the south pole. Cap it at -90.
         min_lat = latitude - lat_offset
         min_lat = -90.0 if min_lat < -90.0 else min_lat
 
-        # FIXME: handle longitude overflow weirdness
-        # Longitude has a limit of -180 to 180; wraps around at the ends
+        # Longitude has an upper limit of 180, wrap around to -180 if it overflows
         max_lng = longitude + lng_offset
+        max_lng = max_lng - 360.0 if max_lng > 180.0 else max_lng
+
+        # Longitude has a lower limit of -180, wrap around to 180 if it underflows
         min_lng = longitude - lng_offset
+        min_lng = min_lng + 360 if min_lng < -180.0 else min_lng
 
         return min_lng, min_lat, max_lng, max_lat
 
@@ -40,10 +44,10 @@ class MealViewSet(NoDeleteModelViewSet):
 
         longitude = self.request.query_params.get('lng', None)
         latitude = self.request.query_params.get('lat', None)
-        max_range = self.request.query_params.get('range', None)
-        units = self.request.query_params.get('units', 'mi')
-        limit = self.request.query_params.get('limit', None)
-        page = self.request.query_params.get('page', None)
+        # max_range = self.request.query_params.get('range', None)
+        # units = self.request.query_params.get('units', 'mi')
+        # limit = self.request.query_params.get('limit', None)
+        # page = self.request.query_params.get('page', None)
 
         # FIXME: fail on bad input
         # Only obey latitude and longitude if we have both
@@ -65,8 +69,6 @@ class MealViewSet(NoDeleteModelViewSet):
                 latitude,
                 max_range=max_range
         )
-
-        print(min_lng, min_lat, max_lng, max_lat)
 
         # FIXME: handle 180, -180 filter edge case
         meals = queryset.filter(
