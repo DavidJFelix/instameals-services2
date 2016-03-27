@@ -3,6 +3,7 @@ from django.contrib import admin
 # Register your models here.
 from instameals.models import (
     Address,
+    UserAddressMapping,
     Allergen,
     APIUser,
     DietaryFilter,
@@ -37,3 +38,4 @@ admin.site.register(Order, TimeStampedModelAdmin)
 admin.site.register(OrderReview)
 admin.site.register(Review, TimeStampedModelAdmin)
 admin.site.register(SellerReview)
+admin.site.register(UserAddressMapping)

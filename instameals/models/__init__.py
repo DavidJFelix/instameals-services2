@@ -12,6 +12,7 @@ from .order import Order
 from .order_review import OrderReview
 from .review import Review
 from .seller_review import SellerReview
+from .user_address_mapping import UserAddressMapping
 
 __all__ = [
     'Address',
@@ -28,4 +29,5 @@ __all__ = [
     'OrderReview',
     'Review',
     'SellerReview',
+    'UserAddressMapping'
 ]
