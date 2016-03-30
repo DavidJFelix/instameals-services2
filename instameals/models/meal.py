@@ -14,9 +14,9 @@ from .uuid import UUIDModelMixin
 class Meal(UUIDModelMixin, TimeStampedModel):
     name = models.TextField(max_length=50)
     description = models.TextField(max_length=10000)
-    allergens = models.ManyToManyField(Allergen, blank=True, related_name='meals')
-    dietary_filters = models.ManyToManyField(DietaryFilter, blank=True, related_name='meals')
-    ingredients = models.ManyToManyField(Ingredient, blank=True, related_name='meals')
+    allergens = models.ForeignKey(Allergen, blank=True, null=True, related_name='meals')
+    dietary_filters = models.ForeignKey(DietaryFilter, blank=True, null=True, related_name='meals')
+    ingredients = models.ForeignKey(Ingredient, blank=True, null=True, related_name='meals')
     portions = models.PositiveSmallIntegerField()
     portions_available = models.PositiveSmallIntegerField()
 

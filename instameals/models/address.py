@@ -11,6 +11,9 @@ class Address(UUIDModelMixin, TimeStampedModel):
     state = models.TextField()
     postal_code = models.TextField()
     country = models.TextField()
+    lat = models.DecimalField(max_digits=9, decimal_places=6)
+    lng = models.DecimalField(max_digits=9, decimal_places=6)
+
 
     class Meta:
         app_label = 'instameals'
@@ -19,7 +22,7 @@ class Address(UUIDModelMixin, TimeStampedModel):
         )
 
     def __str__(self):
-        return "[{id}]: {line1}, {line2}, {city}, {state}, {postal_code}, {country}".format(
+        return "[{id}]: {line1}, {line2}, {city}, {state}, {postal_code}, {country}, {lat}, {lng}".format(
                 id=str(self.id),
                 line1=str(self.line1),
                 line2=str(self.line2),
@@ -27,4 +30,6 @@ class Address(UUIDModelMixin, TimeStampedModel):
                 state=str(self.state),
                 postal_code=str(self.postal_code),
                 country=str(self.country),
+                lng=str(self.lng),
+                lat=str(self.lat)
         )
