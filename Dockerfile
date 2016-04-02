@@ -20,5 +20,4 @@ COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 COPY ./ /opt/instameals
-
-CMD python manage.py runserver
+CMD python manage.py migrate && python manage.py runserver
