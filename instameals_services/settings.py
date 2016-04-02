@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'instameals.apps.InstamealsConfig',
     'django_extensions',
     'guardian',
+    'rest_framework_gis',
 ]
 
 MIDDLEWARE_CLASSES = [
