@@ -9,7 +9,6 @@ from instameals.models import (
     FavoriteSeller,
     Image,
     Ingredient,
-    Location,
     Meal,
     MealReview,
     Order,
@@ -30,7 +29,6 @@ admin.site.register(DietaryFilter)
 admin.site.register(FavoriteSeller, TimeStampedModelAdmin)
 admin.site.register(Image, TimeStampedModelAdmin)
 admin.site.register(Ingredient)
-admin.site.register(Location)
 admin.site.register(Meal, TimeStampedModelAdmin)
 admin.site.register(MealReview)
 admin.site.register(Order, TimeStampedModelAdmin)

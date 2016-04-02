@@ -5,7 +5,6 @@ from .dietary_filter import DietaryFilter
 from .favorite_seller import FavoriteSeller
 from .image import Image
 from .ingredient import Ingredient
-from .location import Location
 from .meal import Meal
 from .meal_review import MealReview
 from .order import Order
@@ -21,7 +20,6 @@ __all__ = [
     'FavoriteSeller',
     'Image',
     'Ingredient',
-    'Location',
     'Meal',
     'MealReview',
     'Order',

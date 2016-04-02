@@ -5,7 +5,6 @@ from .dietary_filter import DietaryFilterSerializer
 from .favorite_seller import FavoriteSellerSerializer
 from .image import ImageSerializer
 from .ingredient import IngredientSerializer
-from .location import LocationSerializer
 from .meal import MealSerializer
 from .meal_review import MealReviewSerializer
 from .order import OrderSerializer
@@ -21,7 +20,6 @@ __all__ = [
     'FavoriteSellerSerializer',
     'ImageSerializer',
     'IngredientSerializer',
-    'LocationSerializer',
     'MealSerializer',
     'MealReviewSerializer',
     'OrderSerializer',

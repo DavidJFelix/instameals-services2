@@ -5,7 +5,6 @@ from .dietary_filter import DietaryFilterViewSet
 from .favorite_seller import FavoriteSellerViewSet
 from .image import ImageViewSet
 from .ingredient import IngredientViewSet
-from .location import LocationViewSet
 from .meal import MealViewSet
 from .meal_review import MealReviewViewSet
 from .order import OrderViewSet
@@ -21,7 +20,6 @@ __all__ = [
     'FavoriteSellerViewSet',
     'ImageViewSet',
     'IngredientViewSet',
-    'LocationViewSet',
     'MealReviewViewSet',
     'OrderViewSet',
     'OrderReviewViewSet',

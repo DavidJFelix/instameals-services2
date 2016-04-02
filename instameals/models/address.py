@@ -1,4 +1,4 @@
-from django.db import models
+from django.contrib.gis.db import models
 from model_utils.models import TimeStampedModel
 
 from .uuid import UUIDModelMixin
@@ -11,6 +11,7 @@ class Address(UUIDModelMixin, TimeStampedModel):
     state = models.TextField()
     postal_code = models.TextField()
     country = models.TextField()
+    coordinates = models.PointField(default='Point(-84.51, 39.10)')
 
     class Meta:
         app_label = 'instameals'

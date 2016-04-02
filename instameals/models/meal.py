@@ -7,7 +7,6 @@ from .api_user import APIUser
 from .dietary_filter import DietaryFilter
 from .image import Image
 from .ingredient import Ingredient
-from .location import Location
 from .uuid import UUIDModelMixin
 
 
@@ -21,7 +20,6 @@ class Meal(UUIDModelMixin, TimeStampedModel):
     portions_available = models.PositiveSmallIntegerField()
 
     pickup_address = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='meals')
-    location = models.OneToOneField(Location, on_delete=models.CASCADE, related_name='meal')
 
     # FIXME: validate dates
     available_from = models.DateTimeField()

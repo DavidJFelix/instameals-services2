@@ -25,7 +25,6 @@ from instameals.views import (
     FavoriteSellerViewSet,
     ImageViewSet,
     IngredientViewSet,
-    LocationViewSet,
     MealViewSet,
     MealReviewViewSet,
     OrderViewSet,
@@ -41,7 +40,6 @@ router.register(r'dietary_filters', DietaryFilterViewSet)
 router.register(r'favorite_sellers', FavoriteSellerViewSet)
 router.register(r'images', ImageViewSet)
 router.register(r'ingredients', IngredientViewSet)
-router.register(r'location', LocationViewSet)
 router.register(r'meals', MealViewSet)
 router.register(r'meal_reviews', MealReviewViewSet)
 router.register(r'orders', OrderViewSet)
