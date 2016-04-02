@@ -5,6 +5,8 @@ WORKDIR /opt/instameals
 RUN mkdir instameals
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
+        libproj-dev \
+        gdal-bin \
         libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 

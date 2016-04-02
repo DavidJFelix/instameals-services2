@@ -11,7 +11,7 @@ class Address(UUIDModelMixin, TimeStampedModel):
     state = models.TextField()
     postal_code = models.TextField()
     country = models.TextField()
-    coordinates = models.PointField(default='Point(-84.51, 39.10)')
+    coordinates = models.PointField()
 
     class Meta:
         app_label = 'instameals'
