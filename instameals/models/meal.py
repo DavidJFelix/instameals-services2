@@ -1,6 +1,7 @@
 from django.contrib.gis.db import models
 from model_utils.models import TimeStampedModel
 
+from .price import Price
 from .address import Address
 from .allergen import Allergen
 from .api_user import APIUser
@@ -24,6 +25,7 @@ class Meal(UUIDModelMixin, TimeStampedModel):
     # FIXME: validate dates
     available_from = models.DateTimeField()
     available_to = models.DateTimeField()
+    price = models.OneToOneField(Price)
 
     is_active = models.BooleanField(default=True)
     seller = models.ForeignKey(APIUser, on_delete=models.CASCADE, related_name='meals')

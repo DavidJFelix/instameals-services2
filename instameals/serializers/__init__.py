@@ -9,6 +9,7 @@ from .meal import MealSerializer
 from .meal_review import MealReviewSerializer
 from .order import OrderSerializer
 from .order_review import OrderReviewSerializer
+from .price import PriceSerializer
 from .review import ReviewSerializer
 from .seller_review import SellerReviewSerializer
 
@@ -24,6 +25,7 @@ __all__ = [
     'MealReviewSerializer',
     'OrderSerializer',
     'OrderReviewSerializer',
+    'PriceSerializer',
     'ReviewSerializer',
     'SellerReviewSerializer',
 ]

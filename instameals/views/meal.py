@@ -75,7 +75,8 @@ class MealViewSet(NoDeleteModelViewSet):
         # FIXME: handle 180, -180 filter edge case
         meals = queryset.filter(
                 is_active=True,
-                pickup_address__coordinates__distance_lte=(Point(longitude, latitude), Distance(m=max_range)),
+                pickup_address__coordinates__distance_lte=(
+                Point(longitude, latitude), Distance(m=max_range)),
         )
         serializer = MealSerializer(meals, many=True, context={'request': request})
         # TODO: sort items by distance and remove items outside of radius
