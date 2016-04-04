@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'oauth2_provider',
     'social.apps.django_app.default',
     'rest_framework',
+    'rest_framework_gis',
     'rest_framework_social_oauth2',
     'instameals.apps.InstamealsConfig',
     'django_extensions',
