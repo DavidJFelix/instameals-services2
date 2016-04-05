@@ -1,8 +1,8 @@
 import math
 
-from django.contrib.gis.measure import Distance
 from django.contrib.gis.geos import Point
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from django.contrib.gis.measure import Distance
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from .base import NoDeleteModelViewSet
@@ -11,9 +11,12 @@ from ..serializers import MealSerializer
 
 
 class MealViewSet(NoDeleteModelViewSet):
+    # FIXME: Filter active meals only
     queryset = Meal.objects.all()
     serializer_class = MealSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    # FIXME: Don't allow people to create meals unless they're logged in
+    # permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (AllowAny,)
 
     @staticmethod
     def get_coord_square(longitude, latitude, max_range=10000.0):

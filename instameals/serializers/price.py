@@ -5,5 +5,5 @@ from ..models import Price
 
 class PriceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        object = Price
+        model = Price
         fields = ('id','currency', 'value')

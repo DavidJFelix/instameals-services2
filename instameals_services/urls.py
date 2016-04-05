@@ -29,6 +29,7 @@ from instameals.views import (
     MealReviewViewSet,
     OrderViewSet,
     OrderReviewViewSet,
+    PriceViewSet,
     ReviewViewSet,
     SellerReviewViewSet,
 )
@@ -44,6 +45,7 @@ router.register(r'meals', MealViewSet)
 router.register(r'meal_reviews', MealReviewViewSet)
 router.register(r'orders', OrderViewSet)
 router.register(r'order_reviews', OrderReviewViewSet)
+router.register(r'prices', PriceViewSet)
 router.register(r'reviews', ReviewViewSet)
 router.register(r'seller_reviews', SellerReviewViewSet)
 router.register(r'users', APIUserViewSet)

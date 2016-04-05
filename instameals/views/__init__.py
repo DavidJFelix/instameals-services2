@@ -9,6 +9,7 @@ from .meal import MealViewSet
 from .meal_review import MealReviewViewSet
 from .order import OrderViewSet
 from .order_review import OrderReviewViewSet
+from .price import PriceViewSet
 from .review import ReviewViewSet
 from .seller_review import SellerReviewViewSet
 
@@ -23,6 +24,7 @@ __all__ = [
     'MealReviewViewSet',
     'OrderViewSet',
     'OrderReviewViewSet',
+    'PriceViewSet',
     'ReviewViewSet',
     'SellerReviewViewSet',
 ]
