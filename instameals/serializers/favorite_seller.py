@@ -1,9 +1,10 @@
 from rest_framework import serializers
 
+from .uuid import UUIDModelSerializerMixin
 from ..models import FavoriteSeller
 
 
-class FavoriteSellerSerializer(serializers.HyperlinkedModelSerializer):
+class FavoriteSellerSerializer(UUIDModelSerializerMixin, serializers.HyperlinkedModelSerializer):
     class Meta:
         model = FavoriteSeller
         fields = (

@@ -1,9 +1,13 @@
 from rest_framework import serializers
 
+from .uuid import UUIDModelSerializerMixin
 from ..models import DietaryFilter
 
 
-class DietaryFilterSerializer(serializers.HyperlinkedModelSerializer):
+class DietaryFilterSerializer(UUIDModelSerializerMixin, serializers.HyperlinkedModelSerializer):
     class Meta:
         model = DietaryFilter
-        fields = ('id', 'name')
+        fields = (
+            'id',
+            'name',
+        )
