@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_gis',
     'rest_framework_social_oauth2',
+    'rest_framework_swagger',
     'instameals.apps.InstamealsConfig',
     'django_extensions',
     'guardian',

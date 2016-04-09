@@ -53,6 +53,7 @@ router.register(r'users', APIUserViewSet)
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^auth/', include('rest_framework_social_oauth2.urls')),
+    url(r'^docs/', include('rest_framework_swagger.urls')),
 
 ]
 
