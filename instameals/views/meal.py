@@ -1,7 +1,8 @@
 import math
 
+from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.geos import Point
-from django.contrib.gis.measure import Distance
+from django.contrib.gis.measure import D
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
@@ -49,6 +50,8 @@ class MealViewSet(NoDeleteModelViewSet):
 
         longitude = self.request.query_params.get('lng', None)
         latitude = self.request.query_params.get('lat', None)
+
+        # FIXME: honor these query params
         # max_range = self.request.query_params.get('range', None)
         # units = self.request.query_params.get('units', 'mi')
         # limit = self.request.query_params.get('limit', None)
@@ -69,19 +72,19 @@ class MealViewSet(NoDeleteModelViewSet):
         # Convert max range to meters
         max_range = 15.0 * 1609.34
 
-        (min_lng, min_lat, max_lng, max_lat) = MealViewSet.get_coord_square(
-                longitude,
-                latitude,
-                max_range=max_range
-        )
+        query_location = Point(longitude, latitude)
 
-        # FIXME: handle 180, -180 filter edge case
+        # Get meals within range and order them by distance from query_location
         meals = queryset.filter(
                 is_active=True,
                 pickup_address__coordinates__distance_lte=(
-                Point(longitude, latitude), Distance(m=max_range)),
-        )
+                    query_location, D(m=max_range)
+                ),
+        ).annotate(
+                distance=Distance('pickup_address__coordinates', query_location)
+        ).order_by('distance')
+
         serializer = MealSerializer(meals, many=True, context={'request': request})
-        # TODO: sort items by distance and remove items outside of radius
+
         # FIXME: paginate here
         return Response(serializer.data)
