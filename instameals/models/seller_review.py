@@ -12,6 +12,9 @@ class SellerReview(UUIDModelMixin, models.Model):
 
     class Meta:
         app_label = 'instameals'
+        permissions = (
+            ('view_seller_review', 'View Seller Review'),
+        )
 
     def __str__(self):
         return "[{id}]: {reviewer}'s review of {seller}; {review}".format(

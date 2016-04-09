@@ -19,6 +19,9 @@ class Order(UUIDModelMixin, TimeStampedModel):
 
     class Meta:
         app_label = 'instameals'
+        permissions = (
+            ('view_order', 'View Order'),
+        )
 
     def __str__(self):
         return "[{id}]: {buyer}'s purchase of {meal} at {purchased_at}".format(

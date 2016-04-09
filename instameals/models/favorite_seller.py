@@ -13,6 +13,9 @@ class FavoriteSeller(UUIDModelMixin, TimeStampedModel):
 
     class Meta:
         app_label = 'instameals'
+        permissions = (
+            ('view_favorite_seller', 'View Favorite Seller'),
+        )
 
     def __str__(self):
         return "[{id}]: {favoriter}'s favorite of {seller}".format(

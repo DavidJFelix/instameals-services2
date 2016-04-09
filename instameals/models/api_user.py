@@ -12,5 +12,5 @@ class APIUser(UUIDModelMixin, TimeStampedModel, AbstractUser):
     class Meta:
         app_label = 'instameals'
         permissions = (
-            ('APIUser', 'APIUser'),
+            ('view_api_user', 'View APIUser'),
         )

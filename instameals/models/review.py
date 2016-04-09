@@ -17,6 +17,9 @@ class Review(UUIDModelMixin, TimeStampedModel):
 
     class Meta:
         app_label = 'instameals'
+        permissions = (
+            ('view_rating', 'View Rating'),
+        )
 
     def __str__(self):
         return "[{id}]: {rating}".format(
