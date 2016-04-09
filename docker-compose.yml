@@ -1,6 +1,8 @@
 version: "2"
 services:
   db:
+    ports:
+      - "5432:5432"
     image: mdillon/postgis:9.5
     environment:
       - POSTGRES_PASSWORD=docker
