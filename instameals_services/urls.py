@@ -61,7 +61,6 @@ urlpatterns = [
     url(r'^auth/', include('rest_framework_social_oauth2.urls')),
     url(r'^docs/', include('rest_framework_swagger.urls')),
     url(r'^dashboard/', include(dashing_router.urls)),
-    url(r'^$', RedirectView.as_view(url='dashboard/'), name='index'),
 ]
 
 urlpatterns += router.urls
