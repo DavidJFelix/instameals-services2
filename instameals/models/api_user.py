@@ -9,6 +9,7 @@ from .uuid import UUIDModelMixin
 
 class APIUser(UUIDModelMixin, TimeStampedModel, AbstractUser):
     addresses = models.ManyToManyField(Address, related_name='users')
+    profile_image = models.OneToOneField(Image, related_name='users', blank='', null=True)
     class Meta:
         app_label = 'instameals'
         permissions = (

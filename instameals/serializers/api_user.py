@@ -17,4 +17,5 @@ class APIUserSerializer(UUIDModelSerializerMixin, serializers.HyperlinkedModelSe
             'is_active',
             'modified',
             'created',
+            'profile_image'
         )
