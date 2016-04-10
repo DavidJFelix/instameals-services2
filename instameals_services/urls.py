@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework.routers import DefaultRouter
+from dashing.utils import router as dashing_router
 
 from instameals.views import (
     APIUserViewSet,
@@ -54,7 +55,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^auth/', include('rest_framework_social_oauth2.urls')),
     url(r'^docs/', include('rest_framework_swagger.urls')),
-
+    url(r'^dashboard/', include(dashing_router.urls)),
 ]
 
 urlpatterns += router.urls
