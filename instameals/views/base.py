@@ -9,3 +9,11 @@ class NoDeleteModelViewSet(
         viewsets.GenericViewSet,
 ):
     pass
+
+
+class CreateRetrieveModelViewSet(
+        mixins.CreateModelMixin,
+        mixins.RetrieveModelMixin,
+        viewsets.GenericViewSet,
+):
+    pass

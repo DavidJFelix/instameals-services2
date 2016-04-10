@@ -1,10 +1,10 @@
-from rest_framework import serializers
+from rest_framework.serializers import HyperlinkedModelSerializer
 
 from .uuid import UUIDModelSerializerMixin
 from ..models import Address
 
 
-class AddressSerializer(UUIDModelSerializerMixin, serializers.HyperlinkedModelSerializer):
+class AddressSerializer(UUIDModelSerializerMixin, HyperlinkedModelSerializer):
     class Meta:
         model = Address
         fields = (
