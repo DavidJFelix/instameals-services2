@@ -17,6 +17,9 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework.routers import DefaultRouter
 from dashing.utils import router as dashing_router
+from .widgets import MealWidget
+from django.views.generic.base import RedirectView
+
 
 from instameals.views import (
     APIUserViewSet,
@@ -51,11 +54,14 @@ router.register(r'reviews', ReviewViewSet)
 router.register(r'seller_reviews', SellerReviewViewSet)
 router.register(r'users', APIUserViewSet)
 
+#dashing widgets
+dashing_router.register(MealWidget, 'meal_widget')
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^auth/', include('rest_framework_social_oauth2.urls')),
     url(r'^docs/', include('rest_framework_swagger.urls')),
     url(r'^dashboard/', include(dashing_router.urls)),
+    url(r'^$', RedirectView.as_view(url='dashboard/'), name='index'),
 ]
 
 urlpatterns += router.urls
