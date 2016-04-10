@@ -10,4 +10,5 @@ class ImageSerializer(UUIDModelSerializerMixin, serializers.HyperlinkedModelSeri
         fields = (
             'id',
             'url',
+            'type',
         )

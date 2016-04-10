@@ -10,4 +10,11 @@ class APIUserSerializer(UUIDModelSerializerMixin, serializers.HyperlinkedModelSe
         fields = (
             'id',
             'username',
+            'email',
+            'first_name',
+            'last_name',
+            'last_login',
+            'is_active',
+            'modified',
+            'created',
         )
