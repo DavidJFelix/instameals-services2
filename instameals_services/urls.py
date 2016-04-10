@@ -13,13 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from dashing.utils import router as dashing_router
 from django.conf.urls import url, include
 from django.contrib import admin
-from rest_framework.routers import DefaultRouter
-from dashing.utils import router as dashing_router
-from .widgets import MealWidget
 from django.views.generic.base import RedirectView
-
+from rest_framework.routers import DefaultRouter
 
 from instameals.views import (
     APIUserViewSet,
@@ -37,6 +35,7 @@ from instameals.views import (
     ReviewViewSet,
     SellerReviewViewSet,
 )
+from instameals.widgets import MealWidget
 
 router = DefaultRouter()
 router.register(r'addresses', AddressViewSet)
@@ -54,8 +53,9 @@ router.register(r'reviews', ReviewViewSet)
 router.register(r'seller_reviews', SellerReviewViewSet)
 router.register(r'users', APIUserViewSet)
 
-#dashing widgets
+# dashing widgets
 dashing_router.register(MealWidget, 'meal_widget')
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^auth/', include('rest_framework_social_oauth2.urls')),
