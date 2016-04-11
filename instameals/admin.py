@@ -13,6 +13,7 @@ from instameals.models import (
     MealReview,
     Order,
     OrderReview,
+    Price,
     Review,
     SellerReview,
 )
@@ -33,5 +34,6 @@ admin.site.register(Meal, TimeStampedModelAdmin)
 admin.site.register(MealReview)
 admin.site.register(Order, TimeStampedModelAdmin)
 admin.site.register(OrderReview)
+admin.site.register(Price)
 admin.site.register(Review, TimeStampedModelAdmin)
 admin.site.register(SellerReview)
