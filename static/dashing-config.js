@@ -13,3 +13,13 @@ dashboard.addWidget('meal_widget', 'Number', {
     },
     interval: 5000
 });
+
+dashboard.addWidget('user_widget', 'Number', {
+    getData: function () {
+        var self = this;
+        Dashing.utils.get('user_widget', function(data) {
+            $.extend(self.scope, data);
+        });
+    },
+    interval: 5000
+});

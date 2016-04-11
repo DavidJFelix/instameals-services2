@@ -36,6 +36,7 @@ from instameals.views import (
     SellerReviewViewSet,
 )
 from instameals.widgets import MealWidget
+from instameals.widgets import UserWidget
 
 router = DefaultRouter()
 router.register(r'addresses', AddressViewSet)
@@ -55,6 +56,7 @@ router.register(r'users', APIUserViewSet)
 
 # dashing widgets
 dashing_router.register(MealWidget, 'meal_widget')
+dashing_router.register(UserWidget, 'user_widget')
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
