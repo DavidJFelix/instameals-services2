@@ -5,6 +5,8 @@ from .uuid import UUIDModelMixin
 
 
 class Image(UUIDModelMixin, TimeStampedModel):
+    # FIXME: for some reason, admin console isn't honoring all of these options and only lists
+    # other. I'm also not keen on classifying the image at this level
     IMAGE_TYPE = (
         ('meal_image', 'meal_image'),
         ('profile_image', 'profile_image'),
