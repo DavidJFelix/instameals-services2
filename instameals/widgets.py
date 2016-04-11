@@ -1,19 +1,18 @@
 from dashing.widgets import NumberWidget
-from .models import Meal
+
 from .models import APIUser
+from .models import Meal
+from .models import Order
 
 
 class MealWidget(NumberWidget):
     title = 'Meals'
 
     def get_value(self):
-        return Meal.objects.count()
+        return Meal.objects.filter(is_active=True).count()
 
     def get_detail(self):
         return 'Number of active meals'
-
-    def get_more_info(self):
-        return 'more info gets in here'
 
 
 class UserWidget(NumberWidget):
@@ -25,5 +24,12 @@ class UserWidget(NumberWidget):
     def get_detail(self):
         return 'Number of users'
 
-    def get_more_info(self):
-        return 'more info gets in here'
+
+class OrderWidget(NumberWidget):
+    title = 'Orders'
+
+    def get_value(self):
+        return Order.objects.count()
+
+    def get_detail(self):
+        return 'Number of Orders'

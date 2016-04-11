@@ -16,7 +16,6 @@ Including another URLconf
 from dashing.utils import router as dashing_router
 from django.conf.urls import url, include
 from django.contrib import admin
-from django.views.generic.base import RedirectView
 from rest_framework.routers import DefaultRouter
 
 from instameals.views import (
@@ -36,6 +35,7 @@ from instameals.views import (
     SellerReviewViewSet,
 )
 from instameals.widgets import MealWidget
+from instameals.widgets import OrderWidget
 from instameals.widgets import UserWidget
 
 router = DefaultRouter()
@@ -57,6 +57,7 @@ router.register(r'users', APIUserViewSet)
 # dashing widgets
 dashing_router.register(MealWidget, 'meal_widget')
 dashing_router.register(UserWidget, 'user_widget')
+dashing_router.register(OrderWidget, 'order_widget')
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

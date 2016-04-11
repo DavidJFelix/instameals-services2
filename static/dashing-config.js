@@ -23,3 +23,13 @@ dashboard.addWidget('user_widget', 'Number', {
     },
     interval: 5000
 });
+
+dashboard.addWidget('order_widget', 'Number', {
+    getData: function () {
+        var self = this;
+        Dashing.utils.get('order_widget', function(data) {
+            $.extend(self.scope, data);
+        });
+    },
+    interval: 5000
+});
