@@ -7,8 +7,8 @@ dashboard.addWidget('clock_widget', 'Clock');
 dashboard.addWidget('meal_widget', 'Number', {
     getData: function () {
         var self = this;
-        $.get('widgets/meal_widget/', function(data) {
-            $.extend(self.data, data);
+        Dashing.utils.get('meal_widget', function(data) {
+            $.extend(self.scope, data);
         });
     },
     interval: 5000

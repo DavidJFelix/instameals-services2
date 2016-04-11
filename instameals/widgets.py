@@ -1,5 +1,5 @@
 from dashing.widgets import NumberWidget
-from instameals.models import Meal
+from .models import Meal
 
 
 class MealWidget(NumberWidget):

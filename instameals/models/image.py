@@ -14,7 +14,6 @@ class Image(UUIDModelMixin, TimeStampedModel):
     url = models.URLField()
     type = models.TextField(choices=IMAGE_TYPE, default='other')
 
-    # TODO: should an image be linked to a user??
     class Meta:
         app_label = 'instameals'
 
