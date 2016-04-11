@@ -18,7 +18,7 @@ class MealSerializer(UUIDModelSerializerMixin, serializers.HyperlinkedModelSeria
     pickup_address = AddressSerializer()
     price = PriceSerializer()
     seller = APIUserSerializer()
-    preview_image = IngredientSerializer()
+    preview_image = ImageSerializer()
     images = ImageSerializer(many=True)
 
     class Meta:
