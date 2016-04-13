@@ -1,10 +1,10 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 
 from .uuid import UUIDModelSerializerMixin
 from ..models import APIUser
 
 
-class APIUserSerializer(UUIDModelSerializerMixin, serializers.HyperlinkedModelSerializer):
+class APIUserSerializer(UUIDModelSerializerMixin, ModelSerializer):
     class Meta:
         model = APIUser
         fields = (

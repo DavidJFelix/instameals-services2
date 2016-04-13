@@ -1,10 +1,10 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 
 from .uuid import UUIDModelSerializerMixin
 from ..models import SellerReview
 
 
-class SellerReviewSerializer(UUIDModelSerializerMixin, serializers.HyperlinkedModelSerializer):
+class SellerReviewSerializer(UUIDModelSerializerMixin, ModelSerializer):
     class Meta:
         model = SellerReview
         fields = ('id',)

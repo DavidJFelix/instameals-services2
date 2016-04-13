@@ -1,16 +1,16 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 
 from .address import AddressSerializer
 from .api_user import APIUserSerializer
-from .meal import MealSerializer
+from .meal import RetrieveMealSerializer
 from .price import PriceSerializer
 from .uuid import UUIDModelSerializerMixin
 from ..models import Order
 
 
-class OrderSerializer(UUIDModelSerializerMixin, serializers.HyperlinkedModelSerializer):
+class OrderSerializer(UUIDModelSerializerMixin, ModelSerializer):
     buyer = APIUserSerializer()
-    meal = MealSerializer()
+    meal = RetrieveMealSerializer()
     buyer_price = PriceSerializer()
     seller_earnings = PriceSerializer()
     billing_address = AddressSerializer()

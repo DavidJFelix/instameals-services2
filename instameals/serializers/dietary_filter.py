@@ -1,10 +1,10 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 
 from .uuid import UUIDModelSerializerMixin
 from ..models import DietaryFilter
 
 
-class DietaryFilterSerializer(UUIDModelSerializerMixin, serializers.HyperlinkedModelSerializer):
+class DietaryFilterSerializer(UUIDModelSerializerMixin, ModelSerializer):
     class Meta:
         model = DietaryFilter
         fields = (

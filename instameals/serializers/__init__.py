@@ -5,7 +5,7 @@ from .dietary_filter import DietaryFilterSerializer
 from .favorite_seller import FavoriteSellerSerializer
 from .image import ImageSerializer
 from .ingredient import IngredientSerializer
-from .meal import MealSerializer
+from .meal import CreateUpdateMealSerializer, RetrieveMealSerializer
 from .meal_review import MealReviewSerializer
 from .order import OrderSerializer
 from .order_review import OrderReviewSerializer
@@ -17,15 +17,16 @@ __all__ = [
     'AddressSerializer',
     'AllergenSerializer',
     'APIUserSerializer',
+    'CreateUpdateMealSerializer',
     'DietaryFilterSerializer',
     'FavoriteSellerSerializer',
     'ImageSerializer',
     'IngredientSerializer',
-    'MealSerializer',
     'MealReviewSerializer',
     'OrderSerializer',
     'OrderReviewSerializer',
     'PriceSerializer',
     'ReviewSerializer',
+    'RetrieveMealSerializer',
     'SellerReviewSerializer',
 ]

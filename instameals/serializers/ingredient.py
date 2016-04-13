@@ -1,10 +1,10 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 
 from .uuid import UUIDModelSerializerMixin
 from ..models import Ingredient
 
 
-class IngredientSerializer(UUIDModelSerializerMixin, serializers.HyperlinkedModelSerializer):
+class IngredientSerializer(UUIDModelSerializerMixin, ModelSerializer):
     class Meta:
         model = Ingredient
         fields = (

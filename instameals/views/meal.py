@@ -1,49 +1,29 @@
-import math
-
 from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
-from rest_framework.permissions import AllowAny
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
 from rest_framework.response import Response
 
 from .base import NoDeleteModelViewSet
 from ..models import Meal
-from ..serializers import MealSerializer
+from ..serializers import CreateUpdateMealSerializer, RetrieveMealSerializer
 
 
 class MealViewSet(NoDeleteModelViewSet):
     # FIXME: Filter active meals only
     queryset = Meal.objects.all()
-    serializer_class = MealSerializer
-    # FIXME: Don't allow people to create meals unless they're logged in
+    serializer_class = CreateUpdateMealSerializer
     # permission_classes = (IsAuthenticatedOrReadOnly,)
     permission_classes = (AllowAny,)
 
-    @staticmethod
-    def get_coord_square(longitude, latitude, max_range=10000.0):
-        # latitude varies about 0.7miles from north pole to equator -- ignore this
-        #  and use equatorial longitude
-        # 69.172 mi/deg-lat * 1609.34 m/mi = 111,321.266 m/deg-lat
-        lat_offset = max_range / 111321.266
-        lng_offset = max_range / (math.cos(math.radians(latitude)) * 111321.266)
-
-        # Latitude has an upper limit of 90 at the north pole. Cap it at 90.
-        max_lat = latitude + lat_offset
-        max_lat = 90.0 if max_lat > 90.0 else max_lat
-
-        # Latitude has a lower limit of -90 at the south pole. Cap it at -90.
-        min_lat = latitude - lat_offset
-        min_lat = -90.0 if min_lat < -90.0 else min_lat
-
-        # Longitude has an upper limit of 180, wrap around to -180 if it overflows
-        max_lng = longitude + lng_offset
-        max_lng = max_lng - 360.0 if max_lng > 180.0 else max_lng
-
-        # Longitude has a lower limit of -180, wrap around to 180 if it underflows
-        min_lng = longitude - lng_offset
-        min_lng = min_lng + 360 if min_lng < -180.0 else min_lng
-
-        return min_lng, min_lat, max_lng, max_lat
+    def create(self, request, *args, **kwargs):
+        serializer = CreateUpdateMealSerializer(data=request.data)
+        serializer.initial_data['seller'] = request.user.id
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
@@ -84,7 +64,7 @@ class MealViewSet(NoDeleteModelViewSet):
                 distance=Distance('pickup_address__coordinates', query_location)
         ).order_by('distance')
 
-        serializer = MealSerializer(meals, many=True, context={'request': request})
+        serializer = self.serializer_class(meals, many=True, context={'request': request})
 
         # FIXME: paginate here
         return Response(serializer.data)

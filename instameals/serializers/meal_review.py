@@ -1,10 +1,10 @@
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 
 from .uuid import UUIDModelSerializerMixin
 from ..models import MealReview
 
 
-class MealReviewSerializer(UUIDModelSerializerMixin, serializers.HyperlinkedModelSerializer):
+class MealReviewSerializer(UUIDModelSerializerMixin, ModelSerializer):
     class Meta:
         model = MealReview
         fields = ('id',)

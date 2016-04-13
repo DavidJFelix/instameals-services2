@@ -31,7 +31,7 @@ class Meal(UUIDModelMixin, TimeStampedModel):
     seller = models.ForeignKey(APIUser, on_delete=models.CASCADE, related_name='meals')
 
     preview_image = models.ForeignKey(Image, related_name='preview_meals')
-    images = models.ManyToManyField(Image, related_name='meals')
+    images = models.ManyToManyField(Image, related_name='meals', blank=True)
 
     class Meta:
         app_label = 'instameals'
