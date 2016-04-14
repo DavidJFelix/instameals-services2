@@ -79,6 +79,29 @@ class RetrieveUpdateDeleteAddressTestCase(APITestCase):
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_retrieve_address_response_structure(self):
+        """Integration test to check the expected response structure of retrieve address"""
+        url = reverse('address-detail', args=[self.address.id])
+        response = self.client.get(url, format='json')
+        self.assertEqual(
+                response.json(),
+                {
+                    'id': str(self.address.id),
+                    'line1': '123 Test Ave',
+                    'line2': '',
+                    'city': 'Testville',
+                    'state': 'TX',
+                    'postal_code': '12345',
+                    'country': 'USA',
+                    'coordinates': {
+                        'type': 'Point',
+                        'coordinates': [
+                            -123.0123, 45.6789
+                        ],
+                    },
+                }
+        )
+
     def test_cannot_list_address(self):
         """Nobody should be allowed to get a list addresses (405)"""
         url = reverse('address-list')
@@ -108,8 +131,8 @@ class RetrieveUpdateDeleteAddressTestCase(APITestCase):
         self.assertEqual(self.address, address_prime)
 
     def test_user_cannot_partially_update_address(self):
-        """An authenticated user should be rejected from partially updating
-            an address with a 405
+        """An authenticated user should be rejected from partially updating an address
+        with a 405
         """
         url = reverse('address-detail', args=[self.address.id])
         self.client.force_authenticate(self.user)
@@ -121,8 +144,8 @@ class RetrieveUpdateDeleteAddressTestCase(APITestCase):
         self.assertEqual(self.address, address_prime)
 
     def test_non_user_cannot_partially_update_address(self):
-        """An unauthenticated user should be rejected from partially updating
-            an address with a 401
+        """An unauthenticated user should be rejected from partially updating an address
+        with a 401
         """
         url = reverse('address-detail', args=[self.address.id])
         response = self.client.patch(url, self.updated_address, format='json')

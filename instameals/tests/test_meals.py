@@ -3,22 +3,22 @@ from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
 
-from ..models import APIUser, Image, Price, Address
+from ..models import APIUser, Image, Price, Address, Meal
 
 
 class CreateMealTestCase(APITestCase):
-    """"""
+    """Test the CREATE CRUD/REST endpoints for meal for business logic"""
 
     def setUp(self):
         self.user = APIUser.objects.create(username='tester')
         self.preview_image = Image.objects.create(url='http://example.com/test.jpg')
         self.pickup_address = Address.objects.create(
-            line1='123 Test Ave',
-            city='Testville',
-            state='TX',
-            postal_code='12345',
-            country='USA',
-            coordinates=Point(-123.0123, 45.6789)
+                line1='123 Test Ave',
+                city='Testville',
+                state='TX',
+                postal_code='12345',
+                country='USA',
+                coordinates=Point(-123.0123, 45.6789)
         )
         self.price = Price.objects.create(currency='USD', value='39.99')
         self.new_meal = {
@@ -39,13 +39,114 @@ class CreateMealTestCase(APITestCase):
         }
 
     def test_user_can_create_meal(self):
+        """An authenticated user should be able to create a meal where they are the seller"""
         url = reverse('meal-list')
         self.client.force_authenticate(self.user)
         response = self.client.post(url, self.new_meal, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_user_can_create_meal_and_connected_objects_in_one_call(self):
+        """An authenticated user should be able to create a meal with all attached objects"""
         pass
 
     def test_non_user_cannot_create_meal(self):
-        pass
+        """An unauthenticated user should not be able to create a meal"""
+        url = reverse('meal-list')
+        response = self.client.post(url, self.new_meal, format='json')
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+
+class RetrieveUpdateDeleteMealTestCase(APITestCase):
+    """Test the RETRIEVE/UPDATE/DELETE CRUD/REST endpoints for address for business logic"""
+
+    def setUp(self):
+        self.user = APIUser.objects.create(username='tester')
+        self.meal = Meal.objects.create(
+                name='Test Meal',
+                description='A meal to test meal RUD',
+                pickup_address=Address.objects.create(
+                        line1='123 Test',
+                        city='Testville',
+                        state='TX',
+                        postal_code='12345',
+                        country='USA',
+                        coordinates=Point(-123.0123, 45.6789)
+                ),
+                portions=10,
+                portions_available=10,
+                price=Price.objects.create(
+                        currency='USD',
+                        value='39.99'
+                ),
+                seller=self.user,
+                available_from='2016-04-10T17:53:50.142558Z',
+                available_to='2016-04-10T17:53:50.142558Z',
+                preview_image=Image.objects.create(
+                        type='other',
+                        url='http://example.com/test.jpg'
+                ),
+        )
+
+    def test_can_retrieve_meal(self):
+        """Any user should be able to retrieve a meal by id"""
+        url = reverse('meal-detail', args=[self.meal.id])
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_retrieve_meal_response_structure(self):
+        """Integration test to check the expected response structure of retrieve address"""
+        url = reverse('meal-detail', args=[self.meal.id])
+        response = self.client.get(url, format='json')
+        self.maxDiff = 2000
+        self.assertEqual(
+                response.json(),
+                {
+                    'id': str(self.meal.id),
+                    'name': 'Test Meal',
+                    'description': 'A meal to test meal RUD',
+                    'allergens': [],
+                    'dietary_filters': [],
+                    'ingredients': [],
+                    'pickup_address': {
+                        'id': str(self.meal.pickup_address.id),
+                        'line1': '123 Test',
+                        'line2': '',
+                        'city': 'Testville',
+                        'state': 'TX',
+                        'postal_code': '12345',
+                        'country': 'USA',
+                        'coordinates': {
+                            'type': 'Point',
+                            'coordinates': [-123.0123, 45.6789],
+                        },
+                    },
+                    'portions': 10,
+                    'portions_available': 10,
+                    'price': {
+                        'id': str(self.meal.price.id),
+                        'currency': 'USD',
+                        'value': '39.99',
+                    },
+                    'seller': {
+                        'id': str(self.meal.seller.id),
+                        'username': 'tester',
+                        'first_name': '',
+                        'last_name': '',
+                        'profile_image': None,
+                    },
+                    'available_from': '2016-04-10T17:53:50.142558Z',
+                    'available_to': '2016-04-10T17:53:50.142558Z',
+                    'preview_image': {
+                        'id': str(self.meal.preview_image.id),
+                        'type': 'other',
+                        'url': 'http://example.com/test.jpg'
+                    },
+                    'images': [],
+                }
+        )
+
+    def test_can_list_meals(self):
+        """Any user should be able to list meals"""
+        url = reverse('meal-list')
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

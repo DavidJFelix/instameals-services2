@@ -2,7 +2,7 @@ from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 
 from .base import NoDeleteModelViewSet
@@ -11,13 +11,13 @@ from ..serializers import CreateUpdateMealSerializer, RetrieveMealSerializer
 
 
 class MealViewSet(NoDeleteModelViewSet):
-    # FIXME: Filter active meals only
+    """A REST Framework viewset for the Meal model."""
     queryset = Meal.objects.all()
-    serializer_class = CreateUpdateMealSerializer
-    # permission_classes = (IsAuthenticatedOrReadOnly,)
-    permission_classes = (AllowAny,)
+    serializer_class = RetrieveMealSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def create(self, request, *args, **kwargs):
+        """"""
         serializer = CreateUpdateMealSerializer(data=request.data)
         serializer.initial_data['seller'] = request.user.id
         serializer.is_valid(raise_exception=True)
@@ -26,6 +26,7 @@ class MealViewSet(NoDeleteModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def list(self, request, *args, **kwargs):
+        """"""
         queryset = self.get_queryset()
 
         longitude = self.request.query_params.get('lng', None)
