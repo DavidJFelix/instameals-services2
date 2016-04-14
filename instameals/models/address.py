@@ -16,7 +16,7 @@ class Address(UUIDModelMixin, TimeStampedModel):
     class Meta:
         app_label = 'instameals'
         permissions = (
-            ('view_address', 'View Address'),
+            ('view_address', 'Can view address'),
         )
 
     def __str__(self):

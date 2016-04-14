@@ -14,7 +14,7 @@ class FavoriteSeller(UUIDModelMixin, TimeStampedModel):
     class Meta:
         app_label = 'instameals'
         permissions = (
-            ('view_favorite_seller', 'View Favorite Seller'),
+            ('view_favorite_seller', 'Can view favorite seller'),
         )
 
     def __str__(self):

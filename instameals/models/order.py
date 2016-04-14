@@ -20,7 +20,7 @@ class Order(UUIDModelMixin, TimeStampedModel):
     class Meta:
         app_label = 'instameals'
         permissions = (
-            ('view_order', 'View Order'),
+            ('view_order', 'Can view order'),
         )
 
     def __str__(self):

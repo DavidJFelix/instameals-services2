@@ -10,7 +10,7 @@ class Allergen(UUIDModelMixin, models.Model):
     class Meta:
         app_label = 'instameals'
         permissions = (
-            ('view_allergen', 'View Allergen'),
+            ('view_allergen', 'Can view allergen'),
         )
 
     def __str__(self):
