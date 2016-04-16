@@ -37,6 +37,7 @@ from instameals.views import (
 from instameals.widgets import MealWidget
 from instameals.widgets import OrderWidget
 from instameals.widgets import UserWidget
+from instameals.widgets import AvgPriceWidget
 
 router = DefaultRouter()
 router.register(r'addresses', AddressViewSet)
@@ -58,6 +59,7 @@ router.register(r'users', APIUserViewSet)
 dashing_router.register(MealWidget, 'meal_widget')
 dashing_router.register(UserWidget, 'user_widget')
 dashing_router.register(OrderWidget, 'order_widget')
+dashing_router.register(AvgPriceWidget, 'avg_meal_price_widget')
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
