@@ -8,5 +8,6 @@ from ..serializers import AllergenSerializer
 class AllergenViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Allergen.objects.all()
     serializer_class = AllergenSerializer
-    # FIXME: turn off allowany. likely want to only permit admin
+    # FIXME: turn off allowany. likely want to only permit admin, however, the viewset
+    # should prevent it
     permission_classes = (AllowAny,)

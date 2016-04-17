@@ -6,6 +6,16 @@ from ..serializers import AddressSerializer
 
 
 class AddressViewSet(CreateRetrieveModelViewSet):
+    """A REST view set for creating and retrieving addresses
+    ---
+    create:
+        parameters:
+            - name: coordinates
+              description: GeoJSON object identifying lng/lat of an address
+              required: true
+              type: object
+
+    """
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
     # FIXME: use this: filter_backends = (DjangoObjectPermissionsFilter,)
