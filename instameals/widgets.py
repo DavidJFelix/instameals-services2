@@ -1,10 +1,10 @@
 from dashing.widgets import NumberWidget
+from django.db.models import Avg
 
 from .models import APIUser
 from .models import Meal
 from .models import Order
 from .models import Price
-from django.db.models import Avg
 
 
 class MealWidget(NumberWidget):
@@ -39,15 +39,16 @@ class OrderWidget(NumberWidget):
 
 class AvgPriceWidget(NumberWidget):
     title = 'Price'
-    #we can group by currency, if needed.
+
+    # we can group by currency, if needed.
     def get_value(self):
-        avg_meal_price = Price.objects.all().aggregate(Avg('value'))
-        print(avg_meal_price)
-        if avg_meal_price['value__avg'] is None:
+        avg_meal_price = Price.objects.all(). \
+            aggregate(Avg('value')). \
+            get('value__avg', None)
+        if avg_meal_price is None:
             return 0
         else:
             return avg_meal_price
-
 
     def get_detail(self):
         return 'Avg price of a Meal'
