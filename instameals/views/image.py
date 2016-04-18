@@ -5,6 +5,7 @@ from ..models import Image
 from ..serializers import ImageSerializer
 
 
+# FIXME: probably want to allow deletions
 class ImageViewSet(NoDeleteModelViewSet):
     queryset = Image.objects.all()
     serializer_class = ImageSerializer

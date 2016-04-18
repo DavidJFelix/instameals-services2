@@ -5,6 +5,7 @@ from ..models import Ingredient
 from ..serializers import IngredientSerializer
 
 
+# FIXME: Use writable viewset but ensure permission_class changes to keep this admin-only
 class IngredientViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer

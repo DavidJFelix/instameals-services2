@@ -40,7 +40,7 @@ class OrderWidget(NumberWidget):
 class AvgPriceWidget(NumberWidget):
     title = 'Price'
 
-    # we can group by currency, if needed.
+    # TODO: we can create price objects without them being attached to a meal.
     def get_value(self):
         avg_meal_price = Price.objects.filter(currency='USD'). \
             aggregate(Avg('value')). \

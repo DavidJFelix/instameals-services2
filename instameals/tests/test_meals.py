@@ -47,6 +47,7 @@ class CreateMealTestCase(APITestCase):
 
     def test_user_can_create_meal_and_connected_objects_in_one_call(self):
         """An authenticated user should be able to create a meal with all attached objects"""
+        # FIXME: need to have an upsert type
         pass
 
     def test_non_user_cannot_create_meal(self):
@@ -150,3 +151,55 @@ class RetrieveUpdateDeleteMealTestCase(APITestCase):
         url = reverse('meal-list')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_list_meals_response_structur(self):
+        # TODO
+        pass
+
+    def test_user_can_update_owned_meal(self):
+        # TODO
+        pass
+
+    def test_user_cannot_update_non_owned_meal(self):
+        # TODO
+        pass
+
+    def test_non_user_cannot_update_meal(self):
+        # TODO
+        pass
+
+    def test_user_can_partially_update_owned_meal(self):
+        # TODO
+        pass
+
+    def test_user_cannot_partially_update_non_owned_meal(self):
+        # TODO
+        pass
+
+    def test_non_user_cannot_partially_update_meal(self):
+        # TODO
+        pass
+
+    def test_user_can_delete_to_mark_owned_meal_inactive(self):
+        # TODO
+        pass
+
+    def test_user_cannot_delete_to_mark_non_owned_meal_inactive(self):
+        # TODO
+        pass
+
+    def test_non_user_cannot_delete_to_mark_meal_inactive(self):
+        # TODO
+        pass
+
+    def test_update_meal_notifies_buyers(self):
+        # TODO
+        pass
+
+    def test_partial_update_meal_notifies_buyers(self):
+        # TODO
+        pass
+
+    def test_delete_to_mark_meal_inactive_notifies_buyers(self):
+        # TODO
+        pass

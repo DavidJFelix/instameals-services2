@@ -5,6 +5,7 @@ from ..models import DietaryFilter
 from ..serializers import DietaryFilterSerializer
 
 
+# FIXME: use a writable viewset when permission_classes allows admin only writes
 class DietaryFilterViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = DietaryFilter.objects.all()
     serializer_class = DietaryFilterSerializer

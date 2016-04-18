@@ -5,6 +5,7 @@ from ..models import FavoriteSeller
 from ..serializers import FavoriteSellerSerializer
 
 
+# FIXME: change viewset to allow deletions
 class FavoriteSellerViewSet(NoDeleteModelViewSet):
     queryset = FavoriteSeller.objects.all()
     serializer_class = FavoriteSellerSerializer
