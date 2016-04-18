@@ -48,7 +48,7 @@ class AvgPriceWidget(NumberWidget):
         if avg_meal_price is None:
             return "$ 0.00"
         else:
-            return "$ {}".format(avg_meal_price)
+            return "$ {0:.2f}".format(avg_meal_price)
 
     def get_detail(self):
         return 'Avg price of a Meal'
