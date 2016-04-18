@@ -42,13 +42,13 @@ class AvgPriceWidget(NumberWidget):
 
     # we can group by currency, if needed.
     def get_value(self):
-        avg_meal_price = Price.objects.all(). \
+        avg_meal_price = Price.objects.filter(currency='USD'). \
             aggregate(Avg('value')). \
             get('value__avg', None)
         if avg_meal_price is None:
-            return 0
+            return "$ 0.00"
         else:
-            return avg_meal_price
+            return "$ {}".format(avg_meal_price)
 
     def get_detail(self):
         return 'Avg price of a Meal'
