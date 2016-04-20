@@ -33,6 +33,7 @@ from instameals.views import (
     PriceViewSet,
     ReviewViewSet,
     SellerReviewViewSet,
+    CusineViewSet
 )
 from instameals.widgets import MealWidget
 from instameals.widgets import OrderWidget
@@ -54,6 +55,7 @@ router.register(r'prices', PriceViewSet)
 router.register(r'reviews', ReviewViewSet)
 router.register(r'seller_reviews', SellerReviewViewSet)
 router.register(r'users', APIUserViewSet)
+router.register(r'cusine', CusineViewSet)
 
 # dashing widgets
 dashing_router.register(MealWidget, 'meal_widget')

@@ -12,6 +12,7 @@ from .order_review import OrderReviewSerializer
 from .price import PriceSerializer
 from .review import ReviewSerializer
 from .seller_review import SellerReviewSerializer
+from .cusine import CusineSerializer
 
 __all__ = [
     'AddressSerializer',
@@ -29,4 +30,5 @@ __all__ = [
     'ReviewSerializer',
     'RetrieveMealSerializer',
     'SellerReviewSerializer',
+    'CusineSerializer'
 ]
