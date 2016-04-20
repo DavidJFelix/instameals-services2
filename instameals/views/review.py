@@ -1,4 +1,4 @@
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .base import NoDeleteModelViewSet
 from ..models import Review
@@ -12,4 +12,4 @@ class ReviewViewSet(NoDeleteModelViewSet):
     # FIXME: restrict access to reviews. Write/read should be creator only
     # filter_backends = (DjangoObjectPermissionsFilter,)
     # permission_classes = (DjangoObjectPermissions,)
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
