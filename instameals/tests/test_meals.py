@@ -51,23 +51,51 @@ class CreateMealTestCase(APITestCase):
         url = reverse('meal-list')
         self.client.force_authenticate(self.user)
         response = self.client.post(url, self.new_meal)
+        meal = Meal.objects.first()
+        self.maxDiff = 2000
         self.assertEqual(
                 response.json(),
                 {
-                    'id': str(Meal.objects.first().id),
+                    'id': str(meal.id),
                     'name': 'Test Meal',
                     'description': 'A Meal to test meal creation',
                     'allergens': [],
                     'dietary_filters': [],
                     'ingredients': [],
-                    'pickup_address': str(self.pickup_address.id),
+                    'pickup_address': {
+                        'id': str(meal.pickup_address.id),
+                        'line1': '123 Test Ave',
+                        'line2': '',
+                        'city': 'Testville',
+                        'state': 'TX',
+                        'postal_code': '12345',
+                        'country': 'USA',
+                        'coordinates': {
+                            'type': 'Point',
+                            'coordinates': [-123.0123, 45.6789],
+                        },
+                    },
                     'portions': 0,
-                    'seller': str(self.user.id),
+                    'seller': {
+                        'id': str(meal.seller.id),
+                        'username': 'tester',
+                        'first_name': '',
+                        'last_name': '',
+                        'profile_image': None,
+                    },
                     'portions_available': 0,
-                    'price': str(self.price.id),
+                    'price': {
+                        'id': str(meal.price.id),
+                        'currency': 'USD',
+                        'value': '39.99',
+                    },
                     'available_from': '2016-04-10T17:53:50.142558Z',
                     'available_to': '2016-04-10T17:53:50.142558Z',
-                    'preview_image': str(self.preview_image.id),
+                    'preview_image': {
+                        'id': str(meal.preview_image.id),
+                        'type': 'other',
+                        'url': 'http://example.com/test.jpg'
+                    },
                     'images': []
                 }
         )
@@ -104,7 +132,7 @@ class RetrieveUpdateDeleteMealTestCase(APITestCase):
                 name='Test Meal',
                 description='A meal to test meal RUD',
                 pickup_address=Address.objects.create(
-                        line1='123 Test',
+                        line1='123 Test Ave',
                         city='Testville',
                         state='TX',
                         postal_code='12345',
@@ -148,7 +176,7 @@ class RetrieveUpdateDeleteMealTestCase(APITestCase):
                     'ingredients': [],
                     'pickup_address': {
                         'id': str(self.meal.pickup_address.id),
-                        'line1': '123 Test',
+                        'line1': '123 Test Ave',
                         'line2': '',
                         'city': 'Testville',
                         'state': 'TX',
@@ -209,7 +237,7 @@ class RetrieveUpdateDeleteMealTestCase(APITestCase):
                         'ingredients': [],
                         'pickup_address': {
                             'id': str(self.meal.pickup_address.id),
-                            'line1': '123 Test',
+                            'line1': '123 Test Ave',
                             'line2': '',
                             'city': 'Testville',
                             'state': 'TX',

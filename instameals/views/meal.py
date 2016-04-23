@@ -31,7 +31,9 @@ class MealViewSet(NoDeleteModelViewSet):
 
         # Respond with created data
         headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        response_serializer = self.serializer_class(serializer.instance,
+                                                    context={'request': request})
+        return Response(response_serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def list(self, request, *args, **kwargs):
         """"""
