@@ -152,19 +152,73 @@ class RetrieveUpdateDeleteMealTestCase(APITestCase):
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_list_meals_response_structur(self):
-        # TODO
-        pass
+    def test_list_meals_response_structure(self):
+        """Integration test to check the expected response structure of list meals"""
+        url = reverse('meal-list') + "?lng=-123.0123&lat=45.6789"
+        response = self.client.get(url, format='json')
+        self.maxDiff = 2000
+        self.assertEqual(
+                response.json(),
+                [
+                    {
+                        'id': str(self.meal.id),
+                        'name': 'Test Meal',
+                        'description': 'A meal to test meal RUD',
+                        'allergens': [],
+                        'dietary_filters': [],
+                        'ingredients': [],
+                        'pickup_address': {
+                            'id': str(self.meal.pickup_address.id),
+                            'line1': '123 Test',
+                            'line2': '',
+                            'city': 'Testville',
+                            'state': 'TX',
+                            'postal_code': '12345',
+                            'country': 'USA',
+                            'coordinates': {
+                                'type': 'Point',
+                                'coordinates': [-123.0123, 45.6789],
+                            },
+                        },
+                        'portions': 10,
+                        'portions_available': 10,
+                        'price': {
+                            'id': str(self.meal.price.id),
+                            'currency': 'USD',
+                            'value': '39.99',
+                        },
+                        'seller': {
+                            'id': str(self.meal.seller.id),
+                            'username': 'tester',
+                            'first_name': '',
+                            'last_name': '',
+                            'profile_image': None,
+                        },
+                        'available_from': '2016-04-10T17:53:50.142558Z',
+                        'available_to': '2016-04-10T17:53:50.142558Z',
+                        'preview_image': {
+                            'id': str(self.meal.preview_image.id),
+                            'type': 'other',
+                            'url': 'http://example.com/test.jpg'
+                        },
+                        'images': [],
+                    }
+                ]
+        )
 
     def test_user_can_update_owned_meal(self):
+        """An authenticated user should be able to update a meal of which they are the seller"""
         # TODO
         pass
 
     def test_user_cannot_update_non_owned_meal(self):
+        """An authenticated user should not be able to update a meal of which they are not the
+         seller"""
         # TODO
         pass
 
     def test_non_user_cannot_update_meal(self):
+        """An unauthenticated user should not be able to update a meal"""
         # TODO
         pass
 
