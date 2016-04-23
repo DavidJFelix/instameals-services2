@@ -6,6 +6,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 
+from instameals.permissions import MealPermissions
 from .base import NoDeleteModelViewSet
 from ..models import Meal
 from ..serializers import CreateUpdateMealSerializer, RetrieveMealSerializer
@@ -15,7 +16,7 @@ class MealViewSet(NoDeleteModelViewSet):
     """A REST Framework viewset for the Meal model."""
     queryset = Meal.objects.all()
     serializer_class = RetrieveMealSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (MealPermissions,)
 
     def create(self, request, *args, **kwargs):
         """"""

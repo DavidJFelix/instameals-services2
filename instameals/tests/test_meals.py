@@ -287,8 +287,52 @@ class RetrieveUpdateDeleteMealTestCase(APITestCase):
 
     def test_non_user_cannot_update_meal(self):
         """An unauthenticated user should not be able to update a meal"""
-        # TODO
-        pass
+        url = reverse('meal-detail', args=[self.meal.id])
+        updated_meal = {
+            'id': str(self.meal.id),
+            'name': 'Test Meal',
+            'description': 'A Meal to test meal creation',
+            'allergens': [],
+            'dietary_filters': [],
+            'ingredients': [],
+            'pickup_address': {
+                'id': str(self.meal.pickup_address.id),
+                'line1': '123 Test Ave',
+                'line2': '',
+                'city': 'Testville',
+                'state': 'TX',
+                'postal_code': '12345',
+                'country': 'USA',
+                'coordinates': {
+                    'type': 'Point',
+                    'coordinates': [-123.0123, 45.6789],
+                },
+            },
+            'portions': 0,
+            'seller': {
+                'id': str(self.meal.seller.id),
+                'username': 'tester',
+                'first_name': '',
+                'last_name': '',
+                'profile_image': None,
+            },
+            'portions_available': 0,
+            'price': {
+                'id': str(self.meal.price.id),
+                'currency': 'USD',
+                'value': '39.99',
+            },
+            'available_from': '2016-04-10T17:53:50.142558Z',
+            'available_to': '2016-04-10T17:53:50.142558Z',
+            'preview_image': {
+                'id': str(self.meal.preview_image.id),
+                'type': 'other',
+                'url': 'http://example.com/test.jpg'
+            },
+            'images': []
+        }
+        response = self.client.put(url, updated_meal)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_user_can_partially_update_owned_meal(self):
         """An authenticated user should be able to partially update a meal of which they are the
