@@ -1,6 +1,7 @@
 from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
+from guardian.shortcuts import assign_perm
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
@@ -18,10 +19,17 @@ class MealViewSet(NoDeleteModelViewSet):
 
     def create(self, request, *args, **kwargs):
         """"""
+        # Serialize and validate the meal, setting seller to be the current user
         serializer = CreateUpdateMealSerializer(data=request.data)
         serializer.initial_data['seller'] = request.user.id
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
+
+        # Set permissions on the new meal
+        assign_perm('change_meal', request.user, serializer.instance)
+        assign_perm('delete_meal', request.user, serializer.instance)
+
+        # Respond with created data
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
