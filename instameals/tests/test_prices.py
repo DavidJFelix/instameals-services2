@@ -1,9 +1,9 @@
-from django.contrib.gis.geos import Point
 from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
 
 from ..models import APIUser, Price
+
 
 class CreatePriceTestCase(APITestCase):
     """Test the CREATE CRUD/REST endpoints for address for business logic"""
@@ -11,15 +11,15 @@ class CreatePriceTestCase(APITestCase):
     def setUp(self):
         self.user = APIUser.objects.create(username='tester')
         self.price = {
-                "id": "87c527a1-b9ed-469c-80f4-649227a83835",
-                "currency": "USD",
-                "value": "5.00"
-            }
+            "id": "87c527a1-b9ed-469c-80f4-649227a83835",
+            "currency": "USD",
+            "value": "5.00"
+        }
         self.invalid_price_currency = {
-                "id": "87c527a1-b9ed-469c-80f4-649227a83835",
-                "currency": "RPS",
-                "value": "5.00"
-            }
+            "id": "87c527a1-b9ed-469c-80f4-649227a83835",
+            "currency": "RPS",
+            "value": "5.00"
+        }
 
     def test_user_can_create_price(self):
         url = reverse('price-list')

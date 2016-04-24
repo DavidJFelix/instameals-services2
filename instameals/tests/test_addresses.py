@@ -35,6 +35,7 @@ class CreateAddressTestCase(APITestCase):
 
     def test_user_created_address_is_listed_in_api_user_addresses(self):
         """When A user creates an address, it should be added to APIUser.addresses"""
+        # TODO
         pass
 
     def test_non_user_cannot_create_address(self):
