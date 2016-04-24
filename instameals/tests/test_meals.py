@@ -1,4 +1,5 @@
 from django.contrib.gis.geos import Point
+from guardian.shortcuts import assign_perm
 from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
@@ -128,6 +129,7 @@ class RetrieveUpdateDeleteMealTestCase(APITestCase):
 
     def setUp(self):
         self.user = APIUser.objects.create(username='tester')
+        self.non_owner_user = APIUser.objects.create(username='tester2')
         self.meal = Meal.objects.create(
                 name='Test Meal',
                 description='A meal to test meal RUD',
@@ -153,6 +155,8 @@ class RetrieveUpdateDeleteMealTestCase(APITestCase):
                         url='http://example.com/test.jpg'
                 ),
         )
+        assign_perm('change_meal', self.user, self.meal)
+        assign_perm('delete_meal', self.user, self.meal)
 
     def test_can_retrieve_meal(self):
         """Any user should be able to retrieve a meal by id"""
@@ -354,19 +358,28 @@ class RetrieveUpdateDeleteMealTestCase(APITestCase):
     def test_user_can_delete_to_mark_owned_meal_inactive(self):
         """An authenticated user should be able to DELETE a meal of which they are the seller to
         mark the meal as is_active=False"""
-        # TODO
-        pass
+        url = reverse('meal-detail', args=[self.meal.id])
+        self.client.force_authenticate(self.user)
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(Meal.objects.count(), 1)
+        self.assertFalse(Meal.objects.get(id=self.meal.id).is_active)
 
     def test_user_cannot_delete_to_mark_non_owned_meal_inactive(self):
         """An authenticated user should not be able to DELETE a meal of which they are not the
         seller"""
-        # TODO
-        pass
+        url = reverse('meal-detail', args=[self.meal.id])
+        self.client.force_authenticate(self.non_owner_user)
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertTrue(Meal.objects.get(id=self.meal.id).is_active)
 
     def test_non_user_cannot_delete_to_mark_meal_inactive(self):
         """An unauthenticated user should not be able to DELETE a meal"""
-        # TODO
-        pass
+        url = reverse('meal-detail', args=[self.meal.id])
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertTrue(Meal.objects.get(id=self.meal.id).is_active)
 
     def test_update_meal_notifies_buyers(self):
         # TODO: we don't currently have notifications

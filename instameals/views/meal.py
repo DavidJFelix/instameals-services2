@@ -3,16 +3,15 @@ from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from guardian.shortcuts import assign_perm
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
 
 from instameals.permissions import MealPermissions
-from .base import NoDeleteModelViewSet
 from ..models import Meal
 from ..serializers import CreateUpdateMealSerializer, RetrieveMealSerializer
 
 
-class MealViewSet(NoDeleteModelViewSet):
+class MealViewSet(ModelViewSet):
     """A REST Framework viewset for the Meal model."""
     queryset = Meal.objects.all()
     serializer_class = RetrieveMealSerializer
@@ -35,6 +34,12 @@ class MealViewSet(NoDeleteModelViewSet):
         response_serializer = self.serializer_class(serializer.instance,
                                                     context={'request': request})
         return Response(response_serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def perform_destroy(self, instance):
+        """Perform destroy is called by destroy to issue object deletion.
+        We override the default deletion behavior by simply marking is_active as false"""
+        instance.is_active = False
+        instance.save()
 
     def list(self, request, *args, **kwargs):
         """"""
