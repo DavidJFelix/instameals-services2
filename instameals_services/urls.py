@@ -57,6 +57,19 @@ router.register(r'reviews', ReviewViewSet)
 router.register(r'seller_reviews', SellerReviewViewSet)
 router.register(r'users', APIUserViewSet)
 
+# TODO
+# Router for /my namespace
+my_router = DefaultRouter()
+# addresses
+# favorite_sellers
+# meals
+# meal_reviews
+# profile (alias to user)
+# orders
+# order_reviews
+# reviews
+# seller_reviews
+
 # dashing widgets
 dashing_router.register(MealWidget, 'meal_widget')
 dashing_router.register(UserWidget, 'user_widget')
@@ -68,6 +81,7 @@ urlpatterns = [
     url(r'^auth/', include('rest_framework_social_oauth2.urls')),
     url(r'^dashboard/', include(dashing_router.urls)),
     url(r'^docs/', include('rest_framework_swagger.urls')),
+    url(r'^my/', include(my_router.urls, namespace='my'))
 ]
 
 urlpatterns += router.urls
