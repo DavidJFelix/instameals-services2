@@ -1,6 +1,7 @@
 from .address import AddressSerializer
 from .allergen import AllergenSerializer
 from .api_user import APIUserSerializer
+from .cuisine import CuisineSerializer
 from .dietary_filter import DietaryFilterSerializer
 from .favorite_seller import FavoriteSellerSerializer
 from .image import ImageSerializer
@@ -12,13 +13,13 @@ from .order_review import OrderReviewSerializer
 from .price import PriceSerializer
 from .review import ReviewSerializer
 from .seller_review import SellerReviewSerializer
-from .cuisine import CuisineSerializer
 
 __all__ = [
     'AddressSerializer',
     'AllergenSerializer',
     'APIUserSerializer',
     'CreateUpdateMealSerializer',
+    'CuisineSerializer',
     'DietaryFilterSerializer',
     'FavoriteSellerSerializer',
     'ImageSerializer',
@@ -30,5 +31,4 @@ __all__ = [
     'ReviewSerializer',
     'RetrieveMealSerializer',
     'SellerReviewSerializer',
-    'CuisineSerializer'
 ]

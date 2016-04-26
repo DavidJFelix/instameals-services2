@@ -1,51 +1,51 @@
 [
   {
-    "model": "instameals.cusine",
+    "model": "instameals.cuisine",
     "pk": "1adc6ee4-684c-40b9-8dba-5e3d1fb66030",
     "fields": {"name": "Caribbean"}
   },
   {
-    "model": "instameals.cusine",
+    "model": "instameals.cuisine",
     "pk": "22b9d1ca-f014-4a4e-9cd5-3d5be75aadb8",
     "fields": {"name": "Chinese"}
   },
   {
-    "model": "instameals.cusine",
+    "model": "instameals.cuisine",
     "pk": "4209f177-83cf-4f82-b079-9d679211e138",
     "fields": {"name": "French"}
   },
   {
-    "model": "instameals.cusine",
+    "model": "instameals.cuisine",
     "pk": "33798a17-1d84-4c44-9ed1-1d274f9b35c2",
     "fields": {"name": "Greek"}
   },
   {
-    "model": "instameals.cusine",
+    "model": "instameals.cuisine",
     "pk": "1cf4f951-006c-410e-bd62-447c8d29800d",
     "fields": {"name": "Indian"}
   },
   {
-    "model": "instameals.cusine",
+    "model": "instameals.cuisine",
     "pk": "0e9a022a-49bb-492a-b0ac-dcd1fe47fe4a",
     "fields": {"name": "Italian"}
   },
   {
-    "model": "instameals.cusine",
+    "model": "instameals.cuisine",
     "pk": "6300f5ba-0a9b-4a81-9a04-4d7482e983c6",
     "fields": {"name": "Louisiana Creole"}
   },
   {
-    "model": "instameals.cusine",
+    "model": "instameals.cuisine",
     "pk": "ae7aa8e0-3bda-40ac-a58b-a2a38db6ccdc",
     "fields": {"name": "English"}
   },
   {
-    "model": "instameals.cusine",
+    "model": "instameals.cuisine",
     "pk": "232ef808-007c-4cee-b33f-d415695677fd",
     "fields": {"name": "Swedish"}
   },
   {
-    "model": "instameals.cusine",
+    "model": "instameals.cuisine",
     "pk": "b817f5ec-3ed5-437c-90c8-ed0923dfd49c",
     "fields": {"name": "Valencian"}
   }

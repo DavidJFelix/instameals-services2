@@ -22,6 +22,7 @@ from instameals.views import (
     APIUserViewSet,
     AddressViewSet,
     AllergenViewSet,
+    CuisineViewSet,
     DietaryFilterViewSet,
     FavoriteSellerViewSet,
     ImageViewSet,
@@ -33,16 +34,16 @@ from instameals.views import (
     PriceViewSet,
     ReviewViewSet,
     SellerReviewViewSet,
-    CuisineViewSet
 )
+from instameals.widgets import AvgPriceWidget
 from instameals.widgets import MealWidget
 from instameals.widgets import OrderWidget
 from instameals.widgets import UserWidget
-from instameals.widgets import AvgPriceWidget
 
 router = DefaultRouter()
 router.register(r'addresses', AddressViewSet)
 router.register(r'allergens', AllergenViewSet)
+router.register(r'cuisines', CuisineViewSet)
 router.register(r'dietary_filters', DietaryFilterViewSet)
 router.register(r'favorite_sellers', FavoriteSellerViewSet)
 router.register(r'images', ImageViewSet)
@@ -55,7 +56,6 @@ router.register(r'prices', PriceViewSet)
 router.register(r'reviews', ReviewViewSet)
 router.register(r'seller_reviews', SellerReviewViewSet)
 router.register(r'users', APIUserViewSet)
-router.register(r'cuisines', CuisineViewSet)
 
 # dashing widgets
 dashing_router.register(MealWidget, 'meal_widget')
@@ -66,8 +66,8 @@ dashing_router.register(AvgPriceWidget, 'avg_meal_price_widget')
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^auth/', include('rest_framework_social_oauth2.urls')),
-    url(r'^docs/', include('rest_framework_swagger.urls')),
     url(r'^dashboard/', include(dashing_router.urls)),
+    url(r'^docs/', include('rest_framework_swagger.urls')),
 ]
 
 urlpatterns += router.urls

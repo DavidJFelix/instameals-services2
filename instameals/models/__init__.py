@@ -1,6 +1,7 @@
 from .address import Address
 from .allergen import Allergen
 from .api_user import APIUser
+from .cuisine import Cuisine
 from .dietary_filter import DietaryFilter
 from .favorite_seller import FavoriteSeller
 from .image import Image
@@ -12,12 +13,12 @@ from .order_review import OrderReview
 from .price import Price
 from .review import Review
 from .seller_review import SellerReview
-from .cuisine import Cuisine
 
 __all__ = [
     'Address',
     'Allergen',
     'APIUser',
+    'Cuisine',
     'DietaryFilter',
     'FavoriteSeller',
     'Image',
@@ -29,5 +30,4 @@ __all__ = [
     'Price',
     'Review',
     'SellerReview',
-    'Cuisine',
 ]
