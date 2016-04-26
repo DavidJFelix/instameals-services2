@@ -12,7 +12,7 @@ from .order_review import OrderReview
 from .price import Price
 from .review import Review
 from .seller_review import SellerReview
-from .cusine import Cusine
+from .cuisine import Cuisine
 
 __all__ = [
     'Address',
@@ -29,5 +29,5 @@ __all__ = [
     'Price',
     'Review',
     'SellerReview',
-    'Cusine',
+    'Cuisine',
 ]

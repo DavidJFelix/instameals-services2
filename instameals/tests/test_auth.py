@@ -63,6 +63,8 @@ class AuthTestCase(APITestCase):
     def test_passing_auth_header_allows_restricted_endpoint(self):
         """Test that providing an authorization header allows a user perform an authenticated
         action"""
+
+        # FIXME: This test relies on the negative test to ensure it is not a false pass
         # FIXME: This test is tightly coupled to meal view behavior
         url = reverse('meal-detail', args=[self.meal.id])
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.access_token.token)
@@ -74,6 +76,7 @@ class AuthTestCase(APITestCase):
         """Test that not providing an authorization header does not allow you to perform a single
         auth only action."""
 
+        # FIXME: This test relies on the postive test to ensure that it is not a false pass
         # FIXME: This test is tightly coupled to meal view behavior
         url = reverse('meal-detail', args=[self.meal.id])
         response = self.client.delete(url)

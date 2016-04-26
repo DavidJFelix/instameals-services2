@@ -12,7 +12,7 @@ from .order_review import OrderReviewViewSet
 from .price import PriceViewSet
 from .review import ReviewViewSet
 from .seller_review import SellerReviewViewSet
-from .cusine import CusineViewSet
+from .cuisine import CuisineViewSet
 
 __all__ = [
     'AddressViewSet',
@@ -28,5 +28,5 @@ __all__ = [
     'PriceViewSet',
     'ReviewViewSet',
     'SellerReviewViewSet',
-    'CusineViewSet'
+    'CuisineViewSet'
 ]

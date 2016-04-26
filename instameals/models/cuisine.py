@@ -3,7 +3,7 @@ from django.contrib.gis.db import models
 from .uuid import UUIDModelMixin
 
 
-class Cusine(UUIDModelMixin, models.Model):
+class Cuisine(UUIDModelMixin, models.Model):
     name = models.TextField(max_length=50, blank=False)
     description = models.TextField(max_length=250, blank=True)
 
