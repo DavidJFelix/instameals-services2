@@ -1,5 +1,5 @@
 from django.contrib.gis.geos import Point
-from guardian.shortcuts import assign_perm
+from guardian.shortcuts import assign_perm  # Ignore Pycharm warning
 from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase

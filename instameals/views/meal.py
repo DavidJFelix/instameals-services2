@@ -1,7 +1,7 @@
 from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
-from guardian.shortcuts import assign_perm
+from guardian.shortcuts import assign_perm  # Ignore Pycharm warning
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet

@@ -8,7 +8,8 @@ class FacebookLoginTestCase(APITestCase):
     """Test that the OAuth2 login functionality works for facebook"""
 
     def setUp(self):
-        self.app_user = APIUser.objects.create(username='Test App')
+        # FIXME: reduce this user from superuser to explicitly defined role
+        self.app_user = APIUser.objects.create(username='TestApp', is_superuser=True)
         self.app = Application.objects.create(
                 name='Test App',
                 user=self.app_user,
