@@ -13,3 +13,13 @@ class OrderReviewViewSet(NoDeleteModelViewSet):
     # permission_classes = (DjangoObjectPermissions,)
     # FIXME: this permission class should only allow writing from the creator
     permission_classes = (AllowAny,)
+
+
+class MyOrderReviewViewSet(OrderReviewViewSet):
+    def get_queryset(self):
+        return OrderReview.objects.filter(order__buyer=self.request.user)
+
+
+class MySaleReviewViewSet(OrderReviewViewSet):
+    def get_queryset(self):
+        return OrderReview.objects.filter(order__meal__seller=self.request.user)

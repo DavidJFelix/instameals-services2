@@ -85,3 +85,8 @@ class MealViewSet(ModelViewSet):
 
         # FIXME: paginate here
         return Response(serializer.data)
+
+
+class MyMealViewSet(MealViewSet):
+    def get_queryset(self):
+        return Meal.objects.filter(seller=self.request.user)

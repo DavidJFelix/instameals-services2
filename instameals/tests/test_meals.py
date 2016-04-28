@@ -104,7 +104,6 @@ class CreateMealTestCase(APITestCase):
     def test_create_meal_gives_user_permissions(self):
         """A user who creates a meal should be given appropriate permissions for the meal and
         attached objects"""
-        # TODO
         url = reverse('meal-list')
         self.client.force_authenticate(self.user)
         self.client.post(url, self.new_meal)

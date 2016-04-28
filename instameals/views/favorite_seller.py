@@ -13,3 +13,13 @@ class FavoriteSellerViewSet(NoDeleteModelViewSet):
     # FIXME: Use this: filter_backends = (DjangoObjectPermissionsFilter,)
     # FIXME: Use this: permission_classes = (DjangoObjectPermissions,)
     permission_classes = (AllowAny,)
+
+
+class MyFavoriteSellerViewSet(FavoriteSellerViewSet):
+    def get_queryset(self):
+        return FavoriteSeller.objects.filter(favoriter=self.request.user)
+
+
+class MyFollowerViewSet(FavoriteSellerViewSet):
+    def get_queryset(self):
+        return FavoriteSeller.objects.filter(seller=self.request.user)

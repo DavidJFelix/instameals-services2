@@ -29,6 +29,18 @@ from instameals.views import (
     IngredientViewSet,
     MealViewSet,
     MealReviewViewSet,
+    MyAddressViewSet,
+    MyAPIUserViewSet,
+    MyFavoriteSellerViewSet,
+    MyFollowerViewSet,
+    MyMealViewSet,
+    MyMealReviewViewSet,
+    MyOrderViewSet,
+    MyOrderReviewViewSet,
+    MySaleViewSet,
+    MySaleReviewViewSet,
+    MySellerReviewViewSet,
+    MySoldMealReviewViewSet,
     OrderViewSet,
     OrderReviewViewSet,
     PriceViewSet,
@@ -60,15 +72,18 @@ router.register(r'users', APIUserViewSet)
 # TODO
 # Router for /my namespace
 my_router = DefaultRouter()
-# addresses
-# favorite_sellers
-# meals
-# meal_reviews
-# profile (alias to user)
-# orders
-# order_reviews
-# reviews
-# seller_reviews
+my_router.register(r'addresses', MyAddressViewSet)
+my_router.register(r'favorite_sellers', MyFavoriteSellerViewSet)
+my_router.register(r'followers', MyFollowerViewSet)
+my_router.register(r'meals', MyMealViewSet)
+my_router.register(r'meal_reviews', MyMealReviewViewSet)
+my_router.register(r'profile', MyAPIUserViewSet)
+my_router.register(r'orders', MyOrderViewSet)
+my_router.register(r'order_reviews', MyOrderReviewViewSet)
+my_router.register(r'sales', MySaleViewSet)
+my_router.register(r'sale_reviews', MySaleReviewViewSet)
+my_router.register(r'seller_reviews', MySellerReviewViewSet)
+my_router.register(r'sold_meal_reviews', MySoldMealReviewViewSet)
 
 # dashing widgets
 dashing_router.register(MealWidget, 'meal_widget')

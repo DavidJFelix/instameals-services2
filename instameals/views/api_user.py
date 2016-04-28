@@ -11,3 +11,8 @@ class APIUserViewSet(NoDeleteModelViewSet):
     serializer_class = APIUserSerializer
     # FIXME: disallow writing to users that aren't you
     permission_classes = (AllowAny,)
+
+
+class MyAPIUserViewSet(APIUserViewSet):
+    def get_queryset(self):
+        return APIUser.objects.filter(id=self.request.user.id)

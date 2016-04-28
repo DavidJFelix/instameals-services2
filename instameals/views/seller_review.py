@@ -13,3 +13,13 @@ class SellerReviewViewSet(NoDeleteModelViewSet):
     # filter_backends = (DjangoObjectPermissionsFilter,)
     # permission_classes = (DjangoObjectPermissions,)
     permission_classes = (AllowAny,)
+
+
+class MySellerReviewViewSet(SellerReviewViewSet):
+    def get_queryset(self):
+        return SellerReview.objects.filter(reviewer=self.request.user)
+
+
+class MyIncomingSellerReviews(SellerReviewViewSet):
+    def get_queryset(self):
+        return SellerReview.objects.filter(seller=self.request.user)

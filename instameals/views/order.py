@@ -12,3 +12,13 @@ class OrderViewSet(NoDeleteModelViewSet):
     # filter_backends = (DjangoObjectPermissionsFilter,)
     # permission_classes = (DjangoObjectPermissions,)
     permission_classes = (AllowAny,)
+
+
+class MyOrderViewSet(OrderViewSet):
+    def get_queryset(self):
+        return Order.objects.filter(buyer=self.request.user)
+
+
+class MySaleViewSet(OrderViewSet):
+    def get_queryset(self):
+        return Order.objects.filter(meal__seller=self.request.user)
