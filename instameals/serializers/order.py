@@ -8,14 +8,7 @@ from .uuid import UUIDModelSerializerMixin
 from ..models import Order
 
 
-class OrderSerializer(UUIDModelSerializerMixin, ModelSerializer):
-    buyer = APIUserSerializer()
-    meal = RetrieveMealSerializer()
-    buyer_price = PriceSerializer()
-    seller_earnings = PriceSerializer()
-    billing_address = AddressSerializer()
-    pickup_address = AddressSerializer()
-
+class CreateUpdateOrderSerializer(UUIDModelSerializerMixin, ModelSerializer):
     class Meta:
         model = Order
         fields = (
@@ -23,8 +16,6 @@ class OrderSerializer(UUIDModelSerializerMixin, ModelSerializer):
             'buyer',
             'purchased_at',
             'meal',
-            'buyer_price',
-            'seller_earnings',
             'billing_address',
-            'pickup_address',
+            'pickup_time',
         )

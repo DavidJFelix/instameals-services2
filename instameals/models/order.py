@@ -1,3 +1,4 @@
+from django.utils.timezone import now
 from django.contrib.gis.db import models
 from model_utils.models import TimeStampedModel
 
@@ -14,8 +15,18 @@ class Order(UUIDModelMixin, TimeStampedModel):
     meal = models.ForeignKey(Meal)
     buyer_price = models.OneToOneField(Price, related_name='buyer_order')
     seller_earnings = models.OneToOneField(Price, related_name='seller_order')
-    billing_address = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='billed_orders')
-    pickup_address = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='pickup_orders')
+    billing_address = models.ForeignKey(
+            Address,
+            on_delete=models.CASCADE,
+            related_name='billed_orders',
+    )
+    pickup_address = models.ForeignKey(
+            Address,
+            on_delete=models.CASCADE,
+            related_name='pickup_orders',
+    )
+    pickup_time = models.DateTimeField()
+    is_paid = models.BooleanField(default=False)
 
     class Meta:
         app_label = 'instameals'

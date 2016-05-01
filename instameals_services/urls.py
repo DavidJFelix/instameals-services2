@@ -69,7 +69,7 @@ router.register(r'reviews', ReviewViewSet)
 router.register(r'seller_reviews', SellerReviewViewSet)
 router.register(r'users', APIUserViewSet)
 
-# TODO
+# TODO: make this router listed in the root router
 # Router for /my namespace
 my_router = DefaultRouter()
 my_router.register(r'addresses', MyAddressViewSet)
@@ -91,6 +91,7 @@ dashing_router.register(UserWidget, 'user_widget')
 dashing_router.register(OrderWidget, 'order_widget')
 dashing_router.register(AvgPriceWidget, 'avg_meal_price_widget')
 
+# TODO: get some of these routes listed in the root router APIView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^auth/', include('rest_framework_social_oauth2.urls')),
