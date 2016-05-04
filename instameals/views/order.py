@@ -8,12 +8,12 @@ from rest_framework.response import Response
 from instameals.permissions import OrderPermissions
 from .base import NoDeleteModelViewSet
 from ..models import Order, Meal, Price
-from ..serializers import CreateUpdateOrderSerializer
+from ..serializers import CreateUpdateOrderSerializer, RetrieveOrderSerializer
 
 
 class OrderViewSet(NoDeleteModelViewSet):
     queryset = Order.objects.all()
-    serializer_class = CreateUpdateOrderSerializer
+    serializer_class = RetrieveOrderSerializer
     filter_backends = (DjangoObjectPermissionsFilter,)
     permission_classes = (OrderPermissions,)
 
@@ -54,9 +54,9 @@ class OrderViewSet(NoDeleteModelViewSet):
 
         # Respond with created data
         headers = self.get_success_headers(serializer.data)
-        # TODO: return response
-
-        return Response({}, status=status.HTTP_201_CREATED, headers=headers)
+        response_serializer = self.serializer_class(serializer.instance,
+                                                    context={'request': reqest})
+        return Response(response_serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
 class MyOrderViewSet(OrderViewSet):

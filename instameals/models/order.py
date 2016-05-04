@@ -1,11 +1,10 @@
-from django.utils.timezone import now
 from django.contrib.gis.db import models
 from model_utils.models import TimeStampedModel
 
-from .price import Price
 from .address import Address
 from .api_user import APIUser
 from .meal import Meal
+from .price import Price
 from .uuid import UUIDModelMixin
 
 

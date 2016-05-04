@@ -19,3 +19,26 @@ class CreateUpdateOrderSerializer(UUIDModelSerializerMixin, ModelSerializer):
             'billing_address',
             'pickup_time',
         )
+
+
+class RetrieveOrderSerializer(UUIDModelSerializerMixin, ModelSerializer):
+    buyer = APIUserSerializer()
+    buyer_price = PriceSerializer()
+    seller_earnings = PriceSerializer()
+    billing_address = AddressSerializer()
+    pickup_address = AddressSerializer()
+
+    class Meta:
+        model = Order
+        fields = (
+            'id',
+            'buyer',
+            'purchased_at',
+            'meal',
+            'buyer_price',
+            'seller_earnings',
+            'billing_address',
+            'pickup_address',
+            'pickup_time',
+            'is_paid',
+        )
