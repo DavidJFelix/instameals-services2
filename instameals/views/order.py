@@ -15,7 +15,6 @@ from ..serializers import CreateUpdateOrderSerializer, RetrieveOrderSerializer
 class OrderViewSet(NoDeleteModelViewSet):
     queryset = Order.objects.all()
     serializer_class = RetrieveOrderSerializer
-    filter_backends = (DjangoObjectPermissionsFilter,)
     permission_classes = (OrderPermissions,)
 
     def create(self, reqest, *args, **kwargs):

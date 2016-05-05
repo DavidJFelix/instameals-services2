@@ -31,7 +31,7 @@ class MealPermissions(BasePermission):
 
 class OrderPermissions(BasePermission):
     def has_permission(self, request, view):
-        if request.method in permissions.SAFE_METHODS:
+        if request.method == 'OPTIONS':
             return True
         else:
             return (
