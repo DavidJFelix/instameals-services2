@@ -2,6 +2,7 @@ from decimal import Decimal, ROUND_UP
 from django.utils.timezone import now
 from guardian.shortcuts import assign_perm
 from rest_framework import status
+from rest_framework.exceptions import ValidationError
 from rest_framework.filters import DjangoObjectPermissionsFilter
 from rest_framework.response import Response
 
@@ -26,6 +27,8 @@ class OrderViewSet(NoDeleteModelViewSet):
         # FIXME: this is a quick solution, but has too many round trips to the db
         # TODO: investigate if recovery is needed if meal doesn't exist
         meal = Meal.objects.get(id=serializer.validated_data['meal'].id)
+        if not meal.is_active:
+            raise ValidationError('meal is inactive')
 
         # Freeze the price and pickup address for an order so sellers can't bait and switch
         price = meal.price
@@ -47,10 +50,13 @@ class OrderViewSet(NoDeleteModelViewSet):
 
         self.perform_create(serializer)
 
-        # Set permissions on the new order
+        # Set buyer permissions on the new order
         assign_perm('view_order', reqest.user, serializer.instance)
         assign_perm('change_order', reqest.user, serializer.instance)
         assign_perm('delete_order', reqest.user, serializer.instance)
+
+        # Set seller permissions on the new order
+        assign_perm('view_order', meal.seller, serializer.instance)
 
         # Respond with created data
         headers = self.get_success_headers(serializer.data)

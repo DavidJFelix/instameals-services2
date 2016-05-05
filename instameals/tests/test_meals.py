@@ -121,10 +121,11 @@ class CreateMealTestCase(APITestCase):
         url = reverse('meal-list')
         response = self.client.post(url, self.new_meal)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(Meal.objects.count(), 0)
 
 
 class RetrieveUpdateDeleteMealTestCase(APITestCase):
-    """Test the RETRIEVE/UPDATE/DELETE CRUD/REST endpoints for address for business logic"""
+    """Test the RETRIEVE/UPDATE/DELETE CRUD/REST endpoints for meal for business logic"""
 
     def setUp(self):
         self.user = APIUser.objects.create(username='tester')

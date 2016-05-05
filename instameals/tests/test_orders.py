@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from django.contrib.gis.geos import Point
 from rest_framework import status
 from rest_framework.reverse import reverse
@@ -14,6 +16,8 @@ from ..models import (
 
 
 class CreateOrderTestCase(APITestCase):
+    """Test the CRUD/REST endpoints for order business logic"""
+
     def setUp(self):
         self.seller = APIUser.objects.create(username='seller')
         self.user = APIUser.objects.create(username='tester')
@@ -125,17 +129,50 @@ class CreateOrderTestCase(APITestCase):
                 }
         )
 
+    def test_create_order_gives_user_permissions(self):
+        """A user who creates a meal should be given appropriate permissions for the meal as well
+        as the seller"""
+        url = reverse('order-list')
+        self.client.force_authenticate(self.user)
+        self.client.post(url, self.new_order)
+        new_order = Order.objects.first()
+        self.assertTrue(self.user.has_perm('change_order', new_order))
+        self.assertTrue(self.user.has_perm('view_order', new_order))
+        self.assertTrue(self.user.has_perm('delete_order', new_order))
+        self.assertTrue(self.seller.has_perm('view_order', new_order))
+
     def test_non_user_cannot_create_order_from_meal(self):
-        pass
+        """An unauthenticated user should not be able to create an order from a meal"""
+        url = reverse('order-list')
+        response = self.client.post(url, self.new_order)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(Order.objects.count(), 0)
 
     def test_user_cannot_create_order_from_non_meal(self):
-        pass
+        """A user should not be able to create an order from a meal which does not exist"""
+        url = reverse('order-list')
+        self.client.force_authenticate(self.user)
+        bad_order = self.new_order
+        # VERY rare chance of generating the same key
+        bad_order['meal'] = str(uuid4())
+        response = self.client.post(url, bad_order)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(Order.objects.count(), 0)
 
-    def test_order_response_structure(self):
-        pass
+    def test_user_cannot_create_order_from_inactive_meal(self):
+        """A user should not be able to create an order from a meal which is inactive"""
+        url = reverse('order-list')
+        self.client.force_authenticate(self.user)
+        self.meal.is_active = False
+        self.meal.save()
+        response = self.client.post(url, self.new_order)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(Order.objects.count(), 0)
 
 
 class RetrieveUpdateDeleteOrderTestCase(APITestCase):
+    """Test the RETRIEVE/UPDATE/DELETE CRUD/REST endpoints for order for business logic"""
+
     def setUp(self):
         pass
 
