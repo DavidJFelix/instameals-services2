@@ -278,6 +278,8 @@ class RetrieveUpdateDeleteOrderTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_retrieve_order_response_structure(self):
+        """Integration test to check the expected response structure of retrieve order"""
+        # TODO
         pass
 
     def test_user_cannot_retrieve_non_purchased_non_sold_order(self):

@@ -1,13 +1,11 @@
-from rest_framework import viewsets
-from rest_framework.permissions import AllowAny
+from rest_framework.viewsets import ModelViewSet
 
 from ..models import DietaryFilter
+from ..permissions import IsAdminOrReadOnly
 from ..serializers import DietaryFilterSerializer
 
 
-# FIXME: use a writable viewset when permission_classes allows admin only writes
-class DietaryFilterViewSet(viewsets.ReadOnlyModelViewSet):
+class DietaryFilterViewSet(ModelViewSet):
     queryset = DietaryFilter.objects.all()
     serializer_class = DietaryFilterSerializer
-    # FIXME: only allow admin to write
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAdminOrReadOnly,)

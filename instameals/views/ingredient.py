@@ -1,13 +1,11 @@
-from rest_framework import viewsets
-from rest_framework.permissions import AllowAny
+from rest_framework.viewsets import ModelViewSet
 
 from ..models import Ingredient
+from ..permissions import IsAdminOrReadOnly
 from ..serializers import IngredientSerializer
 
 
-# FIXME: Use writable viewset but ensure permission_class changes to keep this admin-only
-class IngredientViewSet(viewsets.ReadOnlyModelViewSet):
+class IngredientViewSet(ModelViewSet):
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
-    # FIXME: make this admin only writable
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAdminOrReadOnly,)

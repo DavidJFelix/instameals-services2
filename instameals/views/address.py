@@ -18,7 +18,6 @@ class AddressViewSet(CreateRetrieveModelViewSet):
     """
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
-    # FIXME: use this: filter_backends = (DjangoObjectPermissionsFilter,)
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
 
