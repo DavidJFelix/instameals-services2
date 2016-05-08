@@ -17,3 +17,13 @@ class CreateRetrieveModelViewSet(
         viewsets.GenericViewSet,
 ):
     pass
+
+
+class NoCreateModelViewSet(
+        mixins.RetrieveModelMixin,
+        mixins.ListModelMixin,
+        mixins.UpdateModelMixin,
+        mixins.DestroyModelMixin,
+        viewsets.GenericViewSet,
+):
+    pass

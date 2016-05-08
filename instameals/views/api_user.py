@@ -1,16 +1,13 @@
-from rest_framework.permissions import AllowAny
-
-from .base import NoDeleteModelViewSet
+from .base import NoCreateModelViewSet
 from ..models import APIUser
+from ..permissions import APIUserPermissions
 from ..serializers import APIUserSerializer
 
 
-class APIUserViewSet(NoDeleteModelViewSet):
-    # FIXME: filter out inactive users if that makes sense
+class APIUserViewSet(NoCreateModelViewSet):
     queryset = APIUser.objects.all()
     serializer_class = APIUserSerializer
-    # FIXME: disallow writing to users that aren't you
-    permission_classes = (AllowAny,)
+    permission_classes = (APIUserPermissions,)
 
 
 class MyAPIUserViewSet(APIUserViewSet):

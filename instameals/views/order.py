@@ -1,9 +1,9 @@
 from decimal import Decimal, ROUND_UP
+
 from django.utils.timezone import now
 from guardian.shortcuts import assign_perm
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
-from rest_framework.filters import DjangoObjectPermissionsFilter
 from rest_framework.response import Response
 
 from instameals.permissions import OrderPermissions
@@ -42,8 +42,8 @@ class OrderViewSet(NoDeleteModelViewSet):
         full_percentage = Decimal('1.00')
         seller_earnings_value = price.value * (full_percentage - instameals_cut)
         seller_earnings = Price.objects.create(
-            currency=price.currency,
-            value=seller_earnings_value.quantize(two_places, rounding=ROUND_UP),
+                currency=price.currency,
+                value=seller_earnings_value.quantize(two_places, rounding=ROUND_UP),
         )
         serializer.validated_data['seller_earnings'] = seller_earnings
 
