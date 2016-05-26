@@ -123,6 +123,17 @@ class CreateMealTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertEqual(Meal.objects.count(), 0)
 
+    def test_non_chronological_from_date_and_to_date_cannot_be_created(self):
+        """A meal should not be able to be created if it has a available_from datetime that is
+        chronologically after its available_to datetime"""
+        # TODO
+        pass
+
+    def test_past_dated_available_to_meal_cannot_be_created(self):
+        """A meal with a past available_to should not be able to be created"""
+        # TODO
+        pass
+
 
 class RetrieveUpdateDeleteMealTestCase(APITestCase):
     """Test the RETRIEVE/UPDATE/DELETE CRUD/REST endpoints for meal for business logic"""

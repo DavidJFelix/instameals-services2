@@ -37,18 +37,33 @@ class OrderWidget(NumberWidget):
         return 'Number of Orders'
 
 
-class AvgPriceWidget(NumberWidget):
-    title = 'Price'
+class AverageOrderPriceWidget(NumberWidget):
+    title = 'Order Price'
 
-    # TODO: we can create price objects without them being attached to a meal.
     def get_value(self):
-        avg_meal_price = Price.objects.filter(currency='USD'). \
-            aggregate(Avg('value')). \
-            get('value__avg', None)
+        avg_order_price = Order.objects.filter(buyer_price__currency='USD'). \
+            aggregate(Avg('buyer_price__value')). \
+            get('buyer_price__value__avg', None)
+        if avg_order_price is None:
+            return "$ 0.00"
+        else:
+            return "$ {0:.2f}".format(avg_order_price)
+
+    def get_detail(self):
+        return 'Avg Price of an Order'
+
+
+class AverageMealPriceWidget(NumberWidget):
+    title = 'Meal Price'
+
+    def get_value(self):
+        avg_meal_price = Meal.objects.filter(price__currency='USD'). \
+            aggregate(Avg('price__value')). \
+            get('price__value__avg', None)
         if avg_meal_price is None:
             return "$ 0.00"
         else:
             return "$ {0:.2f}".format(avg_meal_price)
 
     def get_detail(self):
-        return 'Avg price of a Meal'
+        return 'Average Price of a Meal'

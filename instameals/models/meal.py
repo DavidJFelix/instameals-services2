@@ -1,5 +1,9 @@
+from datetime import datetime
+
 from django.contrib.gis.db import models
+from django.core.exceptions import ValidationError
 from model_utils.models import TimeStampedModel
+from django.utils.translation import ugettext_lazy as _
 
 from .price import Price
 from .address import Address
@@ -22,7 +26,6 @@ class Meal(UUIDModelMixin, TimeStampedModel):
 
     pickup_address = models.ForeignKey(Address, on_delete=models.CASCADE, related_name='meals')
 
-    # FIXME: validate dates
     available_from = models.DateTimeField()
     available_to = models.DateTimeField()
     price = models.OneToOneField(Price)
@@ -38,6 +41,15 @@ class Meal(UUIDModelMixin, TimeStampedModel):
         permissions = (
             ('view_meal', 'Can view meal'),
         )
+
+    def clean(self):
+        # Available from and available to must be chronological
+        if self.available_from >= self.available_to:
+            raise ValidationError(_("available_from must be older than available_to"))
+
+        # Available to must be in the future
+        if datetime.now() >= self.available_to:
+            raise ValidationError(_("available_to must be in the future"))
 
     def __str__(self):
         return "[{id}]: {seller}'s {name}".format(
