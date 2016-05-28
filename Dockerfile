@@ -21,5 +21,8 @@ RUN set -ex \
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
+# Diagnostic command for checking dependencies
+RUN pip list --outdated
+
 COPY ./ /opt/instameals
 CMD python manage.py migrate && python manage.py runserver
