@@ -1,6 +1,7 @@
-from datetime import timedelta, datetime
+from datetime import timedelta
 
 from django.contrib.gis.geos import Point
+from django.utils import timezone
 from guardian.shortcuts import assign_perm  # Ignore pycharm warning
 from oauth2_provider.models import Application, AccessToken  # Ignore pycharm warning
 from rest_framework import status
@@ -56,7 +57,7 @@ class AuthTestCase(APITestCase):
                 user=self.user,
                 token='Hl6yLPJBwhfS10vFexFjj8v0staIk9',  # Jibberish
                 application=self.app,
-                expires=datetime.now() + timedelta(hours=4),
+                expires=timezone.now() + timedelta(hours=4),
                 scope='write read',
         )
 

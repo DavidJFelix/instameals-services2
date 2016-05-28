@@ -47,10 +47,13 @@ from instameals.views import (
     ReviewViewSet,
     SellerReviewViewSet,
 )
-from instameals.widgets import AvgPriceWidget
-from instameals.widgets import MealWidget
-from instameals.widgets import OrderWidget
-from instameals.widgets import UserWidget
+from instameals.widgets import (
+    AverageMealPriceWidget,
+    AverageOrderPriceWidget,
+    MealWidget,
+    OrderWidget,
+    UserWidget,
+)
 
 router = DefaultRouter()
 router.register(r'addresses', AddressViewSet)
@@ -89,7 +92,8 @@ my_router.register(r'sold_meal_reviews', MySoldMealReviewViewSet)
 dashing_router.register(MealWidget, 'meal_widget')
 dashing_router.register(UserWidget, 'user_widget')
 dashing_router.register(OrderWidget, 'order_widget')
-dashing_router.register(AvgPriceWidget, 'avg_meal_price_widget')
+dashing_router.register(AverageMealPriceWidget, 'average_meal_price_widget')
+dashing_router.register(AverageOrderPriceWidget, 'average_order_price_widget')
 
 # TODO: get some of these routes listed in the root router APIView
 urlpatterns = [

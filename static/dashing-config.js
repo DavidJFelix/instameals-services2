@@ -38,10 +38,20 @@ dashboard.addWidget('order_widget', 'Number', {
     interval: 5000
 });
 
-dashboard.addWidget('avg_meal_price_widget', 'Number', {
+dashboard.addWidget('average_meal_price_widget', 'Number', {
     getData: function () {
         var self = this;
         Dashing.utils.get('avg_meal_price_widget', function(data) {
+            $.extend(self.scope, data);
+        });
+    },
+    interval: 5000
+});
+
+dashboard.addWidget('average_order_price_widget', 'Number', {
+    getData: function () {
+        var self = this;
+        Dashing.utils.get('avg_order_price_widget', function(data) {
             $.extend(self.scope, data);
         });
     },
