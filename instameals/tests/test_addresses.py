@@ -27,7 +27,7 @@ class CreateAddressTestCase(APITestCase):
 
     def test_user_can_create_address(self):
         """An authenticated user should be allowed to create an address"""
-        url = reverse('address-list')
+        url = reverse('v2:address-list')
         self.client.force_authenticate(self.user)
         response = self.client.post(url, self.new_address, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -40,7 +40,7 @@ class CreateAddressTestCase(APITestCase):
 
     def test_non_user_cannot_create_address(self):
         """An unauthenticated user should not be allowed to create an address"""
-        url = reverse('address-list')
+        url = reverse('v2:address-list')
         response = self.client.post(url, self.new_address, format='json')
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertEqual(Address.objects.count(), 0)
@@ -76,13 +76,13 @@ class RetrieveUpdateDeleteAddressTestCase(APITestCase):
     # Retrieve REST/CRUD tests
     def test_can_retrieve_address(self):
         """Any user should be able to retrieve an address by its id"""
-        url = reverse('address-detail', args=[self.address.id])
+        url = reverse('v2:address-detail', args=[self.address.id])
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_retrieve_address_response_structure(self):
         """Integration test to check the expected response structure of retrieve address"""
-        url = reverse('address-detail', args=[self.address.id])
+        url = reverse('v2:address-detail', args=[self.address.id])
         response = self.client.get(url, format='json')
         self.assertEqual(
                 response.json(),
@@ -105,14 +105,14 @@ class RetrieveUpdateDeleteAddressTestCase(APITestCase):
 
     def test_cannot_list_address(self):
         """Nobody should be allowed to get a list addresses (405)"""
-        url = reverse('address-list')
+        url = reverse('v2:address-list')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     # Update REST/CRUD tests
     def test_user_cannot_update_address(self):
         """An authenticated user should be rejected from updating an address with a 405"""
-        url = reverse('address-detail', args=[self.address.id])
+        url = reverse('v2:address-detail', args=[self.address.id])
         self.client.force_authenticate(self.user)
         response = self.client.put(url, self.updated_address, format='json')
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
@@ -123,7 +123,7 @@ class RetrieveUpdateDeleteAddressTestCase(APITestCase):
 
     def test_non_user_cannot_update_address(self):
         """An unauthenticated user should be rejected from updating an address with a 401"""
-        url = reverse('address-detail', args=[self.address.id])
+        url = reverse('v2:address-detail', args=[self.address.id])
         response = self.client.put(url, self.updated_address, format='json')
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
@@ -135,7 +135,7 @@ class RetrieveUpdateDeleteAddressTestCase(APITestCase):
         """An authenticated user should be rejected from partially updating an address
         with a 405
         """
-        url = reverse('address-detail', args=[self.address.id])
+        url = reverse('v2:address-detail', args=[self.address.id])
         self.client.force_authenticate(self.user)
         response = self.client.patch(url, self.updated_address, format='json')
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
@@ -148,7 +148,7 @@ class RetrieveUpdateDeleteAddressTestCase(APITestCase):
         """An unauthenticated user should be rejected from partially updating an address
         with a 401
         """
-        url = reverse('address-detail', args=[self.address.id])
+        url = reverse('v2:address-detail', args=[self.address.id])
         response = self.client.patch(url, self.updated_address, format='json')
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
@@ -159,7 +159,7 @@ class RetrieveUpdateDeleteAddressTestCase(APITestCase):
     # Delete REST/CRUD tests
     def test_user_cannot_delete_address(self):
         """An authenticated user should not be able to delete an immutable address"""
-        url = reverse('address-detail', args=[self.address.id])
+        url = reverse('v2:address-detail', args=[self.address.id])
         self.client.force_authenticate(self.user)
         response = self.client.delete(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
@@ -170,7 +170,7 @@ class RetrieveUpdateDeleteAddressTestCase(APITestCase):
 
     def test_non_user_cannot_delete_address(self):
         """An unauthenticated user should not be able to delete an immutable address"""
-        url = reverse('address-detail', args=[self.address.id])
+        url = reverse('v2:address-detail', args=[self.address.id])
         response = self.client.delete(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 

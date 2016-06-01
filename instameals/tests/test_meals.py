@@ -41,7 +41,7 @@ class CreateMealTestCase(APITestCase):
 
     def test_user_can_create_meal(self):
         """An authenticated user should be able to create a meal where they are the seller"""
-        url = reverse('meal-list')
+        url = reverse('v2:meal-list')
         self.client.force_authenticate(self.user)
         response = self.client.post(url, self.new_meal)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -49,7 +49,7 @@ class CreateMealTestCase(APITestCase):
 
     def test_create_meal_response_structure(self):
         """Integration test to check the expected response structure of create meal"""
-        url = reverse('meal-list')
+        url = reverse('v2:meal-list')
         self.client.force_authenticate(self.user)
         response = self.client.post(url, self.new_meal)
         meal = Meal.objects.first()
@@ -63,40 +63,14 @@ class CreateMealTestCase(APITestCase):
                     'allergens': [],
                     'dietary_filters': [],
                     'ingredients': [],
-                    'pickup_address': {
-                        'id': str(meal.pickup_address.id),
-                        'line1': '123 Test Ave',
-                        'line2': '',
-                        'city': 'Testville',
-                        'state': 'TX',
-                        'postal_code': '12345',
-                        'country': 'USA',
-                        'coordinates': {
-                            'type': 'Point',
-                            'coordinates': [-123.0123, 45.6789],
-                        },
-                    },
+                    'pickup_address': str(meal.pickup_address.id),
                     'portions': 0,
-                    'seller': {
-                        'id': str(meal.seller.id),
-                        'username': 'tester',
-                        'first_name': '',
-                        'last_name': '',
-                        'profile_image': None,
-                    },
+                    'seller': str(meal.seller.id),
                     'portions_available': 0,
-                    'price': {
-                        'id': str(meal.price.id),
-                        'currency': 'USD',
-                        'value': '39.99',
-                    },
+                    'price': str(meal.price.id),
                     'available_from': '2016-04-10T17:53:50.142558Z',
                     'available_to': '2016-04-10T17:53:50.142558Z',
-                    'preview_image': {
-                        'id': str(meal.preview_image.id),
-                        'type': 'other',
-                        'url': 'http://example.com/test.jpg'
-                    },
+                    'preview_image': str(meal.preview_image.id),
                     'images': []
                 }
         )
@@ -104,21 +78,16 @@ class CreateMealTestCase(APITestCase):
     def test_create_meal_gives_user_permissions(self):
         """A user who creates a meal should be given appropriate permissions for the meal and
         attached objects"""
-        url = reverse('meal-list')
+        url = reverse('v2:meal-list')
         self.client.force_authenticate(self.user)
         self.client.post(url, self.new_meal)
         new_meal = Meal.objects.first()
         self.assertTrue(self.user.has_perm('change_meal', new_meal))
         self.assertTrue(self.user.has_perm('delete_meal', new_meal))
 
-    def test_user_can_create_meal_and_connected_objects_in_one_call(self):
-        """An authenticated user should be able to create a meal with all attached objects"""
-        # FIXME: need to have an upsert type
-        pass
-
     def test_non_user_cannot_create_meal(self):
         """An unauthenticated user should not be able to create a meal"""
-        url = reverse('meal-list')
+        url = reverse('v2:meal-list')
         response = self.client.post(url, self.new_meal)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertEqual(Meal.objects.count(), 0)
@@ -171,13 +140,13 @@ class RetrieveUpdateDeleteMealTestCase(APITestCase):
 
     def test_can_retrieve_meal(self):
         """Any user should be able to retrieve a meal by id"""
-        url = reverse('meal-detail', args=[self.meal.id])
+        url = reverse('v2:meal-detail', args=[self.meal.id])
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_retrieve_meal_response_structure(self):
         """Integration test to check the expected response structure of retrieve address"""
-        url = reverse('meal-detail', args=[self.meal.id])
+        url = reverse('v2:meal-detail', args=[self.meal.id])
         response = self.client.get(url)
         self.maxDiff = 2000
         self.assertEqual(
@@ -189,47 +158,21 @@ class RetrieveUpdateDeleteMealTestCase(APITestCase):
                     'allergens': [],
                     'dietary_filters': [],
                     'ingredients': [],
-                    'pickup_address': {
-                        'id': str(self.meal.pickup_address.id),
-                        'line1': '123 Test Ave',
-                        'line2': '',
-                        'city': 'Testville',
-                        'state': 'TX',
-                        'postal_code': '12345',
-                        'country': 'USA',
-                        'coordinates': {
-                            'type': 'Point',
-                            'coordinates': [-123.0123, 45.6789],
-                        },
-                    },
+                    'pickup_address': str(self.meal.pickup_address.id),
                     'portions': 10,
                     'portions_available': 10,
-                    'price': {
-                        'id': str(self.meal.price.id),
-                        'currency': 'USD',
-                        'value': '39.99',
-                    },
-                    'seller': {
-                        'id': str(self.meal.seller.id),
-                        'username': 'tester',
-                        'first_name': '',
-                        'last_name': '',
-                        'profile_image': None,
-                    },
+                    'price': str(self.meal.price.id),
+                    'seller': str(self.meal.seller.id),
                     'available_from': '2016-04-10T17:53:50.142558Z',
                     'available_to': '2016-04-10T17:53:50.142558Z',
-                    'preview_image': {
-                        'id': str(self.meal.preview_image.id),
-                        'type': 'other',
-                        'url': 'http://example.com/test.jpg'
-                    },
+                    'preview_image': str(self.meal.preview_image.id),
                     'images': [],
                 }
         )
 
     def test_can_list_meals(self):
         """Any user should be able to list meals"""
-        url = reverse('meal-list')
+        url = reverse('v2:meal-list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -237,7 +180,7 @@ class RetrieveUpdateDeleteMealTestCase(APITestCase):
         """Integration test to check the expected response structure of list meals"""
         # TODO: give this test 2 results
         # FIXME: handle the query params better
-        url = reverse('meal-list') + "?lng=-123.0123&lat=45.6789"
+        url = reverse('v2:meal-list') + "?lng=-123.0123&lat=45.6789"
         response = self.client.get(url)
         self.maxDiff = 2000
         self.assertEqual(
@@ -250,40 +193,14 @@ class RetrieveUpdateDeleteMealTestCase(APITestCase):
                         'allergens': [],
                         'dietary_filters': [],
                         'ingredients': [],
-                        'pickup_address': {
-                            'id': str(self.meal.pickup_address.id),
-                            'line1': '123 Test Ave',
-                            'line2': '',
-                            'city': 'Testville',
-                            'state': 'TX',
-                            'postal_code': '12345',
-                            'country': 'USA',
-                            'coordinates': {
-                                'type': 'Point',
-                                'coordinates': [-123.0123, 45.6789],
-                            },
-                        },
+                        'pickup_address': str(self.meal.pickup_address.id),
                         'portions': 10,
                         'portions_available': 10,
-                        'price': {
-                            'id': str(self.meal.price.id),
-                            'currency': 'USD',
-                            'value': '39.99',
-                        },
-                        'seller': {
-                            'id': str(self.meal.seller.id),
-                            'username': 'tester',
-                            'first_name': '',
-                            'last_name': '',
-                            'profile_image': None,
-                        },
+                        'price': str(self.meal.price.id),
+                        'seller': str(self.meal.seller.id),
                         'available_from': '2016-04-10T17:53:50.142558Z',
                         'available_to': '2016-04-10T17:53:50.142558Z',
-                        'preview_image': {
-                            'id': str(self.meal.preview_image.id),
-                            'type': 'other',
-                            'url': 'http://example.com/test.jpg'
-                        },
+                        'preview_image': str(self.meal.preview_image.id),
                         'images': [],
                     }
                 ]
@@ -302,7 +219,7 @@ class RetrieveUpdateDeleteMealTestCase(APITestCase):
 
     def test_non_user_cannot_update_meal(self):
         """An unauthenticated user should not be able to update a meal"""
-        url = reverse('meal-detail', args=[self.meal.id])
+        url = reverse('v2:meal-detail', args=[self.meal.id])
         updated_meal = {
             'id': str(self.meal.id),
             'name': 'Test Meal',
@@ -310,40 +227,14 @@ class RetrieveUpdateDeleteMealTestCase(APITestCase):
             'allergens': [],
             'dietary_filters': [],
             'ingredients': [],
-            'pickup_address': {
-                'id': str(self.meal.pickup_address.id),
-                'line1': '123 Test Ave',
-                'line2': '',
-                'city': 'Testville',
-                'state': 'TX',
-                'postal_code': '12345',
-                'country': 'USA',
-                'coordinates': {
-                    'type': 'Point',
-                    'coordinates': [-123.0123, 45.6789],
-                },
-            },
+            'pickup_address': str(self.meal.pickup_address.id),
             'portions': 0,
-            'seller': {
-                'id': str(self.meal.seller.id),
-                'username': 'tester',
-                'first_name': '',
-                'last_name': '',
-                'profile_image': None,
-            },
+            'seller': str(self.meal.seller.id),
             'portions_available': 0,
-            'price': {
-                'id': str(self.meal.price.id),
-                'currency': 'USD',
-                'value': '39.99',
-            },
+            'price': str(self.meal.price.id),
             'available_from': '2016-04-10T17:53:50.142558Z',
             'available_to': '2016-04-10T17:53:50.142558Z',
-            'preview_image': {
-                'id': str(self.meal.preview_image.id),
-                'type': 'other',
-                'url': 'http://example.com/test.jpg'
-            },
+            'preview_image': str(self.meal.preview_image.id),
             'images': []
         }
         response = self.client.put(url, updated_meal)
@@ -369,7 +260,7 @@ class RetrieveUpdateDeleteMealTestCase(APITestCase):
     def test_user_can_delete_to_mark_owned_meal_inactive(self):
         """An authenticated user should be able to DELETE a meal of which they are the seller to
         mark the meal as is_active=False"""
-        url = reverse('meal-detail', args=[self.meal.id])
+        url = reverse('v2:meal-detail', args=[self.meal.id])
         self.client.force_authenticate(self.user)
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
@@ -379,7 +270,7 @@ class RetrieveUpdateDeleteMealTestCase(APITestCase):
     def test_user_cannot_delete_to_mark_non_owned_meal_inactive(self):
         """An authenticated user should not be able to DELETE a meal of which they are not the
         seller"""
-        url = reverse('meal-detail', args=[self.meal.id])
+        url = reverse('v2:meal-detail', args=[self.meal.id])
         self.client.force_authenticate(self.non_owner_user)
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
@@ -387,7 +278,7 @@ class RetrieveUpdateDeleteMealTestCase(APITestCase):
 
     def test_non_user_cannot_delete_to_mark_meal_inactive(self):
         """An unauthenticated user should not be able to DELETE a meal"""
-        url = reverse('meal-detail', args=[self.meal.id])
+        url = reverse('v2:meal-detail', args=[self.meal.id])
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertTrue(Meal.objects.get(id=self.meal.id).is_active)

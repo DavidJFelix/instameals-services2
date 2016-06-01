@@ -67,7 +67,7 @@ class AuthTestCase(APITestCase):
 
         # FIXME: This test relies on the negative test to ensure it is not a false pass
         # FIXME: This test is tightly coupled to meal view behavior
-        url = reverse('meal-detail', args=[self.meal.id])
+        url = reverse('v2:meal-detail', args=[self.meal.id])
         self.client.credentials(HTTP_AUTHORIZATION='Bearer ' + self.access_token.token)
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
@@ -79,7 +79,7 @@ class AuthTestCase(APITestCase):
 
         # FIXME: This test relies on the postive test to ensure that it is not a false pass
         # FIXME: This test is tightly coupled to meal view behavior
-        url = reverse('meal-detail', args=[self.meal.id])
+        url = reverse('v2:meal-detail', args=[self.meal.id])
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertEqual(Meal.objects.get(id=self.meal.id).is_active, True)

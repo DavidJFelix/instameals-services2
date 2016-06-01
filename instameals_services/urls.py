@@ -55,22 +55,22 @@ from instameals.widgets import (
     UserWidget,
 )
 
-router = DefaultRouter()
-router.register(r'addresses', AddressViewSet)
-router.register(r'allergens', AllergenViewSet)
-router.register(r'cuisines', CuisineViewSet)
-router.register(r'dietary_filters', DietaryFilterViewSet)
-router.register(r'favorite_sellers', FavoriteSellerViewSet)
-router.register(r'images', ImageViewSet)
-router.register(r'ingredients', IngredientViewSet)
-router.register(r'meals', MealViewSet)
-router.register(r'meal_reviews', MealReviewViewSet)
-router.register(r'orders', OrderViewSet)
-router.register(r'order_reviews', OrderReviewViewSet)
-router.register(r'prices', PriceViewSet)
-router.register(r'reviews', ReviewViewSet)
-router.register(r'seller_reviews', SellerReviewViewSet)
-router.register(r'users', APIUserViewSet)
+v2_router = DefaultRouter()
+v2_router.register(r'addresses', AddressViewSet)
+v2_router.register(r'allergens', AllergenViewSet)
+v2_router.register(r'cuisines', CuisineViewSet)
+v2_router.register(r'dietary_filters', DietaryFilterViewSet)
+v2_router.register(r'favorite_sellers', FavoriteSellerViewSet)
+v2_router.register(r'images', ImageViewSet)
+v2_router.register(r'ingredients', IngredientViewSet)
+v2_router.register(r'meals', MealViewSet)
+v2_router.register(r'meal_reviews', MealReviewViewSet)
+v2_router.register(r'orders', OrderViewSet)
+v2_router.register(r'order_reviews', OrderReviewViewSet)
+v2_router.register(r'prices', PriceViewSet)
+v2_router.register(r'reviews', ReviewViewSet)
+v2_router.register(r'seller_reviews', SellerReviewViewSet)
+v2_router.register(r'users', APIUserViewSet)
 
 # TODO: make this router listed in the root router
 # Router for /my namespace
@@ -101,7 +101,6 @@ urlpatterns = [
     url(r'^auth/', include('rest_framework_social_oauth2.urls')),
     url(r'^dashboard/', include(dashing_router.urls)),
     url(r'^docs/', include('rest_framework_swagger.urls')),
-    url(r'^my/', include(my_router.urls, namespace='my'))
+    url(r'^v2/my/', include(my_router.urls, namespace='my')),
+    url(r'^v2/', include(v2_router.urls, namespace='v2')),
 ]
-
-urlpatterns += router.urls

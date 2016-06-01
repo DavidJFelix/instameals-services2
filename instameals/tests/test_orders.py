@@ -66,7 +66,7 @@ class CreateOrderTestCase(APITestCase):
 
     def test_user_can_create_order_from_meal(self):
         """An authenticated user should be able to order a meal"""
-        url = reverse('order-list')
+        url = reverse('v2:order-list')
         self.client.force_authenticate(self.user)
         response = self.client.post(url, self.new_order)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -74,7 +74,7 @@ class CreateOrderTestCase(APITestCase):
 
     def test_create_order_response_structure(self):
         """Integration test to check the expected response structure of create order"""
-        url = reverse('order-list')
+        url = reverse('v2:order-list')
         self.client.force_authenticate(self.user)
         response = self.client.post(url, self.new_order)
         order = Order.objects.first()
@@ -136,7 +136,7 @@ class CreateOrderTestCase(APITestCase):
     def test_create_order_gives_user_permissions(self):
         """A user who creates a meal should be given appropriate permissions for the meal as well
         as the seller"""
-        url = reverse('order-list')
+        url = reverse('v2:order-list')
         self.client.force_authenticate(self.user)
         self.client.post(url, self.new_order)
         new_order = Order.objects.first()
@@ -147,14 +147,14 @@ class CreateOrderTestCase(APITestCase):
 
     def test_non_user_cannot_create_order_from_meal(self):
         """An unauthenticated user should not be able to create an order from a meal"""
-        url = reverse('order-list')
+        url = reverse('v2:order-list')
         response = self.client.post(url, self.new_order)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertEqual(Order.objects.count(), 0)
 
     def test_user_cannot_create_order_from_non_meal(self):
         """A user should not be able to create an order from a meal which does not exist"""
-        url = reverse('order-list')
+        url = reverse('v2:order-list')
         self.client.force_authenticate(self.user)
         bad_order = self.new_order
         # VERY rare chance of generating the same key
@@ -165,7 +165,7 @@ class CreateOrderTestCase(APITestCase):
 
     def test_user_cannot_create_order_from_inactive_meal(self):
         """A user should not be able to create an order from a meal which is inactive"""
-        url = reverse('order-list')
+        url = reverse('v2:order-list')
         self.client.force_authenticate(self.user)
         self.meal.is_active = False
         self.meal.save()
@@ -265,14 +265,14 @@ class RetrieveUpdateDeleteOrderTestCase(APITestCase):
 
     def test_user_can_retrieve_purchased_order(self):
         """An authenticated user should be able to view an order they placed"""
-        url = reverse('order-detail', args=[self.order.id])
+        url = reverse('v2:order-detail', args=[self.order.id])
         self.client.force_authenticate(self.user)
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_user_can_retrieve_sold_order(self):
         """An authenticated user should be able to view an order they sold"""
-        url = reverse('order-detail', args=[self.order.id])
+        url = reverse('v2:order-detail', args=[self.order.id])
         self.client.force_authenticate(self.seller)
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -285,14 +285,14 @@ class RetrieveUpdateDeleteOrderTestCase(APITestCase):
     def test_user_cannot_retrieve_non_purchased_non_sold_order(self):
         """An authenticated user should be not be able to view an order they did not place or
         sell"""
-        url = reverse('order-detail', args=[self.order.id])
+        url = reverse('v2:order-detail', args=[self.order.id])
         self.client.force_authenticate(self.non_owner_user)
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_non_user_cannot_retrieve_order(self):
         """An unauthenticated user should not be able to view an order"""
-        url = reverse('order-detail', args=[self.order.id])
+        url = reverse('v2:order-detail', args=[self.order.id])
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
@@ -303,6 +303,6 @@ class RetrieveUpdateDeleteOrderTestCase(APITestCase):
 
     def test_non_user_cannot_list_orders(self):
         """An unauthenticated user should not be able to list any orders"""
-        url = reverse('order-list')
+        url = reverse('v2:order-list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)

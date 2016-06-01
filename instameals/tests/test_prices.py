@@ -22,20 +22,20 @@ class CreatePriceTestCase(APITestCase):
         }
 
     def test_user_can_create_price(self):
-        url = reverse('price-list')
+        url = reverse('v2:price-list')
         self.client.force_authenticate(self.user)
         response = self.client.post(url, self.price, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Price.objects.count(), 1)
 
     def test_non_user_cannot_create_price(self):
-        url = reverse('price-list')
+        url = reverse('v2:price-list')
         response = self.client.post(url, self.price, format='json')
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertEqual(Price.objects.count(), 0)
 
     def test_user_cannot_create_price_in_non_supported_currency_formats(self):
-        url = reverse('price-list')
+        url = reverse('v2:price-list')
         self.client.force_authenticate(self.user)
         response = self.client.post(url, self.invalid_price_currency, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

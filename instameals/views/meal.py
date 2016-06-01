@@ -8,19 +8,19 @@ from rest_framework.viewsets import ModelViewSet
 
 from instameals.permissions import MealPermissions
 from ..models import Meal
-from ..serializers import CreateUpdateMealSerializer, RetrieveMealSerializer
+from ..serializers import MealSerializer
 
 
 class MealViewSet(ModelViewSet):
     """A REST Framework viewset for the Meal model."""
     queryset = Meal.objects.all()
-    serializer_class = RetrieveMealSerializer
+    serializer_class = MealSerializer
     permission_classes = (MealPermissions,)
 
     def create(self, request, *args, **kwargs):
         """"""
         # Serialize and validate the meal, setting seller to be the current user
-        serializer = CreateUpdateMealSerializer(data=request.data)
+        serializer = self.serializer_class(data=request.data)
         serializer.initial_data['seller'] = request.user.id
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
@@ -31,9 +31,7 @@ class MealViewSet(ModelViewSet):
 
         # Respond with created data
         headers = self.get_success_headers(serializer.data)
-        response_serializer = self.serializer_class(serializer.instance,
-                                                    context={'request': request})
-        return Response(response_serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def perform_destroy(self, instance):
         """Perform destroy is called by destroy to issue object deletion.
