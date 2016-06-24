@@ -13,7 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from dashing.utils import router as dashing_router
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework.routers import DefaultRouter
@@ -46,13 +45,6 @@ from instameals.views import (
     PriceViewSet,
     ReviewViewSet,
     SellerReviewViewSet,
-)
-from instameals.widgets import (
-    AverageMealPriceWidget,
-    AverageOrderPriceWidget,
-    MealWidget,
-    OrderWidget,
-    UserWidget,
 )
 
 v2_router = DefaultRouter()
@@ -88,18 +80,10 @@ my_router.register(r'sale_reviews', MySaleReviewViewSet)
 my_router.register(r'seller_reviews', MySellerReviewViewSet)
 my_router.register(r'sold_meal_reviews', MySoldMealReviewViewSet)
 
-# dashing widgets
-dashing_router.register(MealWidget, 'meal_widget')
-dashing_router.register(UserWidget, 'user_widget')
-dashing_router.register(OrderWidget, 'order_widget')
-dashing_router.register(AverageMealPriceWidget, 'average_meal_price_widget')
-dashing_router.register(AverageOrderPriceWidget, 'average_order_price_widget')
-
 # TODO: get some of these routes listed in the root router APIView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^auth/', include('rest_framework_social_oauth2.urls')),
-    url(r'^dashboard/', include(dashing_router.urls)),
     url(r'^docs/', include('rest_framework_swagger.urls')),
     url(r'^v2/my/', include(my_router.urls, namespace='my')),
     url(r'^v2/', include(v2_router.urls, namespace='v2')),

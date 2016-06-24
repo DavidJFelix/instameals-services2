@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'instameals.apps.InstamealsConfig',
     'django_extensions',
     'guardian',
-    'dashing',
 ]
 
 MIDDLEWARE_CLASSES = [
