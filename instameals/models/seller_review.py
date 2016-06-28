@@ -1,14 +1,22 @@
+from django.conf import settings
 from django.contrib.gis.db import models
 
-from .api_user import APIUser
 from .review import Review
 from .uuid import UUIDModelMixin
 
 
 class SellerReview(UUIDModelMixin, models.Model):
     review = models.OneToOneField(Review, on_delete=models.CASCADE, related_name='seller_review')
-    seller = models.ForeignKey(APIUser, on_delete=models.CASCADE, related_name='seller_reviews_of')
-    reviewer = models.ForeignKey(APIUser, on_delete=models.CASCADE, related_name='seller_reviews')
+    seller = models.ForeignKey(
+            settings.AUTH_USER_MODEL,
+            on_delete=models.CASCADE,
+            related_name='seller_reviews_of',
+    )
+    reviewer = models.ForeignKey(
+            settings.AUTH_USER_MODEL,
+            on_delete=models.CASCADE,
+            related_name='seller_reviews',
+    )
 
     class Meta:
         app_label = 'instameals'

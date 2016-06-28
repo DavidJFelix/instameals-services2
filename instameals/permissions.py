@@ -27,6 +27,27 @@ class APIUserPermissions(BasePermission):
             return False
 
 
+class ImagePermissions(BasePermission):
+    def has_permission(self, request, view):
+        if request.method == 'OPTIONS':
+            return True
+        else:
+            return (
+                request.user and
+                request.user.is_authenticated()
+            )
+
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        elif request.method in ('PUT', 'PATCH'):
+            return (
+                request.user and
+                request.user.is_authenticated() and
+                request.user.has_perm('change_image', obj)
+            )
+
+
 class MealPermissions(BasePermission):
     def has_permission(self, request, view):
         if request.method in permissions.SAFE_METHODS:

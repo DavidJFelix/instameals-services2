@@ -1,15 +1,21 @@
+from django.conf import settings
 from django.contrib.gis.db import models
 from model_utils.models import TimeStampedModel
 
-from .api_user import APIUser
 from .uuid import UUIDModelMixin
 
 
 class FavoriteSeller(UUIDModelMixin, TimeStampedModel):
-    seller = models.ForeignKey(APIUser, on_delete=models.CASCADE,
-                               related_name="favorite_sellers_of")
-    favoriter = models.ForeignKey(APIUser, on_delete=models.CASCADE,
-                                  related_name="favorite_sellers")
+    seller = models.ForeignKey(
+            settings.AUTH_USER_MODEL,
+            on_delete=models.CASCADE,
+            related_name="favorite_sellers_of",
+    )
+    favoriter = models.ForeignKey(
+            settings.AUTH_USER_MODEL,
+            on_delete=models.CASCADE,
+            related_name="favorite_sellers",
+    )
 
     class Meta:
         app_label = 'instameals'

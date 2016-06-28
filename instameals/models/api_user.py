@@ -9,8 +9,8 @@ from .uuid import UUIDModelMixin
 
 class APIUser(UUIDModelMixin, TimeStampedModel, AbstractUser):
     addresses = models.ManyToManyField(Address, related_name='users')
-    # FIXME: No blank and null. Set this to a default "fake" picture when we have one
-    profile_image = models.OneToOneField(Image, related_name='users', blank='', null=True)
+    # TODO: add profile_image
+    # profile_image = models.OneToOneField(Image, related_name='users', blank='', null=True)
 
     class Meta:
         app_label = 'instameals'

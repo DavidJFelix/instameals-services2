@@ -1,17 +1,17 @@
 from datetime import datetime
 
+from django.conf import settings
 from django.contrib.gis.db import models
 from django.core.exceptions import ValidationError
-from model_utils.models import TimeStampedModel
 from django.utils.translation import ugettext_lazy as _
+from model_utils.models import TimeStampedModel
 
-from .price import Price
 from .address import Address
 from .allergen import Allergen
-from .api_user import APIUser
 from .dietary_filter import DietaryFilter
 from .image import Image
 from .ingredient import Ingredient
+from .price import Price
 from .uuid import UUIDModelMixin
 
 
@@ -31,7 +31,11 @@ class Meal(UUIDModelMixin, TimeStampedModel):
     price = models.OneToOneField(Price)
 
     is_active = models.BooleanField(default=True)
-    seller = models.ForeignKey(APIUser, on_delete=models.CASCADE, related_name='meals')
+    seller = models.ForeignKey(
+            settings.AUTH_USER_MODEL,
+            on_delete=models.CASCADE,
+            related_name='meals',
+    )
 
     preview_image = models.ForeignKey(Image, related_name='preview_meals')
     images = models.ManyToManyField(Image, related_name='meals', blank=True)

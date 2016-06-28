@@ -1,6 +1,6 @@
+from django.conf import settings
 from django.contrib.gis.db import models
 
-from .api_user import APIUser
 from .order import Order
 from .review import Review
 from .uuid import UUIDModelMixin
@@ -9,7 +9,11 @@ from .uuid import UUIDModelMixin
 class OrderReview(UUIDModelMixin, models.Model):
     review = models.OneToOneField(Review, on_delete=models.CASCADE, related_name='order_review')
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_reviews_of')
-    reviewer = models.ForeignKey(APIUser, on_delete=models.CASCADE, related_name='order_reviews')
+    reviewer = models.ForeignKey(
+            settings.AUTH_USER_MODEL,
+            on_delete=models.CASCADE,
+            related_name='order_reviews',
+    )
 
     class Meta:
         app_label = 'instameals'

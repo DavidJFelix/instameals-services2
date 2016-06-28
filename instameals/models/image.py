@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.gis.db import models
 from model_utils.models import TimeStampedModel
 
@@ -5,16 +6,12 @@ from .uuid import UUIDModelMixin
 
 
 class Image(UUIDModelMixin, TimeStampedModel):
-    # FIXME: for some reason, admin console isn't honoring all of these options and only lists
-    # other. I'm also not keen on classifying the image at this level
-    IMAGE_TYPE = (
-        ('meal_image', 'meal_image'),
-        ('profile_image', 'profile_image'),
-        ('review_meal_image', 'review_meal_image'),
-        ('other', 'other'),
+    content = models.ImageField()
+    owner = models.ForeignKey(
+            settings.AUTH_USER_MODEL,
+            on_delete=models.CASCADE,
+            related_name='images',
     )
-    url = models.URLField()
-    type = models.TextField(choices=IMAGE_TYPE, default='other')
 
     class Meta:
         app_label = 'instameals'
