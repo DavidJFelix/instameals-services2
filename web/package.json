@@ -1,0 +1,22 @@
+{
+  "name": "instameals-web",
+  "version": "0.1.0",
+  "description": "React frontend for instameals",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidjfelix/instameals_services.git"
+  },
+  "author": "David J Felix",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/davidjfelix/instameals_services/issues"
+  },
+  "homepage": "https://github.com/davidjfelix/instameals_services#readme",
+  "dependencies": {
+    "react": "^15.1.0"
+  }
+}
