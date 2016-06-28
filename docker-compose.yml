@@ -9,7 +9,7 @@ services:
       - POSTGRES_USER=docker
       - POSTGRES_DB=instameals
 
-  web:
+  api:
     build: .
     command: python manage.py runserver_plus 0.0.0.0:8000
     ports:
