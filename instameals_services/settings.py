@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'rest_framework_gis',
     'rest_framework_social_oauth2',
     'rest_framework_swagger',
-    'instameals.apps.InstamealsConfig',
+    'api.apps.APIConfig',
     'django_extensions',
     'guardian',
 ]
@@ -97,9 +97,9 @@ AUTHENTICATION_BACKENDS = (
     'guardian.backends.ObjectPermissionBackend',
 )
 
-PROPRIETARY_BACKEND_NAME = 'instameals'
+PROPRIETARY_BACKEND_NAME = 'api'
 
-AUTH_USER_MODEL = 'instameals.APIUser'
+AUTH_USER_MODEL = 'api.APIUser'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

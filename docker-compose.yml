@@ -7,7 +7,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=docker
       - POSTGRES_USER=docker
-      - POSTGRES_DB=instameals
+      - POSTGRES_DB=api
 
   api:
     build: .
