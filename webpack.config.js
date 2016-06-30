@@ -1,8 +1,8 @@
 module.exports = {
-  entry: "./app/components/Main.js",
+  entry: "./web/app/js/components/Main.js",
 
   output: {
-    filename: "./public/bundle.js"
+    filename: "./static/app.js"
   },
 
   module: {
