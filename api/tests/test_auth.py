@@ -1,8 +1,11 @@
 from datetime import timedelta
 
+from PIL import Image as pImage
 from django.contrib.gis.geos import Point
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.utils import timezone
 from guardian.shortcuts import assign_perm  # Ignore pycharm warning
+from io import BytesIO
 from oauth2_provider.models import Application, AccessToken  # Ignore pycharm warning
 from rest_framework import status
 from rest_framework.reverse import reverse
@@ -26,6 +29,15 @@ class AuthTestCase(APITestCase):
                 client_type=Application.CLIENT_PUBLIC,
                 authorization_grant_type=Application.GRANT_PASSWORD,
         )
+
+        image = pImage.new('RGBA', size=(50, 50), color=(256, 0, 0))
+        image_file = BytesIO(image.tobytes())
+        file = InMemoryUploadedFile(image_file, None, 'test.jpg', 'image/jpg', 1024, None)
+        self.preview_image = Image.objects.create(
+                owner=self.user,
+                content=file
+        )
+
         self.meal = Meal.objects.create(
                 name='Test Meal',
                 description='A meal to test meal RUD',
@@ -46,10 +58,7 @@ class AuthTestCase(APITestCase):
                 seller=self.user,
                 available_from='2016-04-10T17:53:50.142558Z',
                 available_to='2016-04-10T17:53:50.142558Z',
-                preview_image=Image.objects.create(
-                        type='other',
-                        url='http://example.com/test.jpg'
-                ),
+                preview_image=self.preview_image,
         )
         assign_perm('change_meal', self.user, self.meal)
         assign_perm('delete_meal', self.user, self.meal)

@@ -1,4 +1,8 @@
+from io import BytesIO
+
+from PIL import Image as pImage
 from django.contrib.gis.geos import Point
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from guardian.shortcuts import assign_perm  # Ignore Pycharm warning
 from rest_framework import status
 from rest_framework.reverse import reverse
@@ -12,7 +16,15 @@ class CreateMealTestCase(APITestCase):
 
     def setUp(self):
         self.user = APIUser.objects.create(username='tester')
-        self.preview_image = Image.objects.create(url='http://example.com/test.jpg')
+
+        image = pImage.new('RGBA', size=(50, 50), color=(256, 0, 0))
+        image_file = BytesIO(image.tobytes())
+        file = InMemoryUploadedFile(image_file, None, 'test.jpg', 'image/jpg', 1024, None)
+        self.preview_image = Image.objects.create(
+                owner=self.user,
+                content=file
+        )
+
         self.pickup_address = Address.objects.create(
                 line1='123 Test Ave',
                 city='Testville',
@@ -110,6 +122,15 @@ class RetrieveUpdateDeleteMealTestCase(APITestCase):
     def setUp(self):
         self.user = APIUser.objects.create(username='tester')
         self.non_owner_user = APIUser.objects.create(username='tester2')
+
+        image = pImage.new('RGBA', size=(50, 50), color=(256, 0, 0))
+        image_file = BytesIO(image.tobytes())
+        file = InMemoryUploadedFile(image_file, None, 'test.jpg', 'image/jpg', 1024, None)
+        self.preview_image = Image.objects.create(
+                owner=self.user,
+                content=file
+        )
+
         self.meal = Meal.objects.create(
                 name='Test Meal',
                 description='A meal to test meal RUD',
@@ -130,10 +151,7 @@ class RetrieveUpdateDeleteMealTestCase(APITestCase):
                 seller=self.user,
                 available_from='2016-04-10T17:53:50.142558Z',
                 available_to='2016-04-10T17:53:50.142558Z',
-                preview_image=Image.objects.create(
-                        type='other',
-                        url='http://example.com/test.jpg'
-                ),
+                preview_image=self.preview_image,
         )
         assign_perm('change_meal', self.user, self.meal)
         assign_perm('delete_meal', self.user, self.meal)

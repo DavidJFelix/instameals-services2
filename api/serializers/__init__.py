@@ -8,7 +8,7 @@ from .image import ImageSerializer
 from .ingredient import IngredientSerializer
 from .meal import MealSerializer
 from .meal_review import MealReviewSerializer
-from .order import CreateUpdateOrderSerializer, RetrieveOrderSerializer
+from .order import OrderSerializer
 from .order_review import OrderReviewSerializer
 from .price import PriceSerializer
 from .review import ReviewSerializer
@@ -18,7 +18,6 @@ __all__ = [
     'AddressSerializer',
     'AllergenSerializer',
     'APIUserSerializer',
-    'CreateUpdateOrderSerializer',
     'CuisineSerializer',
     'DietaryFilterSerializer',
     'FavoriteSellerSerializer',
@@ -26,9 +25,9 @@ __all__ = [
     'IngredientSerializer',
     'MealReviewSerializer',
     'MealSerializer',
+    'OrderSerializer',
     'OrderReviewSerializer',
     'PriceSerializer',
     'ReviewSerializer',
-    'RetrieveOrderSerializer',
     'SellerReviewSerializer',
 ]

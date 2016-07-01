@@ -1,6 +1,9 @@
+from io import BytesIO
 from uuid import uuid4
 
+from PIL import Image as pImage
 from django.contrib.gis.geos import Point
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from guardian.shortcuts import assign_perm  # Ignore PyCharm warning
 from rest_framework import status
 from rest_framework.reverse import reverse
@@ -25,6 +28,15 @@ class CreateOrderTestCase(APITestCase):
     def setUp(self):
         self.seller = APIUser.objects.create(username='seller')
         self.user = APIUser.objects.create(username='tester')
+
+        image = pImage.new('RGBA', size=(50, 50), color=(256, 0, 0))
+        image_file = BytesIO(image.tobytes())
+        file = InMemoryUploadedFile(image_file, None, 'test.jpg', 'image/jpg', 1024, None)
+        self.preview_image = Image.objects.create(
+                owner=self.user,
+                content=file
+        )
+
         self.meal = Meal.objects.create(
                 name='Test Meal',
                 description='A meal to test meal RUD',
@@ -45,10 +57,7 @@ class CreateOrderTestCase(APITestCase):
                 seller=self.seller,
                 available_from='2016-04-10T17:53:50.142558Z',
                 available_to='2016-04-10T17:53:50.142558Z',
-                preview_image=Image.objects.create(
-                        type='other',
-                        url='http://example.com/test.jpg'
-                ),
+                preview_image=self.preview_image,
         )
         self.billing_address = Address.objects.create(
                 line1='456 Billing Rd',
@@ -62,6 +71,8 @@ class CreateOrderTestCase(APITestCase):
             'meal': str(self.meal.id),
             'billing_address': str(self.billing_address.id),
             'pickup_time': '2016-04-10T17:53:51.142558Z',
+            'pickup_address': str(self.meal.pickup_address.id),
+            'buyer_price': str(self.meal.price.id),
         }
 
     def test_user_can_create_order_from_meal(self):
@@ -83,53 +94,13 @@ class CreateOrderTestCase(APITestCase):
                 response.json(),
                 {
                     'id': str(order.id),
-                    'buyer': {
-                        'id': str(self.user.id),
-                        'first_name': '',
-                        'last_name': '',
-                        'profile_image': None,
-                        'username': 'tester',
-                    },
+                    'buyer': str(self.user.id),
                     'purchased_at': order.purchased_at.strftime('%Y-%m-%dT%T.%fZ'),
                     'meal': str(self.meal.id),
-                    'buyer_price': {
-                        'id': str(self.meal.price.id),
-                        'currency': 'USD',
-                        'value': '39.99',
-                    },
-                    'seller_earnings': {
-                        'id': str(order.seller_earnings.id),
-                        'currency': 'USD',
-                        'value': '36.00'
-                    },
-                    'billing_address': {
-                        'id': str(self.billing_address.id),
-                        'city': 'Testville',
-                        'coordinates': {
-                            'coordinates': [-123.1234, 45.6789],
-                            'type': 'Point'
-                        },
-                        'country': 'USA',
-                        'line1': '456 Billing Rd',
-                        'line2': '',
-                        'postal_code': '12345',
-                        'state': 'TX'
-                    },
-                    'pickup_address': {
-                        'id': str(self.meal.pickup_address.id),
-                        'city': 'Testville',
-                        'coordinates': {
-                            'coordinates': [-123.0123, 45.6789],
-                            'type': 'Point',
-                        },
-                        'country': 'USA',
-                        'line1': '123 Test Ave',
-                        'line2': '',
-                        'postal_code': '12345',
-                        'state': 'TX'
-                    },
+                    'buyer_price': str(self.meal.price.id),
+                    'billing_address': str(self.billing_address.id),
+                    'pickup_address': str(self.meal.pickup_address.id),
                     'pickup_time': '2016-04-10T17:53:51.142558Z',
-                    'is_paid': False,
                 }
         )
 
@@ -187,6 +158,15 @@ class RetrieveUpdateDeleteOrderTestCase(APITestCase):
         self.user = APIUser.objects.create(username='tester')
         self.seller = APIUser.objects.create(username='seller')
         self.non_owner_user = APIUser.objects.create(username='tester2')
+
+        image = pImage.new('RGBA', size=(50, 50), color=(256, 0, 0))
+        image_file = BytesIO(image.tobytes())
+        file = InMemoryUploadedFile(image_file, None, 'test.jpg', 'image/jpg', 1024, None)
+        self.preview_image = Image.objects.create(
+                owner=self.user,
+                content=file
+        )
+
         self.meal = Meal.objects.create(
                 name='Test Meal',
                 description='A meal to test meal RUD',
@@ -207,10 +187,7 @@ class RetrieveUpdateDeleteOrderTestCase(APITestCase):
                 seller=self.seller,
                 available_from='2016-04-10T17:53:50.142558Z',
                 available_to='2016-04-10T17:53:50.142558Z',
-                preview_image=Image.objects.create(
-                        type='other',
-                        url='http://example.com/test.jpg'
-                ),
+                preview_image=self.preview_image,
         )
         self.order = Order.objects.create(
                 meal=self.meal,
