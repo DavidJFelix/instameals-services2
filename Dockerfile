@@ -8,18 +8,25 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libproj-dev \
         gdal-bin \
         libpq-dev \
+        libtiff5-dev \
+        libjpeg-dev \
+        zlib1g-dev \
+        libfreetype6-dev \
+        liblcms2-dev \
+        libwebp-dev \
+        tcl8.6-dev \
+        tk8.6-dev \
+        python-tk \
     && rm -rf /var/lib/apt/lists/*
 
-RUN set -ex \
-    && buildDeps=' \
-        gcc \
-    ' \
-    && apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
-    && pip install psycopg2 \
-    && apt-get purge -y --auto-remove $buildDeps
-
 COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        gcc \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip install -r requirements.txt \
+    && apt-get purge -y --auto-remove \
+        gcc
 
 # Diagnostic command for checking dependencies
 RUN pip list --outdated

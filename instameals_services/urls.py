@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
 
 from api.views import (
@@ -82,6 +83,7 @@ my_router.register(r'sold_meal_reviews', MySoldMealReviewViewSet)
 
 # TODO: get some of these routes listed in the root router APIView
 urlpatterns = [
+    url(r'^$', TemplateView.as_view(template_name='index.html')),
     url(r'^admin/', admin.site.urls),
     url(r'^auth/', include('rest_framework_social_oauth2.urls')),
     url(r'^docs/', include('rest_framework_swagger.urls')),
