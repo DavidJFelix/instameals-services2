@@ -2,7 +2,7 @@ module.exports = {
   entry: "./web/app/js/components/Main.js",
 
   output: {
-    filename: "./static/app.js"
+    filename: "./web/static/app.js"
   },
 
   module: {

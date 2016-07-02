@@ -2,7 +2,7 @@ var React = require('react');
 var ReactDom = require('react-dom');
 
 
-var Main = React.creatClass({
+var Main = React.createClass({
   render: function() {
     return (
       <div>Hello World</div>

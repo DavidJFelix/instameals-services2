@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
@@ -47,6 +48,7 @@ from api.views import (
     ReviewViewSet,
     SellerReviewViewSet,
 )
+from . import settings
 
 v2_router = DefaultRouter()
 v2_router.register(r'addresses', AddressViewSet)
@@ -89,4 +91,4 @@ urlpatterns = [
     url(r'^docs/', include('rest_framework_swagger.urls')),
     url(r'^v2/my/', include(my_router.urls, namespace='my')),
     url(r'^v2/', include(v2_router.urls, namespace='v2')),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
