@@ -48,7 +48,7 @@ from api.views import (
     ReviewViewSet,
     SellerReviewViewSet,
 )
-from . import settings
+from django.conf import settings
 
 v2_router = DefaultRouter()
 v2_router.register(r'addresses', AddressViewSet)
