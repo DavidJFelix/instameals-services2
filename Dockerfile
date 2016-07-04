@@ -32,4 +32,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN pip list --outdated
 
 COPY ./ /opt/instameals
-CMD python manage.py migrate && python manage.py runserver
+CMD python manage.py collectstatic && \
+    python manage.py migrate && \
+    python manage.py runserver
