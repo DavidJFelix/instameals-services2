@@ -41,6 +41,7 @@ from .static_files import (
     STATIC_ROOT,
     STATIC_URL,
     STATICFILES_DIRS,
+    STATICFILES_STORAGE,
 )
 from .templates import (
     TEMPLATES,
@@ -70,6 +71,7 @@ __all__ = (
     'STATIC_ROOT',
     'STATIC_URL',
     'STATICFILES_DIRS',
+    'STATICFILES_STORAGE',
     'TEMPLATES',
     'TIME_ZONE',
     'USE_I18N',

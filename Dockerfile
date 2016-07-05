@@ -34,4 +34,6 @@ RUN pip list --outdated
 COPY ./ /opt/instameals
 CMD python manage.py collectstatic && \
     python manage.py migrate && \
-    python manage.py runserver
+    gunicorn instameals_services.wsgi \
+        -k gaiohttp \
+        --log-file -
