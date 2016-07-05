@@ -1,5 +1,5 @@
 module.exports = {
-  entry: "./web/app/js/components/Main.js",
+  entry: "./web/app/js/App.js",
 
   output: {
     filename: "./web/static/app.js"
