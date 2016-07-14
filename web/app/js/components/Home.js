@@ -7,11 +7,13 @@ var MealList = require('./MealList');
 
 var Home = React.createClass({
     render: function () {
+        var meals = ["stuff", "duh", "pretty", "dope"];
+
         return (
             <div>
                 <Header></Header>
                 <LocationSetter></LocationSetter>
-                <MealList></MealList>
+                <MealList meals={meals}></MealList>
                 <Footer></Footer>
             </div>
         )

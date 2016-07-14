@@ -1,9 +1,15 @@
 var React = require('react');
 
+var MealListItem = require('./MealListItem');
+
 var MealList = React.createClass({
     render: function() {
         return (
-            <div>Meal List</div>
+            <ul>
+                {this.props.meals.map(function(meal) {
+                    return <MealListItem key={meal} data={meal}/>;
+                })}
+            </ul>
         )
     }
 });
