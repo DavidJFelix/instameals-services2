@@ -7,7 +7,25 @@ var MealList = require('./MealList');
 
 var Home = React.createClass({
     render: function () {
-        var meals = ["stuff", "duh", "pretty", "dope"];
+        var meals = [
+            {
+                name: "Chicken Pot Pie",
+                description: "Delicious"
+            },
+            {
+                name: "Dumplings",
+                description: "Delicious"
+            },
+            {
+                name: "Brown Rice",
+                description: "Delicious"
+            },
+            {
+                name: "Meatloaf",
+                description: "Delicious"
+
+            }
+        ];
 
         return (
             <div>

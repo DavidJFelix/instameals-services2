@@ -3,7 +3,7 @@ var React = require('react');
 var Footer = React.createClass({
     render: function() {
         return (
-            <div>Footer</div>
+            <nav className="navbar bg-faded">Footer</nav>
         )
     }
 });

@@ -1,9 +1,17 @@
 var React = require('react');
 
 var MealListItem = React.createClass({
+    propTypes: {
+        meal: React.PropTypes.object.isRequired
+    },
+
     render: function() {
         return (
-            <div>Meal List Item</div>
+            <div>
+                <img src=""/>
+                <h4>{this.props.meal.name}</h4>
+                <p>{this.props.meal.description}</p>
+            </div>
         )
     }
 });

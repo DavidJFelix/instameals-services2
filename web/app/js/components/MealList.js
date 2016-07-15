@@ -3,13 +3,22 @@ var React = require('react');
 var MealListItem = require('./MealListItem');
 
 var MealList = React.createClass({
-    render: function() {
+    propTypes: {
+        meals: React.PropTypes.array.isRequired
+    },
+
+    render: function () {
         return (
-            <ul>
-                {this.props.meals.map(function(meal) {
-                    return <MealListItem key={meal} data={meal}/>;
-                })}
-            </ul>
+            <ul>{
+                this.props.meals.map(
+                    function (meal, index) {
+                        return <MealListItem
+                            key={index}
+                            meal={meal}
+                        />;
+                    }
+                )
+            }</ul>
         )
     }
 });

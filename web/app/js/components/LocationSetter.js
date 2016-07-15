@@ -10,13 +10,15 @@ var LocationSetter = React.createClass({
 
     render: function () {
         return (
-            <div className="input-group">
-                <input
-                    className="form-control"
-                    placeholder="Enter A City"
-                    onChange={this.handleChange}
-                    value={this.state.value}
-                />
+            <div className="jumbotron jumbotron-fluid bg-primary">
+                <div className="input-group container-fluid">
+                    <input
+                        className="form-control"
+                        placeholder="Enter A City"
+                        onChange={this.handleChange}
+                        value={this.state.value}
+                    />
+                </div>
             </div>
         )
     }
