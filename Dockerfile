@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN pip list --outdated
 
 COPY ./ /opt/instameals
-CMD python manage.py collectstatic && \
+CMD python manage.py collectstatic --no-input && \
     python manage.py migrate && \
     gunicorn instameals_services.wsgi \
         -k gaiohttp \
