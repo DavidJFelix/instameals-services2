@@ -3,7 +3,9 @@ var React = require('react');
 var Header = React.createClass({
     render: function() {
         return (
-            <nav className="navbar">Instameals</nav>
+            <nav className="navbar">
+                <a className="navbar-brand">Instameals</a>
+            </nav>
         )
     }
 });
