@@ -26,3 +26,6 @@ WSGI_APPLICATION = 'instameals_services.wsgi.application'
 DATABASES = {
     'default': dj_database_url.parse(config('DATABASE_URL'))
 }
+
+# This hack is for Heroku, since DATABASE_URL isn't overwritable there
+DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
